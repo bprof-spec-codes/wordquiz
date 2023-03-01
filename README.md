@@ -9,10 +9,10 @@
 | Budai Dávid   | Backend       |
 | Bognár Bence  | Teamleader    |
 
-##User manual
+## User manual
 
 TODO
 
-##Difficulties
+## Difficulties
 
 TODO
