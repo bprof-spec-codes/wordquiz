@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WordQuiz.Data;
+using WordQuiz.Data.Repositories;
 using WordQuiz.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddTransient<IWordRepository, WordRepository>();
+builder.Services.AddTransient<IWordStaticRepository, WordStaticRepository>();
+builder.Services.AddTransient<ITopicRepository, TopicRepository>();
 
 builder.Services.AddDefaultIdentity<Player>(options => {
     options.SignIn.RequireConfirmedAccount = false;
