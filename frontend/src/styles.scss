@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+@use "variables";
+$secondary-background: #b3bedd;
+$secondary-font-color: black;
+$accent-color: #9684ff;
+$font-stack: "Open Sans", sans-serif;
+
+.logo-word {
+  font-family: "Tilt Warp", cursive;
+}
+
+.heavy-font {
+  font-family: "Tilt Warp", cursive;
+}
+
+.logo-quiz {
+  font-family: "Lora", serif;
+}
+
+.fancy-font {
+  font-family: "Lora", serif;
+}
+
+/* Bootstrap overrides */
+$body-bg: variables.$body-bg;
+$body-color: variables.$body-color;
+$primary: variables.$primary;
+$secondary: variables.$secondary;
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
