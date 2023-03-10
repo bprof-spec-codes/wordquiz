@@ -1,0 +1,24 @@
+<div class="text-dark">
+  <div *ngIf="header">
+    <div class="row">
+      <div class="col-md-4 col-6 bg-secondary sec-region-title-tl"></div>
+      <div class="col-md-8 col-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-6 bg-secondary"></div>
+      <div class="sec-region-title-br-wrapper col-md-8 col-6">
+        <div class="sec-region-title-br"></div>
+      </div>
+    </div>
+    <div class="bg-secondary">
+      <div class="container">
+        <span class="fs-6 title-box fancy-font">{{ header }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="bg-secondary">
+    <div class="container">
+      <ng-content> </ng-content>
+    </div>
+  </div>
+</div>
