@@ -26,5 +26,13 @@ $body-color: variables.$body-color;
 $primary: variables.$primary;
 $secondary: variables.$secondary;
 
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 800px,
+  xl: 900px,
+  xxl: 1120px,
+);
+
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
