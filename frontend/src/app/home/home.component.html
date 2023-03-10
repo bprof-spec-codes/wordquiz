@@ -21,8 +21,13 @@
   </div>
 </div>
 
-<app-secondary-region header="Popular topics"> Content </app-secondary-region>
+<app-secondary-region header="Popular topics">
+  <div *ngFor="let topic of topics">
+    {{ topic }}
+  </div>
+</app-secondary-region>
 
+<!-- Some marketing BS -->
 <div class="container">
   <div class="my-5 row">
     <section class="col-6">
