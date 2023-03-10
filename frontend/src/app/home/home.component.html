@@ -22,7 +22,10 @@
 </div>
 
 <app-secondary-region header="Popular topics">
-  <div *ngFor="let topic of topics">
+  <div
+    *ngFor="let topic of topics; let i = index"
+    class="d-inline-block p-4 mx-3 topic topic-{{ i }}"
+  >
     {{ topic }}
   </div>
 </app-secondary-region>
