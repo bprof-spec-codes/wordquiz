@@ -20,6 +20,12 @@ $font-stack: "Open Sans", sans-serif;
   font-family: "Lora", serif;
 }
 
+.secondary-font {
+  font-family: "Saira Condensed", sans-serif;
+  word-spacing: 110%;
+  letter-spacing: 0.1rem;
+}
+
 /* Bootstrap overrides */
 $body-bg: variables.$body-bg;
 $body-color: variables.$body-color;
