@@ -2,7 +2,6 @@
 $secondary-background: #b3bedd;
 $secondary-font-color: black;
 $accent-color: #9684ff;
-$font-stack: "Open Sans", sans-serif;
 
 .logo-word {
   font-family: "Tilt Warp", cursive;
@@ -32,6 +31,12 @@ $body-color: variables.$body-color;
 $primary: variables.$primary;
 $secondary: variables.$secondary;
 
+/* Buttons */
+$btn-border-radius: 0px;
+$btn-border-radius-sm: 0px;
+$btn-border-radius-lg: 0px;
+$btn-font-family: "Saira Condensed", sans-serif;
+
 $container-max-widths: (
   sm: 540px,
   md: 720px,
@@ -42,3 +47,7 @@ $container-max-widths: (
 
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
+
+.btn-outline-primary {
+  color: #fff;
+}
