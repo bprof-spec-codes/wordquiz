@@ -1,5 +1,6 @@
+import { Topic, TopicService } from '../topic.service';
+
 import { Component } from '@angular/core';
-import { TopicService } from '../topic.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,7 @@ import { TopicService } from '../topic.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  topics!: string[];
+  topics!: Topic[];
 
   constructor(private topicService: TopicService) {}
 

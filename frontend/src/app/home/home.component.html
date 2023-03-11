@@ -23,20 +23,26 @@
 </div>
 
 <app-secondary-region header="Popular topics">
-  <div
-    *ngFor="let topic of topics.slice(0, 8); let i = index"
-    class="d-inline-block p-4 mx-3 topic topic-{{ i }}"
-  >
-    {{ topic }}
+  <div class="py-4">
+    <div
+      *ngFor="let topic of topics.slice(0, 8); let i = index"
+      class="d-inline-block mx-3"
+    >
+      <a
+        [routerLink]="['/topics', topic.id]"
+        class="topic topic-{{ i }} font-reset"
+        >{{ topic.title }}</a
+      >
+    </div>
   </div>
 </app-secondary-region>
 
 <!-- Some marketing BS -->
 <div class="container">
   <div class="my-5 row">
-    <section class="col-12 col-md-6 secondary-font">
+    <section class="col-12 col-md-6 fancy-font">
       <span class="fs-4">
-        How well will <span class="text-primary font-italic">you</span> do?
+        How well will <span class="text-primary fst-italic">you</span> do?
       </span>
       <br />
 
