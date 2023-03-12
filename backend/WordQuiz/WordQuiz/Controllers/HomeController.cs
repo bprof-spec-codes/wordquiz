@@ -2,6 +2,12 @@
 using System.Diagnostics;
 using WordQuiz.Models;
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.SignalR;
+
+
 namespace WordQuiz.Controllers
 {
     public class HomeController : Controller
