@@ -23,7 +23,8 @@ builder.Services.AddDefaultIdentity<Player>(options => {
     options.Password.RequireUppercase = false;
 }
 )
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
 

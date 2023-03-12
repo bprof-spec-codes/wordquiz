@@ -42,4 +42,3 @@ namespace WordQuiz.Data.Repositories
         }
     }
 }
-}
