@@ -12,8 +12,8 @@ using WordQuiz.Data;
 namespace WordQuiz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230304104803_initial")]
-    partial class initial
+    [Migration("20230312105936_seddPlayer")]
+    partial class seddPlayer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,6 +240,69 @@ namespace WordQuiz.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("WordQuiz.Models.Topic", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Topics");
+                });
+
+            modelBuilder.Entity("WordQuiz.Models.Word", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Original")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TopicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Translation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("Words");
+                });
+
+            modelBuilder.Entity("WordQuiz.Models.WordStatistic", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PlayerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WordId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId");
+
+                    b.HasIndex("WordId");
+
+                    b.ToTable("WordStatistics");
+                });
+
             modelBuilder.Entity("WordQuiz.Models.Player", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -249,6 +312,24 @@ namespace WordQuiz.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Player");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "bd706185-03be-4584-8f12-ab33671e1da8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "dc862022-6352-4ed3-8aa5-d2d674561e0b",
+                            Email = "seedplayer@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "SEEDPLAYER@gmail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAED/EeSqufjwJjSsYWxB8gyO1cChyPCSyC0+R7DPFpwNDYIEol7z9ZnemvabSCeSsEA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1a15cd8d-5aeb-49d4-878c-909639d35bcd",
+                            TwoFactorEnabled = false,
+                            UserName = "seedplayer@gmail.com",
+                            PlayerName = "SeedPlayer"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -300,6 +381,46 @@ namespace WordQuiz.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WordQuiz.Models.Word", b =>
+                {
+                    b.HasOne("WordQuiz.Models.Topic", "Topic")
+                        .WithMany("Words")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("WordQuiz.Models.WordStatistic", b =>
+                {
+                    b.HasOne("WordQuiz.Models.Player", "Player")
+                        .WithMany("WordStatistics")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WordQuiz.Models.Word", "Word")
+                        .WithMany()
+                        .HasForeignKey("WordId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+
+                    b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("WordQuiz.Models.Topic", b =>
+                {
+                    b.Navigation("Words");
+                });
+
+            modelBuilder.Entity("WordQuiz.Models.Player", b =>
+                {
+                    b.Navigation("WordStatistics");
                 });
 #pragma warning restore 612, 618
         }

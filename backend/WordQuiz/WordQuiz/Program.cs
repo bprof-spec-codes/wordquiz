@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using WordQuiz.Data;
 using WordQuiz.Data.Repositories;
 using WordQuiz.Models;
@@ -23,7 +26,28 @@ builder.Services.AddDefaultIdentity<Player>(options => {
     options.Password.RequireUppercase = false;
 }
 )
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = true;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = "http://www.security.org",
+        ValidIssuer = "http://www.security.org",
+        IssuerSigningKey = new SymmetricSecurityKey
+      (Encoding.UTF8.GetBytes("WordQuizSecurityKey"))
+    };
+});
 
 builder.Services.AddControllersWithViews();
 
