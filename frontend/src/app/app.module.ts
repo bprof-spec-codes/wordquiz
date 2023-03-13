@@ -11,24 +11,16 @@ import { SecondaryRegionComponent } from './secondary-region/secondary-region.co
 import { TopicSelectionComponent } from './topic-selection/topic-selection.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NavbarComponent,
-    SecondaryRegionComponent,
-    FooterComponent,
-    TopicSelectionComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'topics', component: TopicSelectionComponent },
-    ]),
-    NgbModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        NavbarComponent,
+        SecondaryRegionComponent,
+        FooterComponent,
+        TopicSelectionComponent,
+    ],
+    imports: [BrowserModule, AppRoutingModule, NgbModule],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
