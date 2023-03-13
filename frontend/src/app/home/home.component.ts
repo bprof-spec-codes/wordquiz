@@ -1,17 +1,19 @@
+import { Topic, TopicService } from '../topic.service';
+
 import { Component } from '@angular/core';
-import { TopicService } from '../topic.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  topics!: string[];
+    topics!: Topic[];
+    layout!: null;
 
-  constructor(private topicService: TopicService) {}
+    constructor(private topicService: TopicService) {}
 
-  ngOnInit() {
-    this.topics = this.topicService.getAll();
-  }
+    ngOnInit() {
+        this.topics = this.topicService.getAll();
+    }
 }

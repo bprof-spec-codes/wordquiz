@@ -310,6 +310,24 @@ namespace WordQuiz.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Player");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "bd706185-03be-4584-8f12-ab33671e1da8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "dc862022-6352-4ed3-8aa5-d2d674561e0b",
+                            Email = "seedplayer@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "SEEDPLAYER@gmail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAED/EeSqufjwJjSsYWxB8gyO1cChyPCSyC0+R7DPFpwNDYIEol7z9ZnemvabSCeSsEA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1a15cd8d-5aeb-49d4-878c-909639d35bcd",
+                            TwoFactorEnabled = false,
+                            UserName = "seedplayer@gmail.com",
+                            PlayerName = "SeedPlayer"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

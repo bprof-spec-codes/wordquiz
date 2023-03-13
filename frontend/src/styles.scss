@@ -2,22 +2,27 @@
 $secondary-background: #b3bedd;
 $secondary-font-color: black;
 $accent-color: #9684ff;
-$font-stack: "Open Sans", sans-serif;
 
 .logo-word {
-  font-family: "Tilt Warp", cursive;
+    font-family: "Tilt Warp", cursive;
 }
 
 .heavy-font {
-  font-family: "Tilt Warp", cursive;
+    font-family: "Tilt Warp", cursive;
 }
 
 .logo-quiz {
-  font-family: "Lora", serif;
+    font-family: "Lora", serif;
 }
 
 .fancy-font {
-  font-family: "Lora", serif;
+    font-family: "Lora", serif;
+}
+
+.secondary-font {
+    font-family: "Saira Condensed", sans-serif;
+    word-spacing: 110%;
+    letter-spacing: 0.1rem;
 }
 
 /* Bootstrap overrides */
@@ -26,13 +31,25 @@ $body-color: variables.$body-color;
 $primary: variables.$primary;
 $secondary: variables.$secondary;
 
+/* Buttons */
+$btn-border-radius: 0px;
+$btn-border-radius-sm: 0px;
+$btn-border-radius-lg: 0px;
+$btn-font-family: "Saira Condensed", sans-serif;
+$card-border-radius: 0px;
+$card-bg: variables.$body-bg;
+
 $container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 800px,
-  xl: 900px,
-  xxl: 1120px,
+    sm: 540px,
+    md: 720px,
+    lg: 800px,
+    xl: 900px,
+    xxl: 1120px,
 );
 
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
+
+.btn-outline-primary {
+    color: #fff;
+}

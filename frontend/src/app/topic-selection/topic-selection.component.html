@@ -1,0 +1,28 @@
+<app-secondary-region header="Select a topic">
+    <div class="container fancy-font pb-5 pt-1">
+        <div class="row gx-3 gy-3">
+            <div
+                class="topic col-12 col-sm-4 col-md-3"
+                *ngFor="let topic of topics"
+            >
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <div class="card-title">
+                            {{ topic.title }}
+                            <hr class="mt-1" />
+                        </div>
+                        <p class="card-text">{{ topic.description }}</p>
+                        <div class="text-end">
+                            <a
+                                [routerLink]="['/topics', topic.id]"
+                                class="stretched-link"
+                            >
+                                Play
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-secondary-region>

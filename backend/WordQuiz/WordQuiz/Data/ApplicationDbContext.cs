@@ -21,6 +21,18 @@ namespace WordQuiz.Data
         {
             builder.Entity<IdentityRole>().HasData(new { Id = "1", Name = "Admin", NormalizedName = "ADMIN" });
 
+            PasswordHasher<Player> ph = new PasswordHasher<Player>();
+            Player seed = new Player
+            {
+                Id = Guid.NewGuid().ToString(),
+                Email = "seedplayer@gmail.com",
+                EmailConfirmed = true,
+                UserName = "seedplayer@gmail.com",
+                PlayerName = "SeedPlayer",
+                NormalizedUserName = "SEEDPLAYER@gmail.com"
+            };
+            seed.PasswordHash = ph.HashPassword(seed, "almafa123");
+            builder.Entity<Player>().HasData(seed);
 
             builder.Entity<Word>().HasOne(p => p.Topic)
                 .WithMany(u => u.Words)

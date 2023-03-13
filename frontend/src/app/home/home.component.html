@@ -14,7 +14,8 @@
       </div>
 
       <div class="col-md-3 col-6">
-        <span class="fancy-font fs-1 mb-0">12</span><br />
+        <span class="fancy-font fs-1 mb-0">{{ topics.length }}</span
+        ><br />
         <span class="text-secondary">topics</span>
       </div>
     </div>
@@ -22,20 +23,26 @@
 </div>
 
 <app-secondary-region header="Popular topics">
-  <div
-    *ngFor="let topic of topics; let i = index"
-    class="d-inline-block p-4 mx-3 topic topic-{{ i }}"
-  >
-    {{ topic }}
+  <div class="py-4">
+    <div
+      *ngFor="let topic of topics.slice(0, 8); let i = index"
+      class="d-inline-block mx-3"
+    >
+      <a
+        [routerLink]="['/topics', topic.id]"
+        class="topic topic-{{ i }} my-2"
+        >{{ topic.title }}</a
+      >
+    </div>
   </div>
 </app-secondary-region>
 
 <!-- Some marketing BS -->
 <div class="container">
   <div class="my-5 row">
-    <section class="col-6">
+    <section class="col-12 col-md-6 fancy-font">
       <span class="fs-4">
-        How well will <span class="text-primary">you</span> do?
+        How well will <span class="text-primary fst-italic">you</span> do?
       </span>
       <br />
 
@@ -44,14 +51,62 @@
         new words feels like a breeze. It keeps track of your guesses so that
         you are always challenged while also having fun.
       </div>
+
+      <a [routerLink]="'/topics'" class="btn btn-outline-primary">
+        Play a game
+      </a>
     </section>
 
-    <img class="col-6 img-fluid" alt="" src="../../assets/img/clipart.png" />
+    <div class="d-none d-md-block col-2"></div>
+
+    <div class="col-4 d-none d-md-block">
+      <img class="img-fluid" alt="" src="../../assets/img/clipart.png" />
+    </div>
   </div>
 </div>
 <!-- TESTIMONIALS -->
 <app-secondary-region>
-  <div class="container row py-5">
-    <div class="col-12 col-sm-6 fancy-font">Testimonial one</div>
+  <div id="testimonials" class="container fancy-font py-4">
+    <div class="pt-3">
+      <p class="fs-5">Testimonials</p>
+      <hr />
+    </div>
+    <div class="row pb-4 gx-5">
+      <div class="col-12 col-sm-4">
+        <div class="testmionial-body">
+          <span class="fst-italic">
+            "Amazing website, truly deserving of the best grade possible."
+          </span>
+        </div>
+        <div class="testimonial-foot">
+          <span class="fst-italic blockquote-footer">My mother</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4">
+        <div class="testmionial-body">
+          <span class="fst-italic">
+            "I used this site to learn English, and look at me now!"
+          </span>
+        </div>
+        <div class="testimonial-foot">
+          <span class="fst-italic blockquote-footer"
+            >Arnold Schwarzenegger
+          </span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4">
+        <div class="testmionial-body">
+          <span class="fst-italic">
+            "We have no idea who you are please stop spamming this email
+            address"
+          </span>
+        </div>
+        <div class="testimonial-foot">
+          <span class="fst-italic blockquote-footer">New York Times</span>
+        </div>
+      </div>
+    </div>
   </div>
 </app-secondary-region>
