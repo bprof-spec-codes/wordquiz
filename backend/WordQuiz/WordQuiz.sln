@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordQuiz", "WordQuiz\WordQuiz.csproj", "{6396A60F-31BF-40A6-90E9-D8B82BCB5F6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordQuiz", "WordQuiz\WordQuiz.csproj", "{6396A60F-31BF-40A6-90E9-D8B82BCB5F6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
