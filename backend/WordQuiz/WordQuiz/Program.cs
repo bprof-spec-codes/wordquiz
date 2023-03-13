@@ -5,9 +5,18 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WordQuiz.Data;
 using WordQuiz.Data.Repositories;
+using WordQuiz.Filters;
+using WordQuiz.Hubs;
 using WordQuiz.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddControllers(opt =>
+{
+    opt.Filters.Add<ApiExceptionFilter>();
+});
+
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -65,6 +74,8 @@ else
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -77,5 +88,31 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
+
+
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.MapHub<EventHub>("/events");
+
+
+
+
+
+
+
+
+
 
 app.Run();
