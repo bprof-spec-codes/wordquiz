@@ -1,0 +1,36 @@
+<div *ngIf="!topic">Invalid topic</div>
+<div *ngIf="topic">
+    <app-secondary-region header="{{ topic.title }}">
+        <div class="py-3">
+            <blockquote class="fancy-font">
+                {{ topic.description }}
+            </blockquote>
+        </div>
+        <div>
+            <a [routerLink]="['/play/', topic.id]" class="btn btn-primary"
+                >Take the quiz</a
+            >
+        </div>
+        <div class="word-bank fancy-font pb-4">
+            <h5 class="text-center fw-bold mb-0">Word bank</h5>
+            <div class="text-center">
+                <small>{{ topic.title }}</small>
+            </div>
+            <div
+                *ngFor="let word of wordBank | keyvalue"
+                class="row justify-content-md-center my-0"
+            >
+                <div class="col-md-3 row gx-0 py-0">
+                    <div class="col-6 text-end">
+                        {{ word.key }}
+                        <span class="text-muted">..........</span>
+                    </div>
+                    <div class="col-6 text-left">
+                        <span class="text-muted">..........</span>
+                        {{ word.value }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-secondary-region>
+</div>

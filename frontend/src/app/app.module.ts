@@ -9,6 +9,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { SecondaryRegionComponent } from './secondary-region/secondary-region.component';
 import { TopicSelectionComponent } from './topic-selection/topic-selection.component';
+import { GameComponent } from './game/game.component';
+import { TopicDetailsComponent } from './topic-details/topic-details.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +20,8 @@ import { TopicSelectionComponent } from './topic-selection/topic-selection.compo
         SecondaryRegionComponent,
         FooterComponent,
         TopicSelectionComponent,
+        GameComponent,
+        TopicDetailsComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, NgbModule],
     providers: [],

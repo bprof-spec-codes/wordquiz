@@ -1,0 +1,14 @@
+<div *ngIf="!topic">Invalid topic</div>
+<div *ngIf="topic">
+    <app-secondary-region header="{{ topic.title }}">
+        <div class="py-3">
+            <p>{{ topic.description }}</p>
+
+            <p>
+                Can you guess them all? You will have
+                {{ gameService.maxTimeSeconds }} seconds
+                {{ gameService.timeRemaining }}
+            </p>
+        </div>
+    </app-secondary-region>
+</div>
