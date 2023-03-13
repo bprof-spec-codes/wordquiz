@@ -17,45 +17,63 @@ namespace WordQuiz.Controllers
     public class WordController : ControllerBase
     {
 
-        IPlayerRepository player;
-        ITopicRepository tp;
+        
         IWordRepository wrd;
-        IWordStaticRepository wrdst;
+        
 
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
+        public WordController(IWordRepository wrd, UserManager<Player> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            this.wrd = wrd;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
+
+        public IWordRepository Wrd { get => wrd; set => wrd = value; }
+
+        public UserManager<Player> UserManager => userManager;
+
+        public RoleManager<IdentityRole> RoleManager => roleManager;
+
 
         // GET: api/<WordController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Word> Get()
         {
-            return new string[] { "value1", "value2" };
+            return wrd.GetAllWords().Result;
         }
 
         // GET api/<WordController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Word Get(string id)
         {
-            return "value";
+            return wrd.GetWordById(id).Result;
         }
 
         // POST api/<WordController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Word value)
         {
+
+            wrd.CreateWord(value);
         }
 
         // PUT api/<WordController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Word value)
         {
+
+            wrd.UpdateWord(value);
         }
 
         // DELETE api/<WordController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            wrd.DeleteWord(id);
+
         }
     }
 }

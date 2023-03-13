@@ -17,45 +17,62 @@ namespace WordQuiz.Controllers
     public class TopicController : ControllerBase
     {
 
-        IPlayerRepository player;
+        
         ITopicRepository tp;
-        IWordRepository wrd;
-        IWordStaticRepository wrdst;
+       
 
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
+        public TopicController(ITopicRepository tp, UserManager<Player> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            this.tp = tp;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
+
+        public ITopicRepository Tp { get => tp; set => tp = value; }
+
+        public UserManager<Player> UserManager => userManager;
+
+        public RoleManager<IdentityRole> RoleManager => roleManager;
+
+
+
 
         // GET: api/<TopicController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Topic> Get()
         {
-            return new string[] { "value1", "value2" };
+            return tp.GetAllTopics();
         }
 
         // GET api/<TopicController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Topic Get(string id)
         {
-            return "value";
+            return tp.GetTopicById(id);
         }
 
         // POST api/<TopicController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Topic value)
         {
+            tp.AddTopic(value);
         }
 
         // PUT api/<TopicController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Topic value)
         {
+            tp.UpdateTopic(value);
         }
 
         // DELETE api/<TopicController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            tp.DeleteTopic(id);
         }
     }
 }

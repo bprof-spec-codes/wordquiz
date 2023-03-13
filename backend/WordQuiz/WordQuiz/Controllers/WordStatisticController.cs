@@ -14,45 +14,61 @@ namespace WordQuiz.Controllers
     [ApiController]
     public class WordStatisticController : ControllerBase
     {
-        IPlayerRepository player;
-        ITopicRepository tp;
-        IWordRepository wrd;
+        
         IWordStaticRepository wrdst;
 
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
+        public WordStatisticController(IWordStaticRepository wrdst, UserManager<Player> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            this.wrdst = wrdst;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
+
+        public IWordStaticRepository Wrdst { get => wrdst; set => wrdst = value; }
+
+        public UserManager<Player> UserManager => userManager;
+
+        public RoleManager<IdentityRole> RoleManager => roleManager;
+
 
         // GET: api/<WordStatisticController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<WordStatistic> Get()
         {
-            return new string[] { "value1", "value2" };
+            return wrdst.GetAllAsync().Result;
         }
 
         // GET api/<WordStatisticController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public WordStatistic Get(string word)
         {
-            return "value";
+            return wrdst.GetByIdAsync(word).Result;
         }
 
         // POST api/<WordStatisticController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] WordStatistic value)
         {
+            wrdst.AddAsync(value);
         }
 
         // PUT api/<WordStatisticController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] WordStatistic value)
         {
+
+            wrdst.AddAsync(value);
         }
 
         // DELETE api/<WordStatisticController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            wrdst.DeleteAsync(id);
+
         }
     }
 }

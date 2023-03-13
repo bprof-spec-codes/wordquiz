@@ -18,44 +18,61 @@ namespace WordQuiz.Controllers
     public class PlayerController : ControllerBase
     {
 
-        IPlayerRepository player;
-        ITopicRepository tp;
-        IWordRepository wrd;
-        IWordStaticRepository wrdst;
+        IPlayerRepository player;       
 
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
+        public PlayerController(IPlayerRepository player, UserManager<Player> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            this.player = player;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
+
+        public IPlayerRepository Player { get => player; set => player = value; }
+
+        public UserManager<Player> UserManager => userManager;
+
+        public RoleManager<IdentityRole> RoleManager => roleManager;
+
+
+
+
         // GET: api/<PlayerController>
         [HttpGet]
-        public IEnumerable<string> GetPlayer()
+        public IEnumerable<Player> GetPlayer()
         {
-            return new string[] { "value1", "value2" };
+            return player.GetAllPlayers().Result;
         }
 
         // GET api/<PlayerController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Player Get(string id)
         {
-            return "value";
+            return player.GetPlayerById(id).Result;
         }
 
         // POST api/<PlayerController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Player value)
         {
+            player.CreatePlayer(value);
+
         }
 
         // PUT api/<PlayerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Player value)
         {
+            player.UpdatePlayer(value);
         }
 
         // DELETE api/<PlayerController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            player.DeletePlayer(id);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace WordQuiz.Models
         [Required]
         public string Title { get; set; }
 
+        public string Description { get; set; }
+
         [NotMapped]
         [ValidateNever]
         public List<Word> Words { get; set; }
