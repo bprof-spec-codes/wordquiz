@@ -1,4 +1,5 @@
 ﻿using WordQuiz.Data;
+using WordQuiz.Data.Repositories;
 using WordQuiz.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,13 +11,24 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace WordQuiz.Controllers
 {
+
+    [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
     {
+
+        IPlayerRepository player;
+        ITopicRepository tp;
+        IWordRepository wrd;
+        IWordStaticRepository wrdst;
+
+        private readonly UserManager<Player> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+
         // GET: api/<PlayerController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetPlayer()
         {
             return new string[] { "value1", "value2" };
         }

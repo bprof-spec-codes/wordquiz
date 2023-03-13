@@ -1,13 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using WordQuiz.Data.Repositories;
+using WordQuiz.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WordQuiz.Controllers
 {
+    [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class WordStatisticController : ControllerBase
     {
+        IPlayerRepository player;
+        ITopicRepository tp;
+        IWordRepository wrd;
+        IWordStaticRepository wrdst;
+
+        private readonly UserManager<Player> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+
+
         // GET: api/<WordStatisticController>
         [HttpGet]
         public IEnumerable<string> Get()
