@@ -12,14 +12,14 @@ using WordQuiz.Data;
 namespace WordQuiz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230312105936_seddPlayer")]
-    partial class seddPlayer
+    [Migration("20230314143142_PlayerRole")]
+    partial class PlayerRole
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -56,6 +56,12 @@ namespace WordQuiz.Migrations
                             Id = "1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "Player",
+                            NormalizedName = "PLAYER"
                         });
                 });
 
@@ -245,6 +251,10 @@ namespace WordQuiz.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -316,16 +326,16 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bd706185-03be-4584-8f12-ab33671e1da8",
+                            Id = "d266f818-d255-4b9f-adbf-c866c68d9609",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc862022-6352-4ed3-8aa5-d2d674561e0b",
+                            ConcurrencyStamp = "3ae80698-3925-4e85-8a68-d5d9d3ec69d6",
                             Email = "seedplayer@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SEEDPLAYER@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAED/EeSqufjwJjSsYWxB8gyO1cChyPCSyC0+R7DPFpwNDYIEol7z9ZnemvabSCeSsEA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPl/ncIbm2q6kwaGISjyKbdYg8jyVMR8B9jdAYWG+YC8uwFXMsvZ3udsuStZtu3wGQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1a15cd8d-5aeb-49d4-878c-909639d35bcd",
+                            SecurityStamp = "02a6400a-0717-445f-988b-dc23b93d000c",
                             TwoFactorEnabled = false,
                             UserName = "seedplayer@gmail.com",
                             PlayerName = "SeedPlayer"

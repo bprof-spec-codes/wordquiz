@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WordQuiz.Migrations
 {
-    public partial class seddPlayer : Migration
+    public partial class PlayerRole : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,7 +55,8 @@ namespace WordQuiz.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -219,9 +220,14 @@ namespace WordQuiz.Migrations
                 values: new object[] { "1", null, "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "2", null, "Player", "PLAYER" });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PlayerName", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "bd706185-03be-4584-8f12-ab33671e1da8", 0, "dc862022-6352-4ed3-8aa5-d2d674561e0b", "Player", "seedplayer@gmail.com", true, false, null, null, "SEEDPLAYER@gmail.com", "AQAAAAEAACcQAAAAED/EeSqufjwJjSsYWxB8gyO1cChyPCSyC0+R7DPFpwNDYIEol7z9ZnemvabSCeSsEA==", null, false, "SeedPlayer", "1a15cd8d-5aeb-49d4-878c-909639d35bcd", false, "seedplayer@gmail.com" });
+                values: new object[] { "d266f818-d255-4b9f-adbf-c866c68d9609", 0, "3ae80698-3925-4e85-8a68-d5d9d3ec69d6", "Player", "seedplayer@gmail.com", true, false, null, null, "SEEDPLAYER@gmail.com", "AQAAAAEAACcQAAAAEPl/ncIbm2q6kwaGISjyKbdYg8jyVMR8B9jdAYWG+YC8uwFXMsvZ3udsuStZtu3wGQ==", null, false, "SeedPlayer", "02a6400a-0717-445f-988b-dc23b93d000c", false, "seedplayer@gmail.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
