@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Data;
 using WordQuiz.Data.Repositories;
 using WordQuiz.Models;
@@ -16,22 +17,29 @@ namespace WordQuiz.Controllers
     {
         
         IWordStaticRepository wrdst;
+        IWordRepository wrd;
+        ITopicRepository tp;
 
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public WordStatisticController(IWordStaticRepository wrdst, UserManager<Player> userManager, RoleManager<IdentityRole> roleManager)
-        {
-            this.wrdst = wrdst;
-            this.userManager = userManager;
-            this.roleManager = roleManager;
-        }
-
         public IWordStaticRepository Wrdst { get => wrdst; set => wrdst = value; }
+        public IWordRepository Wrd { get => wrd; set => wrd = value; }
+        public ITopicRepository Tp { get => tp; set => tp = value; }
 
         public UserManager<Player> UserManager => userManager;
 
         public RoleManager<IdentityRole> RoleManager => roleManager;
+
+        public WordStatisticController(IWordStaticRepository wrdst, IWordRepository wrd, ITopicRepository tp, UserManager<Player> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            this.wrdst = wrdst;
+            this.wrd = wrd;
+            this.tp = tp;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
+
 
 
         // GET: api/<WordStatisticController>
@@ -43,32 +51,154 @@ namespace WordQuiz.Controllers
 
         // GET api/<WordStatisticController>/5
         [HttpGet("{id}")]
-        public WordStatistic Get(string word)
+        public WordStatistic? GetWordStatistic(string word)
         {
             return wrdst.GetByIdAsync(word).Result;
         }
 
         // POST api/<WordStatisticController>
         [HttpPost]
-        public void Post([FromBody] WordStatistic value)
+        public async void AddWordStatistic([FromBody] WordStatistic value)
         {
-            wrdst.AddAsync(value);
+            await wrdst.AddAsync(value);
         }
 
         // PUT api/<WordStatisticController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] WordStatistic value)
+        public async Task<IActionResult> EditWordStatistic(int id, [FromBody] WordStatistic value)
         {
 
-            wrdst.AddAsync(value);
+           await wrdst.UpdateAsync(value);
+            return Ok();
         }
 
         // DELETE api/<WordStatisticController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public async Task<IActionResult> DeleteWordStatistic(string id)
         {
-            wrdst.DeleteAsync(id);
+          await wrdst.DeleteAsync(id);
+            return Ok();
 
         }
+        
+        // GET: api/<WordController>
+        [HttpGet("{idRandom}")]
+        public IEnumerable<Word> GetRandom(int idRandom, string player)
+        {
+
+
+
+            // Retrieve all words from the database
+            var words = wrd.GetAllWords().Result;
+            var statistic = wrdst.GetAllAsync().Result;
+            List<Word> result = new List<Word>();
+            int i = 0;
+
+            var currentPlayerWords = statistic.Where(x => x.Player.PlayerName.Equals(player));  
+
+           
+
+            // Calculate the total weight of all the words
+
+            int totalWeight = currentPlayerWords.Sum(w => w.Score);
+
+            // Generate a random number between 1 and the total weight
+            int randomNumber = new Random().Next(1, totalWeight + 1);
+
+            // Iterate over the words and subtract their weight from the random number
+            // until the random number is less than or equal to zero
+            foreach (var word in words)
+            {
+                i++;
+                if (i< idRandom)
+                {
+                    randomNumber -= currentPlayerWords.ToArray()[i].Score;
+                    if (randomNumber <= 0)
+                    {
+                        result.Add(word);
+
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+             
+            }
+
+            return result;
+        }
+
+        [HttpGet("{idRandomWithTopic}")]
+        public IEnumerable<Word> GetRandomWithTopics(int idRandomWithTopic, string player, List<string> mytopicstitle)
+        {
+
+
+
+            // Retrieve all words from the database
+            var words = wrd.GetAllWords().Result;
+            var statistic = wrdst.GetAllAsync().Result;
+            List<Word> result = new List<Word>();
+            int i = 0;
+            var topics = tp.GetAllTopics();
+            List<Topic> current_tp = new List<Topic>();
+
+
+
+            var currentPlayerWords = statistic.Where(x => x.Player.PlayerName.Equals(player));
+
+
+            var currentTopics = topics.Result.Where(x => x.Title.Equals(mytopicstitle))  ;
+
+            foreach (var topictitle in mytopicstitle)
+            {
+                               
+                current_tp.Add(tp.GetTopicById(topictitle).Result);
+
+            }
+
+            // Calculate the total weight of all the words
+
+            int totalWeight = currentPlayerWords.Sum(w => w.Score);
+
+            // Generate a random number between 1 and the total weight
+            int randomNumber = new Random().Next(1, totalWeight + 1);
+
+            // Iterate over the words and subtract their weight from the random number
+            // until the random number is less than or equal to zero
+            foreach (var word in words)
+            {
+                if (mytopicstitle.Contains(word.Topic.Title))
+                {
+                    i++;
+                    if (i < idRandomWithTopic)
+                    {
+                        randomNumber -= currentPlayerWords.ToArray()[i].Score;
+                        if (randomNumber <= 0)
+                        {
+                            result.Add(word);
+
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+              
+
+            }
+
+            return result;
+        }
+
     }
+
+ 
+
 }
+
+
+

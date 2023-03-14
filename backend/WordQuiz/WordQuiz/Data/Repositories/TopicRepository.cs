@@ -12,35 +12,45 @@ namespace WordQuiz.Data.Repositories
             _context = context;
         }
 
-        public IEnumerable<Topic> GetAllTopics()
+        public async Task<IEnumerable<Topic>> GetAllTopics()
         {
-            return _context.Topics.Include(t => t.Words).ToList();
+            return await _context.Topics.Include(t => t.Words).ToListAsync();
         }
 
-        public Topic GetTopicById(string id)
+        public async Task<Topic> GetTopicById(string id)
         {
-            return _context.Topics.Include(t => t.Words).FirstOrDefault(t => t.Id == id);
+            return await _context.Topics.Include(t => t.Words).SingleOrDefaultAsync(t => t.Id == id);
         }
 
-        public void AddTopic(Topic topic)
+        public async Task<Topic> AddTopic(Topic topic)
         {
             _context.Topics.Add(topic);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+            return topic;
         }
 
-        public void UpdateTopic(Topic topic)
+        public async Task<Topic> UpdateTopic(Topic topic)
         {
-            _context.Topics.Update(topic);
-            _context.SaveChanges();
+            _context.Entry(topic).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return topic;
         }
 
-        public void DeleteTopic(string id)
+        public async Task DeleteTopic(string id)
         {
+            /*
             var topic = _context.Topics.FirstOrDefault(t => t.Id == id);
             if (topic != null)
             {
                 _context.Topics.Remove(topic);
                 _context.SaveChanges();
+            }*/
+
+            var topic = await _context.Words.FindAsync(id);
+            if (topic != null)
+            {
+                _context.Words.Remove(topic);
+                await _context.SaveChangesAsync();
             }
         }
     }

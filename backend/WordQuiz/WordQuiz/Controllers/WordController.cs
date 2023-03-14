@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.AspNetCore.SignalR;
 using WordQuiz.Data.Repositories;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,40 +41,47 @@ namespace WordQuiz.Controllers
 
         // GET: api/<WordController>
         [HttpGet]
-        public IEnumerable<Word> Get()
+        public IEnumerable<Word> GetAllWord()
         {
             return wrd.GetAllWords().Result;
         }
 
         // GET api/<WordController>/5
         [HttpGet("{id}")]
-        public Word Get(string id)
+        public Word? GetWord(string id)
         {
             return wrd.GetWordById(id).Result;
         }
 
         // POST api/<WordController>
         [HttpPost]
-        public void Post([FromBody] Word value)
+        public async void AddWord([FromBody] Word value)
         {
 
-            wrd.CreateWord(value);
+            await wrd.CreateWord(value);
         }
 
         // PUT api/<WordController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Word value)
+        public async Task<IActionResult> EditWord(int id, [FromBody] Word value)
         {
 
-            wrd.UpdateWord(value);
+           await wrd.UpdateWord(value);
+            return Ok();
         }
 
         // DELETE api/<WordController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public async Task<IActionResult> DeleteWord(string id)
         {
-            wrd.DeleteWord(id);
+          await wrd.DeleteWord(id);
+            return Ok();
 
         }
+
+     
+            
+
+
     }
 }

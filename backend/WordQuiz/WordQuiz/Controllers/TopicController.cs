@@ -42,37 +42,39 @@ namespace WordQuiz.Controllers
 
         // GET: api/<TopicController>
         [HttpGet]
-        public IEnumerable<Topic> Get()
+        public IEnumerable<Topic> GetAllTopic()
         {
-            return tp.GetAllTopics();
+            return tp.GetAllTopics().Result;
         }
 
         // GET api/<TopicController>/5
         [HttpGet("{id}")]
-        public Topic Get(string id)
+        public Topic? GetTopic(string id)
         {
-            return tp.GetTopicById(id);
+            return tp.GetTopicById(id).Result;
         }
 
         // POST api/<TopicController>
         [HttpPost]
-        public void Post([FromBody] Topic value)
+        public async void AddTopic([FromBody] Topic value)
         {
-            tp.AddTopic(value);
+            await tp.AddTopic(value);
         }
 
         // PUT api/<TopicController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Topic value)
+        public async Task<IActionResult> EditTopic(int id, [FromBody] Topic value)
         {
-            tp.UpdateTopic(value);
+          await tp.UpdateTopic(value);
+            return Ok();
         }
 
         // DELETE api/<TopicController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public async Task<IActionResult> DeleteTopic(string id)
         {
-            tp.DeleteTopic(id);
+            await tp.DeleteTopic(id);
+            return Ok();
         }
     }
 }

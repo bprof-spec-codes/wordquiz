@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace WordQuiz.Controllers
 {
 
-    [Authorize(Roles = "Player, Admin")]
+  //  [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
@@ -41,38 +41,40 @@ namespace WordQuiz.Controllers
 
         // GET: api/<PlayerController>
         [HttpGet]
-        public IEnumerable<Player> GetPlayer()
+        public IEnumerable<Player> GetAllPlayer()
         {
             return player.GetAllPlayers().Result;
         }
 
         // GET api/<PlayerController>/5
         [HttpGet("{id}")]
-        public Player Get(string id)
+        public Player? GetPlayer(string id)
         {
             return player.GetPlayerById(id).Result;
         }
 
         // POST api/<PlayerController>
         [HttpPost]
-        public void Post([FromBody] Player value)
+        public async void AddPlayer([FromBody] Player value)
         {
-            player.CreatePlayer(value);
+           await player.CreatePlayer(value);
 
         }
 
         // PUT api/<PlayerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Player value)
+        public async Task<IActionResult> EditPlayer(int id, [FromBody] Player value)
         {
-            player.UpdatePlayer(value);
+           await player.UpdatePlayer(value);
+            return Ok();
         }
 
         // DELETE api/<PlayerController>/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public async Task<IActionResult> DeletePlayer(string id)
         {
-            player.DeletePlayer(id);
+          await player.DeletePlayer(id);
+            return Ok();
         }
     }
 }
