@@ -36,6 +36,7 @@ builder.Services.AddDefaultIdentity<Player>(options => {
     options.Password.RequireUppercase = false;
 }
 )
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
