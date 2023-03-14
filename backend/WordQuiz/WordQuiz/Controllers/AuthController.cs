@@ -49,5 +49,23 @@ namespace WordQuiz.Controllers
             }
             return Unauthorized();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
+        {
+            var user = new Player
+            {
+                Email = model.Email,
+                UserName = model.UserName,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                PlayerName = model.PlayerName
+                
+                //PhotoContentType = model.PhotoContentType,
+                //PhotoData = model.PhotoData
+            };
+            await _userManager.CreateAsync(user, model.Password);
+            await _userManager.AddToRoleAsync(user, "Player");
+            return Ok();
+        }
     }
 }
