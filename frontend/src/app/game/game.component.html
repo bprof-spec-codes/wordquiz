@@ -2,13 +2,47 @@
 <div *ngIf="topic">
     <app-secondary-region header="{{ topic.title }}">
         <div class="py-3">
-            <p>{{ topic.description }}</p>
+            <!-- PENDING GAME -->
+            <div *ngIf="gameService.phase == 'pending'">
+                <p>{{ topic.description }}</p>
 
-            <p>
-                Can you guess them all? You will have
-                {{ gameService.maxTimeSeconds }} seconds
-                {{ gameService.timeRemaining }}
-            </p>
+                <p>
+                    Can you guess them all? You will have
+                    {{ gameService.maxTimeSeconds }} seconds to guess the words.
+                </p>
+
+                <button (click)="onStartClicked()">Start</button>
+            </div>
+
+            <!-- RUNNING GAME -->
+            <div *ngIf="gameService.phase == 'playing'">
+                <div class="row">
+                    <div>
+                        <p>Translate the following word</p>
+                        <p>{{ gameService.words[activeWord] }}</p>
+                    </div>
+                </div>
+                <p
+                    [ngClass]="{
+                        'text-danger': gameService.timeRemaining <= 5
+                    }"
+                >
+                    {{ gameService.timeRemaining }}
+                </p>
+
+                <div>
+                    <input type="text" [(ngModel)]="currentGuess" />
+                </div>
+
+                <div class="row">
+                    <div class="col-6 text-start">
+                        <button (click)="onPrevClicked()">Back</button>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button (click)="onNextClicked()">Next</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </app-secondary-region>
 </div>

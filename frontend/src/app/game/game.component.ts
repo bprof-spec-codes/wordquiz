@@ -1,7 +1,8 @@
+import { Component, SimpleChange, SimpleChanges } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
 import { Topic, TopicService } from '../topic.service';
 
 import { ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
 import { GameService } from '../game.service';
 
 @Component({
@@ -11,6 +12,10 @@ import { GameService } from '../game.service';
 })
 export class GameComponent {
     topic!: Topic | undefined;
+
+    activeWord!: number;
+
+    currentGuess!: string;
 
     /**
      *
@@ -29,4 +34,24 @@ export class GameComponent {
             .getAll()
             .find((t) => t.id == topicIdFromRoute);
     }
+
+    onStartClicked() {
+        this.activeWord = 0;
+        this.gameService.startGame(this.topic!);
+        console.log(this.gameService.phase);
+    }
+
+    onNextClicked() {
+        this.activeWord = Math.min(
+            this.gameService.words.length - 1,
+            this.activeWord + 1
+        );
+        console.log(this.currentGuess);
+    }
+
+    onPrevClicked() {
+        this.activeWord = Math.max(0, this.activeWord - 1);
+    }
+
+    onSubmitClicked() {}
 }
