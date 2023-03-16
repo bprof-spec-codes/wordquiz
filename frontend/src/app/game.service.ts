@@ -6,7 +6,7 @@ import { WordsService } from './words.service';
     providedIn: 'root',
 })
 export class GameService {
-    maxTimeSeconds = 30;
+    maxTimeSeconds = 300;
     timeRemaining = this.maxTimeSeconds;
     interval!: any;
 
@@ -22,10 +22,11 @@ export class GameService {
     }
 
     constructor(private wordService: WordsService) {
-        this.phase = 'pending';
+        this.phase = 'pending'; // TODO change back to pending
     }
 
     startGame(topic: Topic) {
+        this.timeRemaining = this.maxTimeSeconds;
         this.interval = setInterval(this.timerTick.bind(this), 1000);
 
         this.words = this.wordService.getRandomWords(topic);
@@ -34,7 +35,7 @@ export class GameService {
         this.phase = 'playing';
     }
 
-    private endGame() {
+    endGame() {
         clearInterval(this.interval);
         this.phase = 'submitting';
 

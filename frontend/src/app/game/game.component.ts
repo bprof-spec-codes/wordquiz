@@ -4,6 +4,7 @@ import { Topic, TopicService } from '../topic.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../game.service';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-game',
@@ -43,8 +44,6 @@ export class GameComponent {
 
     /** Handles the event when the next button has been clicked. */
     onNextClicked() {
-        this.saveGuess();
-
         this.activeWord = Math.min(
             this.gameService.words.length - 1,
             this.activeWord + 1
@@ -55,8 +54,6 @@ export class GameComponent {
 
     /** Handles the event when the previous button has been clicked. */
     onPrevClicked() {
-        this.saveGuess();
-
         this.activeWord = Math.max(0, this.activeWord - 1);
 
         this.loadGuess();
@@ -72,5 +69,19 @@ export class GameComponent {
         this.currentGuess = this.gameService.guesses[this.activeWord];
     }
 
-    onSubmitClicked() {}
+    onSubmitClicked() {
+        this.gameService.endGame();
+    }
+
+    get completionPercentage() {
+        return (this.completedWords / this.gameService.words.length) * 100;
+    }
+
+    get completedWords() {
+        return this.gameService.guesses.filter((g) => g !== '').length;
+    }
+
+    onGuessKeydown() {
+        this.saveGuess();
+    }
 }

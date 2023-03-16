@@ -6,8 +6,10 @@
                 {{ topic.description }}
             </blockquote>
         </div>
-        <div>
-            <a [routerLink]="['/play/', topic.id]" class="btn btn-primary"
+        <div class="text-center my-4">
+            <a
+                [routerLink]="['/play/', topic.id]"
+                class="btn btn-primary rounded-pill"
                 >Take the quiz</a
             >
         </div>

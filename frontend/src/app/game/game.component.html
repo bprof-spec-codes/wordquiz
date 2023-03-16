@@ -1,7 +1,7 @@
 <div *ngIf="!topic">Invalid topic</div>
-<div *ngIf="topic">
+<div *ngIf="topic" class="fancy-font">
     <app-secondary-region header="{{ topic.title }}">
-        <div class="py-3">
+        <div class="py-5">
             <!-- PENDING GAME -->
             <div *ngIf="gameService.phase == 'pending'">
                 <p>{{ topic.description }}</p>
@@ -11,41 +11,108 @@
                     {{ gameService.maxTimeSeconds }} seconds to guess the words.
                 </p>
 
-                <button (click)="onStartClicked()">Start</button>
+                <button class="rounded-pill" (click)="onStartClicked()">
+                    Start
+                </button>
+                <div>
+                    <a [routerLink]="['/topics']">&lt; Select another topic</a>
+                </div>
             </div>
 
             <!-- RUNNING GAME -->
-            <div *ngIf="gameService.phase == 'playing'">
+            <div class="py-5 my-5" *ngIf="gameService.phase == 'playing'">
                 <div class="row">
-                    <div>
-                        <p>Translate the following word</p>
-                        <p>{{ gameService.words[activeWord] }}</p>
+                    <div class="col-6">
+                        <p class="heavy-font my-2">
+                            Translate the following word
+                        </p>
+                        <p class="h2">{{ gameService.words[activeWord] }}</p>
+                    </div>
+
+                    <div class="col-6">
+                        <label class="heavy-font my-2">
+                            Type your answer here
+                        </label>
+                        <input
+                            id="answer-box"
+                            type="text"
+                            (keydown.enter)="onNextClicked()"
+                            (input)="onGuessKeydown()"
+                            [(ngModel)]="currentGuess"
+                            class="w-100 rounded-pill"
+                        />
                     </div>
                 </div>
-                <p
-                    [ngClass]="{
-                        'text-danger': gameService.timeRemaining <= 5
-                    }"
-                >
-                    {{ gameService.timeRemaining }}
-                </p>
+
+                <div class="row mt-5">
+                    <div class="col-4 text-start">
+                        <button
+                            [disabled]="activeWord == 0"
+                            class="step-button"
+                            (click)="onPrevClicked()"
+                        >
+                            &lt;
+                        </button>
+                    </div>
+
+                    <div class="heavy-font text-center col-4">
+                        <p class="pb-0 m-0">Time remaining</p>
+                        <p
+                            class="fs-4"
+                            [ngClass]="{
+                                'text-warning': gameService.timeRemaining <= 10,
+                                'text-danger': gameService.timeRemaining <= 5
+                            }"
+                        >
+                            {{ gameService.timeRemaining }}
+                        </p>
+                    </div>
+
+                    <div class="col-4 text-end">
+                        <button
+                            class="step-button"
+                            (click)="onNextClicked()"
+                            [disabled]="
+                                activeWord == gameService.words.length - 1
+                            "
+                        >
+                            &gt;
+                        </button>
+                    </div>
+                </div>
 
                 <div>
-                    <input
-                        type="text"
-                        (keydown.enter)="onNextClicked()"
-                        [(ngModel)]="currentGuess"
-                    />
+                    <ngb-progressbar
+                        type="primary"
+                        [value]="completionPercentage"
+                    >
+                        <span id="progressbar">
+                            {{ completedWords }}/{{ gameService.words.length }}
+                        </span>
+                    </ngb-progressbar>
                 </div>
 
-                <div class="row">
-                    <div class="col-6 text-start">
-                        <button (click)="onPrevClicked()">Back</button>
-                    </div>
-                    <div class="col-6 text-end">
-                        <button (click)="onNextClicked()">Next</button>
-                    </div>
+                <div class="text-center mt-3 mb-5">
+                    <button
+                        (click)="onSubmitClicked()"
+                        class="rounded-pill btn btn-primary"
+                    >
+                        Submit all guesses
+                    </button>
                 </div>
+            </div>
+
+            <!-- Submitting words -->
+            <div *ngIf="gameService.phase == 'submitting'">
+                <p>{{ topic.description }}</p>
+
+                <p>Submitting your guesses, please wait</p>
+            </div>
+
+            <!-- Submitting words -->
+            <div *ngIf="gameService.phase == 'finished'">
+                Your results
+                <button (click)="onStartClicked()">Try again</button>
             </div>
         </div>
     </app-secondary-region>
