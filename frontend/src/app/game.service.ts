@@ -6,7 +6,7 @@ import { WordsService } from './words.service';
     providedIn: 'root',
 })
 export class GameService {
-    maxTimeSeconds = 300;
+    maxTimeSeconds = 30;
     timeRemaining = this.maxTimeSeconds;
     interval!: any;
 
