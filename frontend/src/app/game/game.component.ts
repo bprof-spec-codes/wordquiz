@@ -35,22 +35,41 @@ export class GameComponent {
             .find((t) => t.id == topicIdFromRoute);
     }
 
+    /** Handles the event when the start button has been clicked. */
     onStartClicked() {
         this.activeWord = 0;
         this.gameService.startGame(this.topic!);
-        console.log(this.gameService.phase);
     }
 
+    /** Handles the event when the next button has been clicked. */
     onNextClicked() {
+        this.saveGuess();
+
         this.activeWord = Math.min(
             this.gameService.words.length - 1,
             this.activeWord + 1
         );
-        console.log(this.currentGuess);
+
+        this.loadGuess();
     }
 
+    /** Handles the event when the previous button has been clicked. */
     onPrevClicked() {
+        this.saveGuess();
+
         this.activeWord = Math.max(0, this.activeWord - 1);
+
+        this.loadGuess();
+    }
+
+    /** Stores the current guess. */
+    saveGuess() {
+        this.gameService.guesses[this.activeWord] = this.currentGuess;
+    }
+
+    /** Loads a guess into the current guess */
+    loadGuess() {
+        this.currentGuess = this.gameService.guesses[this.activeWord];
     }
 
     onSubmitClicked() {}

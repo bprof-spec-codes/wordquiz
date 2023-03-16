@@ -31,7 +31,11 @@
                 </p>
 
                 <div>
-                    <input type="text" [(ngModel)]="currentGuess" />
+                    <input
+                        type="text"
+                        (keydown.enter)="onNextClicked()"
+                        [(ngModel)]="currentGuess"
+                    />
                 </div>
 
                 <div class="row">
