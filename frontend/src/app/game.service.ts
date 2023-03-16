@@ -29,6 +29,8 @@ export class GameService {
         this.interval = setInterval(this.timerTick.bind(this), 1000);
 
         this.words = this.wordService.getRandomWords(topic);
+        this.guesses = [];
+        this.words.forEach((w) => this.guesses.push(''));
         this.phase = 'playing';
     }
 
