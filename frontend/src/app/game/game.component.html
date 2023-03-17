@@ -1,6 +1,13 @@
 <div *ngIf="!topic">Invalid topic</div>
 <div *ngIf="topic" class="fancy-font">
-    <app-secondary-region header="{{ topic.title }}">
+    <app-secondary-region
+        header="{{
+            topic.title +
+                (gameService.phase == 'playing'
+                    ? ' ' + (activeWord + 1) + '/' + gameService.words.length
+                    : '')
+        }}"
+    >
         <div class="py-5">
             <!-- PENDING GAME -->
             <div *ngIf="gameService.phase == 'pending'">
