@@ -1,4 +1,10 @@
-import { Component, SimpleChange, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    SimpleChange,
+    SimpleChanges,
+    ViewChild,
+} from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { Topic, TopicService } from '../topic.service';
 
@@ -17,6 +23,8 @@ export class GameComponent {
     activeWord!: number;
 
     currentGuess!: string;
+
+    @ViewChild('guessBox') guessBox!: ElementRef;
 
     /**
      *
@@ -40,6 +48,7 @@ export class GameComponent {
     onStartClicked() {
         this.activeWord = 0;
         this.gameService.startGame(this.topic!);
+        setTimeout(() => this.guessBox.nativeElement.focus(), 20);
     }
 
     /** Handles the event when the next button has been clicked. */
@@ -48,15 +57,15 @@ export class GameComponent {
             this.gameService.words.length - 1,
             this.activeWord + 1
         );
-
         this.loadGuess();
+        this.guessBox.nativeElement.focus();
     }
 
     /** Handles the event when the previous button has been clicked. */
     onPrevClicked() {
         this.activeWord = Math.max(0, this.activeWord - 1);
-
         this.loadGuess();
+        this.guessBox.nativeElement.focus();
     }
 
     /** Stores the current guess. */
