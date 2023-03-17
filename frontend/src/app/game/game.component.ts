@@ -36,6 +36,8 @@ export class GameComponent {
     ) {}
 
     ngOnInit() {
+        this.gameService.reset();
+
         const routeParams = this.route.snapshot.paramMap;
         const topicIdFromRoute = String(routeParams.get('topicId'));
 
@@ -46,6 +48,7 @@ export class GameComponent {
 
     /** Handles the event when the start button has been clicked. */
     onStartClicked() {
+        this.gameService.endGame();
         this.activeWord = 0;
         this.gameService.startGame(this.topic!);
         setTimeout(() => this.guessBox.nativeElement.focus(), 20);
