@@ -38,6 +38,7 @@ export class GameService {
 
     /** Resets everything. */
     reset() {
+        clearInterval(this.interval);
         this.phase = 'pending';
         this.topic = undefined;
         this.timeRemaining = this.maxTimeSeconds;
@@ -45,8 +46,7 @@ export class GameService {
         this.guesses = [];
     }
 
-    /**
-     * Starts the game in the given topic.
+    /** Starts the game in the given topic.
      * @param topic The topic of the game
      */
     startGame(topic: Topic) {
@@ -66,9 +66,9 @@ export class GameService {
     endGame() {
         clearInterval(this.interval);
         this.phase = 'submitting';
-        this.topic = undefined;
 
-        // TODO submit
+        this.submitGuesses();
+
         this.phase = 'finished';
     }
 
@@ -78,4 +78,18 @@ export class GameService {
             this.endGame();
         } else this.timeRemaining = Math.max(0, this.timeRemaining - 1);
     }
+
+    private async submitGuesses() {
+        if (this.topic == undefined || this.words.length === 0)
+            throw new Error('Something went wrong.');
+
+        const guessesToApi: ApiGuesses = this.words.map((word, idx) => {
+            return { original: word, guess: this.guesses[idx] };
+        });
+
+        // TODO Submit to API
+        console.log(guessesToApi);
+    }
 }
+
+type ApiGuesses = { original: string; guess: string }[];

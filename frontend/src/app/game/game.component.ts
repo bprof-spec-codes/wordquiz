@@ -48,10 +48,12 @@ export class GameComponent {
 
     /** Handles the event when the start button has been clicked. */
     onStartClicked() {
-        this.gameService.endGame();
         this.activeWord = 0;
         this.gameService.startGame(this.topic!);
-        setTimeout(() => this.guessBox.nativeElement.focus(), 20);
+        setTimeout(() => {
+            this.guessBox.nativeElement.value = '';
+            this.guessBox.nativeElement.focus();
+        }, 20);
     }
 
     /** Handles the event when the next button has been clicked. */
