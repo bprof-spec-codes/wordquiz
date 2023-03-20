@@ -45,5 +45,10 @@ namespace WordQuiz.Data.Repositories
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Word>> GetWordsByTopicIdAsync(string topicId)
+        {
+            return await _dbContext.Words.Where(w => w.Topic.Id == topicId).ToListAsync();
+        }
     }
 }

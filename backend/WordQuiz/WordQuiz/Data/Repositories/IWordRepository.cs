@@ -9,5 +9,7 @@ namespace WordQuiz.Data.Repositories
         Task<IEnumerable<Word>> GetAllWords();
         Task<Word> GetWordById(string wordId);
         Task<Word> UpdateWord(Word word);
+
+        Task<IEnumerable<Word>> GetWordsByTopicIdAsync(string topicId);
     }
 }

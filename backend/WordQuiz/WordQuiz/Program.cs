@@ -1,14 +1,20 @@
+using FluentAssertions.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 using WordQuiz.Data;
 using WordQuiz.Data.Repositories;
 using WordQuiz.Filters;
 using WordQuiz.Hubs;
 using WordQuiz.Models;
+using Microsoft.Extensions.DependencyInjection;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,6 +77,10 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddSignalR();
+
+
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 
 var app = builder.Build();

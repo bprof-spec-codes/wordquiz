@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WordQuiz.Models
 {
     public class Word
     {
         [Key]
+
         public string Id { get; set; }
         [Required]
         public string Original { get; set; }
@@ -17,6 +19,7 @@ namespace WordQuiz.Models
         public string TopicId { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public Topic Topic { get; set; }
 
         public Word()
