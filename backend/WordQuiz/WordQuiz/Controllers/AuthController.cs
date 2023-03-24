@@ -13,10 +13,12 @@ namespace WordQuiz.Controllers
     public class AuthController : Controller
     {
         private readonly UserManager<Player> _userManager;
+        private readonly SignInManager<Player> _signManager;
 
-        public AuthController(UserManager<Player> userManager)
+        public AuthController(UserManager<Player> userManager, SignInManager<Player> signManager)
         {
             _userManager = userManager;
+            _signManager = signManager;
         }
 
         [HttpPost]
@@ -65,6 +67,14 @@ namespace WordQuiz.Controllers
             };
             await _userManager.CreateAsync(user, model.Password);
             await _userManager.AddToRoleAsync(user, "Player");
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _signManager.SignOutAsync();
             return Ok();
         }
     }
