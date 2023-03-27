@@ -189,10 +189,12 @@ namespace WordQuiz.Controllers
         [HttpGet("ExportWords")]
         public async Task<ActionResult> ExportWords()
         {
-            var words = await wrd.GetAllWords();
+            /*var words = await wrd.GetAllWords();
             var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
 
-            return Ok(serializedWords);
+            */
+
+           return  Ok(await wrd.GetAllWords());
         }
 
         // POST api/<WordController>/ImportWords
