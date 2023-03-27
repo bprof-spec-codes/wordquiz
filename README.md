@@ -43,6 +43,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 
  Game Features:
+ 
 A fun and interactive word quiz game
 Test your vocabulary and language skills
 Learn new words and track your progress
@@ -52,6 +53,7 @@ Topic selection for personalized gameplay
 
 
  Technology Stack :
+ 
  Backend
 ASP.NET Core RESTful API
 Entity Framework Core for database access
@@ -60,30 +62,36 @@ JWT tokens for authentication
 SignalR for real-time communication
 
  Word Quiz API:
+ 
 Backend service for the Word Quiz game
 Handles user authentication, word and topic management, and game logic
 Exposes RESTful endpoints for client applications
 
  User Authentication & Authorization :
+ 
 Secure user registration and login
 Role-based access control
 JWT tokens for secure API access
 
  Word & Topic Management:
+ 
 CRUD operations for words and topics
 Retrieve random words based on player's statistics and selected topics
 
-Word Statistics Tracking
+Word Statistics Tracking:
+
 Monitor player's progress and performance
 Update statistics after each game session
 Encourage improvement and learning
 
- Real-time Communication with SignalR
+ Real-time Communication with SignalR:
+ 
 Real-time updates and notifications
 Enhance user experience and engagement
 Potential for multiplayer and collaborative features
 
-Future Enhancements
+Future Plans:
+
 Multiplayer mode
 Leaderboards and achievements
 Integration with other language learning tools
