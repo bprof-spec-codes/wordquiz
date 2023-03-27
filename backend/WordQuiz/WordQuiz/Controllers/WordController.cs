@@ -9,6 +9,8 @@ using WordQuiz.Data.Repositories;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Options;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -193,8 +195,17 @@ namespace WordQuiz.Controllers
             var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
 
             */
+            /*
+            return Ok(await wrd.GetAllWords());
 
-           return  Ok(await wrd.GetAllWords());
+
+            */
+
+            var words = await wrd.GetAllWords();
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var jsonString = System.Text.Json.JsonSerializer.Serialize(words, options);
+
+            return Ok(jsonString);
         }
 
         // POST api/<WordController>/ImportWords
