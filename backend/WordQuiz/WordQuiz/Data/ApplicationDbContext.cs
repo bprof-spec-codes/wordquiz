@@ -52,6 +52,27 @@ namespace WordQuiz.Data
                 .HasForeignKey(p => p.WordId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            var family = new Topic() { Title = "Family", Description = "Learn how to address your or your partner's family at gatherings." };
+            var sports = new Topic() { Title = "Sports", Description = "These words will help you cheer for your favorite team." };
+            var gardening = new Topic() { Title = "Gardening", Description = "Become an Oxford level green-thumb with this vocabulary." };
+            var travel = new Topic() { Title = "Travel", Description = "Words related to traveling abroad." };
+            var clothing = new Topic() { Title = "Clothing", Description = "Everything you need to know regarding fashion or about simply going shopping for clothes." };
+            var food = new Topic() { Title = "Food", Description = "A vocabulary aimed to help you avoid embarrassment while going out to eat." };
+            builder.Entity<Topic>().HasData(family, sports, gardening, travel, clothing, food);
+
+            builder.Entity<Word>().HasData(
+                /* Fam */
+                new Word() { Original = "Father", Translation = "Apa", TopicId = family.Id },
+                new Word() { Original = "Mother", Translation = "Anya", TopicId = family.Id },
+                new Word() { Original = "Aunt", Translation = "Nagynéni", TopicId = family.Id },
+                new Word() { Original = "Uncle", Translation = "Nagybácsi", TopicId = family.Id },
+                new Word() { Original = "Grandmother", Translation = "Nagymama", TopicId = family.Id },
+                new Word() { Original = "Grandfather", Translation = "Nagypapa", TopicId = family.Id },
+                new Word() { Original = "Grandfather", Translation = "Nagyapa", TopicId = family.Id },
+                new Word() { Original = "Mother-in-law", Translation = "Anyós", TopicId = family.Id },
+                new Word() { Original = "Father-in-law", Translation = "Após", TopicId = family.Id }
+            );
+
             base.OnModelCreating(builder);
         }
     }
