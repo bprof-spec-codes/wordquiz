@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { SecondaryRegionComponent } from './secondary-region/secondary-region.component';
 import { TopicDetailsComponent } from './topic-details/topic-details.component';
 import { TopicSelectionComponent } from './topic-selection/topic-selection.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { TopicSelectionComponent } from './topic-selection/topic-selection.compo
         TopicSelectionComponent,
         GameComponent,
         TopicDetailsComponent,
+        LoginComponent,
     ],
     imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
     providers: [],
