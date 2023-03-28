@@ -56,7 +56,7 @@
                     <div class="col-4 text-start">
                         <button
                             [disabled]="activeWord == 0"
-                            class="step-button"
+                            class="step-button rounded-pill"
                             (click)="onPrevClicked()"
                         >
                             &lt;
@@ -78,7 +78,7 @@
 
                     <div class="col-4 text-end">
                         <button
-                            class="step-button"
+                            class="step-button rounded-pill"
                             (click)="onNextClicked()"
                             [disabled]="
                                 activeWord == gameService.words.length - 1

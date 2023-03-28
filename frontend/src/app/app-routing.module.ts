@@ -10,6 +10,9 @@ const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'topics', component: TopicSelectionComponent },
     { path: 'topics/:topicId', component: TopicDetailsComponent },
+
+    { path: 'user/', component: TopicDetailsComponent },
+
     { path: 'play/:topicId', component: GameComponent },
 ];
 
