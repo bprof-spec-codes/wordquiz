@@ -33,6 +33,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddTransient<IWordRepository, WordRepository>();
 builder.Services.AddTransient<IWordStaticRepository, WordStaticRepository>();
 builder.Services.AddTransient<ITopicRepository, TopicRepository>();
+builder.Services.AddTransient<IPlayerRepository, PlayerRepository>();
 
 builder.Services.AddDefaultIdentity<Player>(options => {
     options.SignIn.RequireConfirmedAccount = false;

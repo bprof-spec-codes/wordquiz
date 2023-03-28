@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.AspNetCore.SignalR;
 using WordQuiz.Data.Repositories;
+using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -76,5 +77,29 @@ namespace WordQuiz.Controllers
             await tp.DeleteTopic(id);
             return Ok();
         }
+
+
+        // GET api/<WordController>/ExportWords
+        [HttpGet("ExportTopics")]
+        public async Task<ActionResult> Exporttopics()
+        {
+            /*var words = await wrd.GetAllWords();
+            var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
+
+            */
+            /*
+            return Ok(await wrd.GetAllWords());
+
+
+            */
+
+            var topics = await tp.GetAllTopics();
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var jsonString = System.Text.Json.JsonSerializer.Serialize(topics, options);
+
+            return Ok(jsonString);
+        }
+
+
     }
 }
