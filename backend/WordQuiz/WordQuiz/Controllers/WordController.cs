@@ -92,6 +92,7 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGame")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] List<string> topicIds, int numberOfWords = 10)
         {
+            
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
@@ -99,6 +100,8 @@ namespace WordQuiz.Controllers
                 var words = await wrd.GetWordsByTopicIdAsync(topicId);
                 wordsFromTopics.AddRange(words);
             }
+
+            numberOfWords = Math.Min(numberOfWords, wordsFromTopics.Count);
 
             // Select random words from the wordsFromTopics list
             var random = new Random();
@@ -124,6 +127,8 @@ namespace WordQuiz.Controllers
                 var words = await wrd.GetWordsByTopicIdAsync(topicId);
                 wordsFromTopics.AddRange(words);
             }
+
+            numberOfWords = Math.Min(numberOfWords, wordsFromTopics.Count);
 
             // Get word statistics for the current player
             var currentPlayerStats = wrdst.GetAllAsync().Result.Where(x => x.Player.PlayerName.Equals(player));
