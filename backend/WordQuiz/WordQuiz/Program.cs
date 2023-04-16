@@ -34,6 +34,14 @@ builder.Services.AddTransient<IWordRepository, WordRepository>();
 builder.Services.AddTransient<IWordStaticRepository, WordStaticRepository>();
 builder.Services.AddTransient<ITopicRepository, TopicRepository>();
 builder.Services.AddTransient<IPlayerRepository, PlayerRepository>();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("*");
+        });
+});
 
 builder.Services.AddDefaultIdentity<Player>(options => {
     options.SignIn.RequireConfirmedAccount = false;
@@ -85,6 +93,8 @@ builder.Services.AddControllers()
 
 
 var app = builder.Build();
+
+app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
