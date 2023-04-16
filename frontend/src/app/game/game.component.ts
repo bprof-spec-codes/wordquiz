@@ -11,6 +11,7 @@ import { Topic, TopicService } from '../topic.service';
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../game.service';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-game',
@@ -18,7 +19,7 @@ import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
-    topic!: Topic | undefined;
+    topic!: Topic;
 
     activeWord!: number;
 
@@ -41,14 +42,16 @@ export class GameComponent {
         const routeParams = this.route.snapshot.paramMap;
         const topicIdFromRoute = String(routeParams.get('topicId'));
 
-        this.topic = this.topicService
-            .getAll()
-            .find((t) => t.id == topicIdFromRoute);
+        this.topicService
+            .getOne(topicIdFromRoute)
+            .subscribe((topic) => (this.topic = topic));
     }
 
     /** Handles the event when the start button has been clicked. */
     onStartClicked() {
         this.activeWord = 0;
+        console.log(this.topic);
+
         this.gameService.startGame(this.topic!);
         setTimeout(() => {
             this.guessBox.nativeElement.value = '';

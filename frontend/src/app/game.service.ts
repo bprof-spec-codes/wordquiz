@@ -1,6 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Topic } from './topic.service';
-import { WordsService } from './words.service';
+import { environment } from 'src/environments/environment';
+
+export type Word = {
+    original: string;
+    id: string;
+    translation: string;
+};
 
 @Injectable({
     providedIn: 'root',
@@ -32,7 +39,7 @@ export class GameService {
         this._phase = value;
     }
 
-    constructor(private wordService: WordsService) {
+    constructor(private http: HttpClient) {
         this.reset();
     }
 
@@ -55,7 +62,9 @@ export class GameService {
         this.topic = topic;
         this.interval = setInterval(this.timerTick.bind(this), 1000);
 
-        this.words = this.wordService.getRandomWords(topic);
+        this.getWords().subscribe((words) => {
+            this.words = words;
+        });
 
         // Filling up the guesses with blank strings
         this.guesses = Array(this.words.length).fill('');
@@ -70,6 +79,18 @@ export class GameService {
         this.submitGuesses();
 
         this.phase = 'finished';
+    }
+
+    private getWords() {
+        const headers = { 'Content-Type': 'application/json' };
+        const body = [this.topic?.id];
+        console.log(environment.apiUrl + 'Word/StartGame');
+
+        return this.http.post<string[]>(
+            environment.apiUrl + 'Word/StartGame',
+            body,
+            { headers }
+        );
     }
 
     /** This function is called every second to decrement the timer. */

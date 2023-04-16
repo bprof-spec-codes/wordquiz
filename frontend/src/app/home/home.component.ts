@@ -1,6 +1,7 @@
 import { Topic, TopicService } from '../topic.service';
 
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-home',
@@ -8,10 +9,15 @@ import { Component } from '@angular/core';
     styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-    topics!: Topic[];
+    topics!: Observable<Topic[]>;
     layout!: null;
+    topicCount!: number;
 
-    constructor(private topicService: TopicService) {}
+    constructor(private topicService: TopicService) {
+        this.topicService.getAll().subscribe((data) => {
+            this.topicCount = data.length;
+        });
+    }
 
     ngOnInit() {
         this.topics = this.topicService.getAll();

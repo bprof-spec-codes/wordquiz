@@ -1,14 +1,14 @@
 <div *ngIf="!topic">Invalid topic</div>
-<div *ngIf="topic">
-    <app-secondary-region header="{{ topic.title }}">
+<ng-container *ngIf="topic">
+    <app-secondary-region header="{{ (topic | async)?.title }}">
         <div class="py-3">
             <blockquote class="fancy-font">
-                {{ topic.description }}
+                {{ (topic | async)?.description }}
             </blockquote>
         </div>
         <div class="text-center my-4">
             <a
-                [routerLink]="['/play/', topic.id]"
+                [routerLink]="['/play/', (topic | async)?.id]"
                 class="btn btn-primary rounded-pill"
                 >Take the quiz</a
             >
@@ -16,23 +16,23 @@
         <div class="word-bank fancy-font pb-4">
             <h5 class="text-center fw-bold mb-0">Word bank</h5>
             <div class="text-center">
-                <small>{{ topic.title }}</small>
+                <small>{{ (topic | async)?.title }}</small>
             </div>
             <div
-                *ngFor="let word of wordBank | keyvalue"
+                *ngFor="let word of (topic | async)?.words"
                 class="row justify-content-md-center my-0"
             >
-                <div class="col-md-3 row gx-0 py-0">
+                <div class="row gx-0 py-0">
                     <div class="col-6 text-end">
-                        {{ word.key }}
+                        {{ word.original }}
                         <span class="text-muted">..........</span>
                     </div>
                     <div class="col-6 text-left">
                         <span class="text-muted">..........</span>
-                        {{ word.value }}
+                        {{ word.translation }}
                     </div>
                 </div>
             </div>
         </div>
     </app-secondary-region>
-</div>
+</ng-container>

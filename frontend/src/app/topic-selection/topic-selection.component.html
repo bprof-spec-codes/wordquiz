@@ -3,7 +3,7 @@
         <div class="row gx-3 gy-3">
             <div
                 class="topic col-12 col-sm-4 col-md-3"
-                *ngFor="let topic of topics"
+                *ngFor="let topic of topics | async"
             >
                 <div class="card bg-dark text-white">
                     <div class="card-body">

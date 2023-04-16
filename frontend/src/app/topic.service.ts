@@ -1,54 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Word } from './game.service';
+import { environment } from './../environments/environment';
 
 export type Topic = {
     title: string;
     description: string;
     id: string;
+    words: Word[];
 };
 
 @Injectable({
     providedIn: 'root',
 })
 export class TopicService {
-    constructor() {}
+    constructor(private http: HttpClient) {}
 
-    getAll(): Topic[] {
-        return [
-            {
-                title: 'Food',
-                description:
-                    'A vocabulary aimed to help you avoid embarrassment while going out to eat.',
-                id: 'food',
-            },
-            {
-                title: 'Family',
-                description:
-                    "Learn how to address your or your partner's family at gatherings.",
-                id: 'family',
-            },
-            {
-                title: 'Sports',
-                description:
-                    'These words will help you cheer for your favorite team.',
-                id: 'housing',
-            },
-            {
-                title: 'Gardening',
-                description:
-                    'Become an Oxford level green-thumb with this vocabulary.',
-                id: 'gardening',
-            },
-            {
-                title: 'Travel',
-                description: 'Words related to traveling abroad.',
-                id: 'travel',
-            },
-            {
-                title: 'Clothing',
-                description:
-                    'Everything you need to know regarding fashion or about simply going shopping for clothes.',
-                id: 'clothing',
-            },
-        ];
+    getAll() {
+        return this.http.get<Topic[]>(environment.apiUrl + 'Topic');
+    }
+
+    getOne(id: string) {
+        return this.http.get<Topic>(environment.apiUrl + 'Topic/' + id);
     }
 }

@@ -2,7 +2,7 @@ import { Topic, TopicService } from '../topic.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import { WordsService } from '../words.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-topic-details',
@@ -10,28 +10,20 @@ import { WordsService } from '../words.service';
     styleUrls: ['./topic-details.component.scss'],
 })
 export class TopicDetailsComponent {
-    topic!: Topic | undefined;
-
-    wordBank!: { [key: string]: string };
+    topic!: Observable<Topic>;
 
     /**
      *
      */
     constructor(
         private route: ActivatedRoute,
-        private topicService: TopicService,
-        public wordService: WordsService
+        private topicService: TopicService
     ) {}
 
     ngOnInit() {
         const routeParams = this.route.snapshot.paramMap;
         const topicIdFromRoute = String(routeParams.get('topicId'));
 
-        this.topic = this.topicService
-            .getAll()
-            .find((t) => t.id == topicIdFromRoute);
-
-        if (this.topic)
-            this.wordBank = this.wordService.getAllFromTopic(this.topic);
+        this.topic = this.topicService.getOne(topicIdFromRoute);
     }
 }
