@@ -9,7 +9,7 @@ using WordQuiz.Models;
 namespace WordQuiz.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuthController : Controller
     {
         private readonly UserManager<Player> _userManager;
