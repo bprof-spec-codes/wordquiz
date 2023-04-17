@@ -18,19 +18,19 @@ namespace WordQuiz.Controllers
     public class PlayerController : ControllerBase
     {
 
-        IPlayerRepository player;       
+        IPlayerRepository playerRepository;       
 
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public PlayerController(IPlayerRepository player, UserManager<Player> userManager, RoleManager<IdentityRole> roleManager)
+        public PlayerController(IPlayerRepository playerRepository, UserManager<Player> userManager, RoleManager<IdentityRole> roleManager)
         {
-            this.player = player;
+            this.playerRepository = playerRepository;
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
 
-        public IPlayerRepository Player { get => player; set => player = value; }
+        public IPlayerRepository Player { get => playerRepository; set => playerRepository = value; }
 
         public UserManager<Player> UserManager => userManager;
 
@@ -39,25 +39,53 @@ namespace WordQuiz.Controllers
 
 
 
-        // GET: api/<PlayerController>
+        // GET: api/<PlayerController>/all
         [HttpGet]
         public IEnumerable<Player> GetAllPlayer()
         {
-            return player.GetAllPlayers().Result;
+            return playerRepository.GetAllPlayers().Result;
         }
 
         // GET api/<PlayerController>/5
         [HttpGet("{id}")]
-        public Player? GetPlayer(string id)
+        public async Task<object> GetPlayer(string id = null)
         {
-            return player.GetPlayerById(id).Result;
+            
+            Player p = playerRepository.GetPlayerById(id).Result;
+            return new {
+                email = p.Email,
+                id = p.Id,
+                playerName = p.PlayerName,
+                userName = p.UserName,
+                admin = await this.userManager.IsInRoleAsync(p, "Admin")
+            };
         }
+
+        // GET api/<PlayerController>
+        [HttpGet]
+        [Authorize]
+        public async Task<object> GetPlayer()
+        {
+            // FIXME cannot get user from userManager.GetUserAsync(User)
+            string id = this.userManager.GetUserId(User);
+            Player p = (await this.playerRepository.GetAllPlayers()).First(p => p.Email == id);
+            return new
+            {
+                email = p.Email,
+                id = p.Id,
+                playerName = p.PlayerName,
+                userName = p.UserName,
+                admin = await this.userManager.IsInRoleAsync(p, "Admin")
+            };
+        }
+
+
 
         // POST api/<PlayerController>
         [HttpPost]
         public async void AddPlayer([FromBody] Player value)
         {
-           await player.CreatePlayer(value);
+           await playerRepository.CreatePlayer(value);
 
         }
 
@@ -65,7 +93,7 @@ namespace WordQuiz.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditPlayer(int id, [FromBody] Player value)
         {
-           await player.UpdatePlayer(value);
+           await playerRepository.UpdatePlayer(value);
             return Ok();
         }
 
@@ -73,7 +101,7 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePlayer(string id)
         {
-          await player.DeletePlayer(id);
+          await playerRepository.DeletePlayer(id);
             return Ok();
         }
     }
