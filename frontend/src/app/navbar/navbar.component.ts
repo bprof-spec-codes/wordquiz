@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { AuthService, User } from '../shared/auth.service';
+import { Component, OnInit } from '@angular/core';
+
 import { Location } from '@angular/common';
 
 @Component({
@@ -6,4 +8,14 @@ import { Location } from '@angular/common';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+    user: User | undefined;
+    /**
+     *
+     */
+    constructor(public authService: AuthService) {}
+
+    logout() {
+        this.authService.doLogout();
+    }
+}

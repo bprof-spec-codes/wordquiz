@@ -7,10 +7,25 @@
                     <span class="logo-quiz">quiz</span>
                 </a>
             </div>
+
             <div class="col-6 text-end mt-2">
-                <a [routerLink]="'/topics'" class="btn btn-outline-primary">
-                    Start playing
-                </a>
+                <div *ngIf="authService.isLoggedIn">
+                    <div class="mx-2 d-inline">
+                        Hello, {{ authService.currentUser?.userName }}
+                        <button (click)="logout()">Logout</button>
+                    </div>
+                    <a [routerLink]="'/topics'" class="btn btn-outline-primary">
+                        Start playing
+                    </a>
+                </div>
+                <div *ngIf="!authService.isLoggedIn">
+                    <a
+                        [routerLink]="'/user/login'"
+                        class="btn btn-outline-primary"
+                    >
+                        Log in
+                    </a>
+                </div>
             </div>
         </div>
     </div>
