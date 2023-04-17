@@ -60,15 +60,16 @@ export class GameService {
         this.reset();
 
         this.topic = topic;
-        this.interval = setInterval(this.timerTick.bind(this), 1000);
 
         this.getWords().subscribe((words) => {
             this.words = words;
-        });
 
-        // Filling up the guesses with blank strings
-        this.guesses = Array(this.words.length).fill('');
-        this.phase = 'playing';
+            this.interval = setInterval(this.timerTick.bind(this), 1000);
+
+            // Filling up the guesses with blank strings
+            this.guesses = Array(this.words.length).fill('');
+            this.phase = 'playing';
+        });
     }
 
     /** Ends the game and submits the guesses to the API. */
