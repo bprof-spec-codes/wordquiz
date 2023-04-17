@@ -20,10 +20,7 @@ namespace WordQuiz.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class WordController : ControllerBase
-    {
-
-
-      
+    {   
         IWordRepository wrd;
         IWordStaticRepository wrdst;
         ITopicRepository tp;
@@ -49,9 +46,9 @@ namespace WordQuiz.Controllers
 
         // GET: api/<WordController>
         [HttpGet]
-        public IEnumerable<Word> GetAllWord()
+        public async Task<IEnumerable<Word>> GetAllWord()
         {
-            return wrd.GetAllWords().Result;
+            return await wrd.GetAllWords();
         }
 
         // GET api/<WordController>/5
@@ -88,9 +85,9 @@ namespace WordQuiz.Controllers
         }
 
 
-        // GET: api/<WordController>/start/{topicId}
+        // POST: api/<WordController>/StartGame
         [HttpPost("StartGame")]
-        public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] List<string> topicIds, int numberOfWords = 10)
+        public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] string[] topicIds, int numberOfWords = 10)
         {
             
             // Get words from the provided topics
@@ -113,7 +110,7 @@ namespace WordQuiz.Controllers
                 wordsFromTopics.RemoveAt(randomIndex);
             }
 
-            return Ok(selectedWords);
+            return Ok(selectedWords.Select(w => w.Original));
         }
 
 
@@ -160,7 +157,7 @@ namespace WordQuiz.Controllers
                 }
             }
 
-            return Ok(selectedWords);
+            return Ok(selectedWords.Select(w => w.Original));
         }
 
 
