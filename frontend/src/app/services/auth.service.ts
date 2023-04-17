@@ -64,6 +64,7 @@ export class AuthService {
     }
 
     doLogout() {
+        // TODO call backend
         let removeToken = localStorage.removeItem('access_token');
         if (removeToken == null) {
             this.router.navigate(['/']);
