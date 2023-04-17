@@ -45,7 +45,7 @@ namespace WordQuiz.Controllers
 
 
         // GET: api/<WordController>
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IEnumerable<Word>> GetAllWord()
         {
             return await wrd.GetAllWords();

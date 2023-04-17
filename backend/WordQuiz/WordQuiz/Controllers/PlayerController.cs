@@ -36,12 +36,9 @@ namespace WordQuiz.Controllers
 
         public RoleManager<IdentityRole> RoleManager => roleManager;
 
-
-
-
         // GET: api/<PlayerController>/all
-        [HttpGet]
-        public IEnumerable<Player> GetAllPlayer()
+        [HttpGet("all")]
+        public IEnumerable<Player> GetAllPlayers()
         {
             return playerRepository.GetAllPlayers().Result;
         }
