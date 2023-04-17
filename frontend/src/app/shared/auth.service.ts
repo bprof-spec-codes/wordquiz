@@ -25,6 +25,7 @@ export type User = {
 export class AuthService {
     headers = new HttpHeaders().set('Content-Type', 'application/json');
     currentUser: User | undefined = undefined;
+    loading = false;
     constructor(private http: HttpClient, public router: Router) {}
     // Sign-up
     signUp(user: User): Observable<any> {
@@ -39,7 +40,7 @@ export class AuthService {
                 localStorage.setItem('access_token', res.token);
                 return this.getUserProfile().subscribe((res) => {
                     this.currentUser = res;
-                    //this.router.navigate(['/']);
+                    this.router.navigate(['/']);
                 });
             });
     }
@@ -52,13 +53,20 @@ export class AuthService {
         let authToken = localStorage.getItem('access_token');
         const isLoggedIn = authToken !== null ? true : false;
 
+        if (isLoggedIn && !this.currentUser && !this.loading) {
+            this.loading = true;
+            this.getUserProfile().subscribe((res) => {
+                this.currentUser = res;
+            });
+        }
+
         return isLoggedIn;
     }
 
     doLogout() {
         let removeToken = localStorage.removeItem('access_token');
         if (removeToken == null) {
-            this.router.navigate(['log-in']);
+            this.router.navigate(['/']);
         }
     }
 

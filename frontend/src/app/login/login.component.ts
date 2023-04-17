@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -19,17 +20,20 @@ export class LoginComponent implements OnInit {
      */
     constructor(
         private formBuilder: FormBuilder,
-        public AuthService: AuthService
+        public AuthService: AuthService,
+        private router: Router
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.AuthService.isLoggedIn) {
+            this.router.navigate(['/']);
+        }
+    }
 
     login() {
         this.AuthService.signIn({
             userName: this.loginForm.value.username!,
             password: this.loginForm.value.password!,
-        }).add(() => {
-            console.log(this.AuthService.currentUser);
         });
     }
 }

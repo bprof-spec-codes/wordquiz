@@ -85,7 +85,6 @@ export class GameService {
     private getWords() {
         const headers = { 'Content-Type': 'application/json' };
         const body = [this.topic?.id];
-        console.log(environment.apiUrl + 'Word/StartGame');
 
         return this.http.post<string[]>(
             environment.apiUrl + 'Word/StartGame',

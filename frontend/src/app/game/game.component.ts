@@ -50,7 +50,6 @@ export class GameComponent {
     /** Handles the event when the start button has been clicked. */
     onStartClicked() {
         this.activeWord = 0;
-        console.log(this.topic);
 
         this.gameService.startGame(this.topic!);
         setTimeout(() => {

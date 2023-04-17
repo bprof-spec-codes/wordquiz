@@ -12,7 +12,9 @@
                 <div *ngIf="authService.isLoggedIn">
                     <div class="mx-2 d-inline">
                         Hello, {{ authService.currentUser?.userName }}
-                        <button (click)="logout()">Logout</button>
+                        <button class="btn btn-link" (click)="logout()">
+                            Logout
+                        </button>
                     </div>
                     <a [routerLink]="'/topics'" class="btn btn-outline-primary">
                         Start playing
@@ -23,7 +25,7 @@
                         [routerLink]="'/user/login'"
                         class="btn btn-outline-primary"
                     >
-                        Log in
+                        Log in&nbsp;/&nbsp;Sign up
                     </a>
                 </div>
             </div>
