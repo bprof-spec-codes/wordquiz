@@ -1,0 +1,30 @@
+@use "../../../../variables.scss";
+
+$curveture: 20px;
+
+.sec-region-title-tl {
+    border-radius: 0 $curveture 0 0;
+    min-height: $curveture;
+}
+
+.sec-region-title-br-wrapper {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    min-width: $curveture;
+    background-color: variables.$secondary;
+}
+
+.sec-region-title-br {
+    background-color: variables.$body-bg;
+    border-radius: 0 0 0 $curveture;
+    min-height: $curveture;
+}
+
+.title-box {
+    position: relative;
+    top: -30px;
+}
+
+app-secondary-region {
+    background-color: red;
+}

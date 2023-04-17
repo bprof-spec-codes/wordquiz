@@ -1,4 +1,4 @@
-import { Topic, TopicService } from '../topic.service';
+import { Topic, TopicService } from '../../../services/topic.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';

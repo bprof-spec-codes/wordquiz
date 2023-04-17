@@ -6,10 +6,10 @@ import {
     ViewChild,
 } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
-import { Topic, TopicService } from '../topic.service';
+import { Topic, TopicService } from '../../services/topic.service';
 
 import { ActivatedRoute } from '@angular/router';
-import { GameService } from '../game.service';
+import { GameService } from '../../services/game.service';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 

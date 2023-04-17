@@ -5,17 +5,17 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from '../app/shared/authconfig.interceptor.ts';
 import { BrowserModule } from '@angular/platform-browser';
-import { FooterComponent } from './footer/footer.component';
-import { GameComponent } from './game/game.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { GameComponent } from './components/game/game.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { SecondaryRegionComponent } from './secondary-region/secondary-region.component';
-import { TopicDetailsComponent } from './topic-details/topic-details.component';
-import { TopicSelectionComponent } from './topic-selection/topic-selection.component';
+import { SecondaryRegionComponent } from './components/shared/secondary-region/secondary-region.component';
+import { TopicDetailsComponent } from './components/topic/topic-details/topic-details.component';
+import { TopicSelectionComponent } from './components/topic/topic-selection/topic-selection.component';
 
 @NgModule({
     declarations: [

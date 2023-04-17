@@ -1,4 +1,4 @@
-import { Topic, TopicService } from '../topic.service';
+import { Topic, TopicService } from '../../services/topic.service';
 
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';

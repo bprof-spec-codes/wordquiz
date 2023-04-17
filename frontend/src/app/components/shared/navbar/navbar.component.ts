@@ -1,4 +1,4 @@
-import { AuthService, User } from '../shared/auth.service';
+import { AuthService, User } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Location } from '@angular/common';

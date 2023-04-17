@@ -1,0 +1,55 @@
+<app-secondary-region header="Sign in">
+    <div class="auth-wrapper container pb-5">
+        <div class="row justify-content-md-center">
+            <div class="col-4">
+                <h4>Log in</h4>
+                <form
+                    class="form-signin"
+                    [formGroup]="loginForm"
+                    (ngSubmit)="login()"
+                >
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="username"
+                            placeholder="email@gmail.com"
+                            required
+                        />
+                    </div>
+                    <div class="form-group my-2">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            formControlName="password"
+                            placeholder="Password"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        class="btn btn-block btn-primary w-100"
+                    >
+                        Sign in
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="auth-wrapper container pb-5 mt-4">
+            <div class="row justify-content-md-center">
+                <div class="col-4 text-center">
+                    <h4>Sign up</h4>
+                    <section>
+                        <span
+                            >Not a player yet?
+                            <a [routerLink]="'/user/register'">Sign up</a></span
+                        >
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-secondary-region>
