@@ -43,20 +43,42 @@ namespace WordQuiz.Controllers
 
         public RoleManager<IdentityRole> RoleManager => roleManager;
 
+        #region Probably never used endpoints
+        //// GET: api/<WordController>
+        //[HttpGet("all")]
+        //public async Task<IEnumerable<Word>> GetAllWord()
+        //{
+        //    return await wrd.GetAllWords();
+        //}
 
-        // GET: api/<WordController>
-        [HttpGet("all")]
-        public async Task<IEnumerable<Word>> GetAllWord()
-        {
-            return await wrd.GetAllWords();
-        }
+        //// GET api/<WordController>/5
+        //[HttpGet("{id}")]
+        //public Word? GetWord(string id)
+        //{
+        //    return wrd.GetWordById(id).Result;
+        //}
 
-        // GET api/<WordController>/5
-        [HttpGet("{id}")]
-        public Word? GetWord(string id)
-        {
-            return wrd.GetWordById(id).Result;
-        }
+        // GET api/<WordController>/ExportWords
+        //[HttpGet("ExportWords")]
+        //public async Task<ActionResult> ExportWords()
+        //{
+        //    /*var words = await wrd.GetAllWords();
+        //    var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
+
+        //    */
+        //    /*
+        //    return Ok(await wrd.GetAllWords());
+
+
+        //    */
+
+        //    var words = await wrd.GetAllWords();
+        //    var options = new JsonSerializerOptions { WriteIndented = true };
+        //    var jsonString = System.Text.Json.JsonSerializer.Serialize(words, options);
+
+        //    return Ok(jsonString);
+        //}
+        #endregion
 
         // POST api/<WordController>
         [HttpPost]
@@ -187,29 +209,6 @@ namespace WordQuiz.Controllers
             return Ok(results);
         }
 
-
-
-        // GET api/<WordController>/ExportWords
-        [HttpGet("ExportWords")]
-        public async Task<ActionResult> ExportWords()
-        {
-            /*var words = await wrd.GetAllWords();
-            var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
-
-            */
-            /*
-            return Ok(await wrd.GetAllWords());
-
-
-            */
-
-            var words = await wrd.GetAllWords();
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            var jsonString = System.Text.Json.JsonSerializer.Serialize(words, options);
-
-            return Ok(jsonString);
-        }
-
         // POST api/<WordController>/ImportWords
         [HttpPost("ImportWords")]
         public async Task<IActionResult> ImportWords([FromBody] List<Word> words)
@@ -256,8 +255,5 @@ namespace WordQuiz.Controllers
 
             return Ok();
         }
-
-
-
     }
 }
