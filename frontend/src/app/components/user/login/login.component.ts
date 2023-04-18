@@ -20,18 +20,18 @@ export class LoginComponent implements OnInit {
      */
     constructor(
         private formBuilder: FormBuilder,
-        public AuthService: AuthService,
+        public authService: AuthService,
         private router: Router
     ) {}
 
     ngOnInit() {
-        if (this.AuthService.isLoggedIn) {
+        if (this.authService.isLoggedIn) {
             this.router.navigate(['/']);
         }
     }
 
     login() {
-        this.AuthService.signIn({
+        this.authService.signIn({
             userName: this.loginForm.value.username!,
             password: this.loginForm.value.password!,
         });

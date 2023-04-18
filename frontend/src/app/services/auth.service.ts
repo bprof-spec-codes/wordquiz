@@ -15,8 +15,17 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 export type User = {
+    admin: boolean;
     userName: string;
     email: string;
+    id: string;
+    playerName: string;
+};
+
+export type LoginResponse = {
+    expiration: string;
+    id: string;
+    token: string;
 };
 
 @Injectable({
@@ -26,6 +35,7 @@ export class AuthService {
     headers = new HttpHeaders().set('Content-Type', 'application/json');
     currentUser: User | undefined = undefined;
     loading = false;
+    signInError = '';
     constructor(private http: HttpClient, public router: Router) {}
     // Sign-up
     signUp(user: User): Observable<any> {
@@ -34,15 +44,21 @@ export class AuthService {
     }
     // Sign-in
     signIn(user: { userName: string; password: string }) {
+        this.signInError = '';
         return this.http
-            .post<any>(environment.apiUrl + 'Auth', user)
-            .subscribe((res: any) => {
-                localStorage.setItem('access_token', res.token);
-                return this.getUserProfile().subscribe((res) => {
-                    this.currentUser = res;
-                    this.router.navigate(['/']);
-                });
-            });
+            .post<LoginResponse>(environment.apiUrl + 'Auth', user)
+            .subscribe(
+                (res: any) => {
+                    localStorage.setItem('access_token', res.token);
+                    return this.getUserProfile().subscribe((res) => {
+                        this.currentUser = res;
+                        this.router.navigate(['/']);
+                    });
+                },
+                (error) => {
+                    this.signInError = error;
+                }
+            );
     }
 
     getToken() {
