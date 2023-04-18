@@ -16,7 +16,6 @@ import { environment } from 'src/environments/environment';
 
 export type User = {
     admin: boolean;
-    userName: string;
     email: string;
     id: string;
     playerName: string;
@@ -28,6 +27,12 @@ export type LoginResponse = {
     token: string;
 };
 
+export type RegisterRequest = {
+    email: string;
+    playerName: string;
+    password: string;
+};
+
 @Injectable({
     providedIn: 'root',
 })
@@ -37,11 +42,13 @@ export class AuthService {
     loading = false;
     signInError = '';
     constructor(private http: HttpClient, public router: Router) {}
+
     // Sign-up
-    signUp(user: User): Observable<any> {
+    signUp(user: RegisterRequest): Observable<any> {
         let api = environment.apiUrl + 'player';
         return this.http.post(api, user).pipe(catchError(this.handleError));
     }
+
     // Sign-in
     signIn(user: { userName: string; password: string }) {
         this.signInError = '';

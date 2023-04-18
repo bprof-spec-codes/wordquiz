@@ -5,6 +5,7 @@ import { GameComponent } from './components/game/game.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { NgModule } from '@angular/core';
+import { RegisterComponent } from './components/user/register/register.component';
 import { TopicDetailsComponent } from './components/topic/topic-details/topic-details.component';
 import { TopicSelectionComponent } from './components/topic/topic-selection/topic-selection.component';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path: 'topics/:topicId', component: TopicDetailsComponent },
 
     { path: 'user/login', component: LoginComponent },
+    { path: 'user/register', component: RegisterComponent },
 
     {
         path: 'play/:topicId',

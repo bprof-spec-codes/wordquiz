@@ -12,6 +12,7 @@ import { LoginComponent } from './components/user/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterComponent } from './components/user/register/register.component';
 import { RouterModule } from '@angular/router';
 import { SecondaryRegionComponent } from './components/shared/secondary-region/secondary-region.component';
 import { TopicDetailsComponent } from './components/topic/topic-details/topic-details.component';
@@ -28,6 +29,7 @@ import { TopicSelectionComponent } from './components/topic/topic-selection/topi
         GameComponent,
         TopicDetailsComponent,
         LoginComponent,
+        RegisterComponent,
     ],
     imports: [
         BrowserModule,

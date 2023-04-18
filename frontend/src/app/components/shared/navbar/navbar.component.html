@@ -11,7 +11,7 @@
             <div class="col-6 text-end mt-2">
                 <div *ngIf="authService.isLoggedIn">
                     <div class="mx-2 d-inline">
-                        Hello, {{ authService.currentUser?.userName }}
+                        Hello, {{ authService.currentUser?.playerName }}
                         <button class="btn btn-link" (click)="logout()">
                             Logout
                         </button>

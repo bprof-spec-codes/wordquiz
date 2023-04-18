@@ -1,0 +1,55 @@
+<app-secondary-region header="Register">
+    <div class="container">
+        <div class="row justify-content-md-center py-5">
+            <div class="col col-md-6 col-lg-4">
+                <div>
+                    <h2>Sign up</h2>
+                </div>
+                <form
+                    class="form-signin"
+                    [formGroup]="registerForm"
+                    (ngSubmit)="register()"
+                >
+                    <div class="form-group my-2">
+                        <label>Display name</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="displayName"
+                            placeholder="JohnnyBoi"
+                            required
+                        />
+                    </div>
+                    <div class="form-group my-2">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            formControlName="username"
+                            placeholder="email@gmail.com"
+                            required
+                        />
+                    </div>
+                    <div class="form-group my-2">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            formControlName="password"
+                            placeholder="Password"
+                            required
+                        />
+                    </div>
+                    <div class="my-3">
+                        <button
+                            type="submit"
+                            class="btn btn-primary form-control"
+                        >
+                            Sign up
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</app-secondary-region>
