@@ -71,9 +71,14 @@ export class AuthService {
 
         if (isLoggedIn && !this.currentUser && !this.loading) {
             this.loading = true;
-            this.getUserProfile().subscribe((res) => {
-                this.currentUser = res;
-            });
+            this.getUserProfile().subscribe(
+                (res) => {
+                    this.currentUser = res;
+                },
+                (err) => {
+                    this.doLogout();
+                }
+            );
         }
 
         return isLoggedIn;
