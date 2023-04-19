@@ -68,6 +68,8 @@ $container-max-widths: (
     border: 2px variables.$primary solid !important;
     padding-left: 40px !important;
     padding-right: 40px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
 }
 
 .btn-primary:hover {
@@ -80,4 +82,7 @@ $container-max-widths: (
 
 .btn-secondary:hover {
     border: 2px variables.$primary solid !important;
+}
+
+.btn {
 }

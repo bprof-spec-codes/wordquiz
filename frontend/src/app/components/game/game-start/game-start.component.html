@@ -7,11 +7,16 @@
         {{ gameService.maxTimeSeconds }} seconds to guess the words.
     </p>
 
-    <button class="btn btn-primary rounded-pill" (click)="startClicked.emit()">
+    <button
+        class="btn btn-primary rounded-pill w-50"
+        (click)="startClicked.emit()"
+    >
         START
     </button>
 </div>
 
-<div>
-    <a [routerLink]="['/topics']">&lt; Select another topic</a>
+<div class="text-center my-2">
+    <a class="btn btn-secondary w-50 rounded-pill" [routerLink]="['/topics']">
+        Change topic
+    </a>
 </div>
