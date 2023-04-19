@@ -35,6 +35,7 @@
                             id="answer-box"
                             #guessBox
                             type="text"
+                            autocomplete="off"
                             (keydown.enter)="onNextClicked()"
                             (keydown.control.enter)="onPrevClicked()"
                             (input)="onGuessKeydown()"
