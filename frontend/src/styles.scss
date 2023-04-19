@@ -61,3 +61,15 @@ $container-max-widths: (
 .bg-secondary a {
     color: black;
 }
+
+.btn-primary {
+    background-color: black !important;
+    color: white !important;
+    border: 2px variables.$primary solid;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+}
+
+.btn-primary:hover {
+    color: variables.$primary !important;
+}

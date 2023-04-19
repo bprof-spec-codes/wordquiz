@@ -51,12 +51,15 @@
 
     <div class="text-center mt-5">
         <button
-            class="btn btn-primary w-50 my-3"
+            class="btn btn-primary w-50 my-3 rounded-pill"
             (click)="restartClicked.emit()"
         >
             Try again</button
         ><br />
-        <a class="btn btn-secondary w-50" [routerLink]="['/topics']">
+        <a
+            class="btn btn-secondary w-50 rounded-pill"
+            [routerLink]="['/topics']"
+        >
             Change topic
         </a>
     </div>
