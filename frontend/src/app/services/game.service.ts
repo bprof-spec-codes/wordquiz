@@ -9,6 +9,17 @@ export type Word = {
     translation: string;
 };
 
+export type GuessResult = {
+    original: string;
+    guess: string;
+    correct: boolean;
+    translations?: string[];
+};
+
+export type GuessResults = GuessResult[];
+
+type ApiGuesses = { original: string; guess: string }[];
+
 @Injectable({
     providedIn: 'root',
 })
@@ -27,6 +38,8 @@ export class GameService {
 
     /** The guesses entered by the user. */
     guesses!: string[];
+
+    results!: GuessResults;
 
     /** The interval used by the timer. */
     private interval!: any;
@@ -51,6 +64,7 @@ export class GameService {
         this.timeRemaining = this.maxTimeSeconds;
         this.words = [];
         this.guesses = [];
+        this.results = [];
     }
 
     /** Starts the game in the given topic.
@@ -61,7 +75,7 @@ export class GameService {
 
         this.topic = topic;
 
-        this.getWords().subscribe((words) => {
+        return this.getWords().subscribe((words) => {
             this.words = words;
 
             this.interval = setInterval(this.timerTick.bind(this), 1000);
@@ -77,9 +91,10 @@ export class GameService {
         clearInterval(this.interval);
         this.phase = 'submitting';
 
-        this.submitGuesses();
-
-        this.phase = 'finished';
+        this.submitGuesses().subscribe((results) => {
+            this.results = results;
+            this.phase = 'finished';
+        });
     }
 
     private getWords() {
@@ -100,7 +115,7 @@ export class GameService {
         } else this.timeRemaining = Math.max(0, this.timeRemaining - 1);
     }
 
-    private async submitGuesses() {
+    private submitGuesses() {
         if (this.topic == undefined || this.words.length === 0)
             throw new Error('Something went wrong.');
 
@@ -108,9 +123,12 @@ export class GameService {
             return { original: word, guess: this.guesses[idx] };
         });
 
-        // TODO Submit to API
-        console.log(guessesToApi);
+        const headers = { 'Content-Type': 'application/json' };
+
+        return this.http.post<GuessResults>(
+            environment.apiUrl + 'Game/EndGame',
+            guessesToApi,
+            { headers }
+        );
     }
 }
-
-type ApiGuesses = { original: string; guess: string }[];

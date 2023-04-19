@@ -11,19 +11,10 @@
         <div class="py-5">
             <!-- PENDING GAME -->
             <div *ngIf="gameService.phase == 'pending'">
-                <p>{{ topic.description }}</p>
-
-                <p>
-                    Can you guess them all? You will have
-                    {{ gameService.maxTimeSeconds }} seconds to guess the words.
-                </p>
-
-                <button class="rounded-pill" (click)="onStartClicked()">
-                    Start
-                </button>
-                <div>
-                    <a [routerLink]="['/topics']">&lt; Select another topic</a>
-                </div>
+                <app-game-start
+                    [topic]="topic"
+                    (startClicked)="onStartClicked()"
+                ></app-game-start>
             </div>
 
             <!-- RUNNING GAME -->
@@ -111,16 +102,18 @@
             </div>
 
             <!-- Submitting words -->
-            <div *ngIf="gameService.phase == 'submitting'">
-                <p>{{ topic.description }}</p>
-
+            <div *ngIf="gameService.phase == 'submitting'" class="text-center">
                 <p>Submitting your guesses, please wait</p>
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
 
             <!-- Submitting words -->
             <div *ngIf="gameService.phase == 'finished'">
-                Your results
-                <button (click)="onStartClicked()">Try again</button>
+                <app-game-result
+                    (restartClicked)="onStartClicked()"
+                ></app-game-result>
             </div>
         </div>
     </app-secondary-region>

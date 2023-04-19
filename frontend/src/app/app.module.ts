@@ -7,6 +7,8 @@ import { AuthInterceptor } from '../app/shared/authconfig.interceptor.ts';
 import { BrowserModule } from '@angular/platform-browser';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { GameComponent } from './components/game/game.component';
+import { GameResultComponent } from './components/game/game-result/game-result.component';
+import { GameStartComponent } from './components/game/game-start/game-start.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -30,6 +32,8 @@ import { TopicSelectionComponent } from './components/topic/topic-selection/topi
         TopicDetailsComponent,
         LoginComponent,
         RegisterComponent,
+        GameResultComponent,
+        GameStartComponent,
     ],
     imports: [
         BrowserModule,
