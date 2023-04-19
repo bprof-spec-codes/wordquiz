@@ -15,6 +15,7 @@ namespace WordQuiz.Controllers
     //[Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TopicController : ControllerBase
     {
 
@@ -38,9 +39,7 @@ namespace WordQuiz.Controllers
 
         public RoleManager<IdentityRole> RoleManager => roleManager;
 
-
-
-
+        [AllowAnonymous]
         // GET: api/<TopicController>
         [HttpGet]
         public IEnumerable<Topic> GetAllTopic()
@@ -48,6 +47,7 @@ namespace WordQuiz.Controllers
             return tp.GetAllTopics().Result;
         }
 
+        [AllowAnonymous]
         // GET api/<TopicController>/5
         [HttpGet("{id}")]
         public Topic? GetTopic(string id)

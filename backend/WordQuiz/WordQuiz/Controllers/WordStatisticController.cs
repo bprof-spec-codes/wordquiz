@@ -13,6 +13,7 @@ namespace WordQuiz.Controllers
     //[Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WordStatisticController : ControllerBase
     {
         
