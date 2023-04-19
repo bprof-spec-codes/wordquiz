@@ -61,6 +61,9 @@ export class GameComponent {
 
     /** Handles the event when the next button has been clicked. */
     onNextClicked() {
+        if (this.activeWord == this.gameService.words.length - 1)
+            this.onSubmitClicked();
+
         this.activeWord = Math.min(
             this.gameService.words.length - 1,
             this.activeWord + 1

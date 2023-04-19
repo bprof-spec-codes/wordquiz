@@ -36,6 +36,7 @@
                             #guessBox
                             type="text"
                             (keydown.enter)="onNextClicked()"
+                            (keydown.control.enter)="onPrevClicked()"
                             (input)="onGuessKeydown()"
                             [(ngModel)]="currentGuess"
                             class="w-100 rounded-pill"
