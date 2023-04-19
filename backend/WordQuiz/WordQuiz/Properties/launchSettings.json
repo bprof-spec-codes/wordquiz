@@ -3,7 +3,7 @@
     "WordQuiz": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:7220/swagger",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
