@@ -1,1 +1,63 @@
-<h3>Your results</h3>
+<div class="my-5 text-center">
+    <h3>Score</h3>
+    <h1
+        [ngClass]="{
+            'text-success': correctAnswers == gameService.results.length
+        }"
+        class="secondary-font display-1"
+    >
+        {{ correctAnswers }}/{{ gameService.results.length }}
+    </h1>
+    <span
+        class="text-success"
+        *ngIf="correctAnswers == gameService.results.length"
+        >Congratulations, you have aced this test!</span
+    >
+</div>
+
+<div class="text-center">
+    <h3>Your results</h3>
+</div>
+
+<div>
+    <table class="table text-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Original</th>
+                <th scope="col">Your guess</th>
+                <th scope="col">Correct answer(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let result of gameService.results; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ result.original }}</td>
+                <td
+                    [ngClass]="{
+                        'text-success': result.correct,
+                        'text-danger': !result.correct
+                    }"
+                >
+                    {{ result.guess }}
+                </td>
+                <td class="text-success" *ngIf="result.correct">&#x2713;</td>
+                <td *ngIf="!result.correct">
+                    {{ result.translations?.join(", ") }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center mt-5">
+        <button
+            class="btn btn-primary w-50 my-3"
+            (click)="restartClicked.emit()"
+        >
+            Try again</button
+        ><br />
+        <a class="btn btn-secondary w-50" [routerLink]="['/topics']">
+            Change topic
+        </a>
+    </div>
+</div>

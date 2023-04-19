@@ -9,6 +9,11 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class GameResultComponent {
     @Output() restartClicked = new EventEmitter();
+
+    get correctAnswers() {
+        return this.gameService.results.filter((r) => r.correct).length;
+    }
+
     /**
      *
      */

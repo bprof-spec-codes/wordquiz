@@ -59,6 +59,7 @@ export class GameService {
     /** Resets everything. */
     reset() {
         clearInterval(this.interval);
+        this.phase = 'finished';
         this.phase = 'pending';
         this.topic = undefined;
         this.timeRemaining = this.maxTimeSeconds;
@@ -91,10 +92,24 @@ export class GameService {
         clearInterval(this.interval);
         this.phase = 'submitting';
 
+        // TODO remove this
+        this.results = this.guesses.map((guess, index) => {
+            return {
+                original: this.words[index],
+                guess: guess,
+                correct: Boolean(Math.round(Math.random())),
+                translations: ['Correct solution', 'Other solution'],
+            };
+        });
+        this.phase = 'finished';
+
+        // TODO uncomment
+        /*
         this.submitGuesses().subscribe((results) => {
             this.results = results;
             this.phase = 'finished';
         });
+        */
     }
 
     private getWords() {
