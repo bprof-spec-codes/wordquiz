@@ -81,7 +81,7 @@ export class GameComponent {
 
     /** Stores the current guess. */
     saveGuess() {
-        this.gameService.guesses[this.activeWord] = this.currentGuess;
+        this.gameService.guesses[this.activeWord] = this.currentGuess.trim();
     }
 
     /** Loads a guess into the current guess */
