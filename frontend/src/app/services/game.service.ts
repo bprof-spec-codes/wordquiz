@@ -87,7 +87,7 @@ export class GameService {
         const body = [this.topic?.id];
 
         return this.http.post<string[]>(
-            environment.apiUrl + 'Word/StartGame',
+            environment.apiUrl + 'Game/StartGame',
             body,
             { headers }
         );
