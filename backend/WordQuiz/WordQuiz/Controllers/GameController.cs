@@ -13,7 +13,6 @@ namespace WordQuiz.Controllers
     {
         IWordRepository wordRepository;
         IWordStaticRepository wordStatRepository;
-        IPlayerRepository playerRepository;
         GameLogic gameLogic;
 
 
@@ -91,6 +90,7 @@ namespace WordQuiz.Controllers
             return Ok(selectedWords.Select(w => w.Original));
         }
 
+        [Authorize]
         [HttpPost("StartGameWeighted")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords = 10)
         {
