@@ -15,7 +15,7 @@ namespace WordQuiz.Controllers
   //  [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+   // [Authorize]
     public class PlayerController : ControllerBase
     {
 
@@ -36,13 +36,36 @@ namespace WordQuiz.Controllers
         public UserManager<Player> UserManager => userManager;
 
         public RoleManager<IdentityRole> RoleManager => roleManager;
-
+        /*
         // GET: api/<PlayerController>/all
         [HttpGet("all")]
         public IEnumerable<Player> GetAllPlayers()
         {
             return playerRepository.GetAllPlayers().Result;
+        }*/
+
+        // GET: api/<PlayerController>/all
+        [HttpGet("all")]
+        public async Task<IEnumerable<PlayerInfo>> GetAllPlayers()
+        {
+            var players = await playerRepository.GetAllPlayers();
+
+            var playerInfos = new List<PlayerInfo>();
+            foreach (var player in players)
+            {
+                playerInfos.Add(new PlayerInfo
+                {
+                    Id = player.Id,
+                    Email = player.Email,
+                    PlayerName = player.PlayerName,
+                    UserName = player.UserName,
+                    IsAdmin = await userManager.IsInRoleAsync(player, "Admin")
+                });
+            }
+
+            return playerInfos;
         }
+
 
         // GET api/<PlayerController>/5
         [HttpGet("{id}")]
@@ -91,7 +114,12 @@ namespace WordQuiz.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditPlayer(int id, [FromBody] Player value)
         {
-           await playerRepository.UpdatePlayer(value);
+            await playerRepository.UpdatePlayer(value);
+
+
+
+
+
             return Ok();
         }
 

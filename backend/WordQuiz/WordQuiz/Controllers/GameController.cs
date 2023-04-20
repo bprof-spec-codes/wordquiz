@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using WordQuiz.Data.Repositories;
 using WordQuiz.Models;
+using WordQuiz.Logics;
 
 namespace WordQuiz.Controllers
 {
@@ -10,17 +13,69 @@ namespace WordQuiz.Controllers
     {
         IWordRepository wrd;
         IWordStaticRepository wrdst;
+        IPlayerRepository player;
+        GameLogic gameLogic;
 
-        public GameController(IWordRepository wrd, IWordStaticRepository wrdst)
+
+        private readonly UserManager<Player> userManager;
+
+        public GameController(IWordRepository wrd, IWordStaticRepository wrdst, UserManager<Player> userManager)
         {
             this.wrd = wrd;
             this.wrdst = wrdst;
+            this.userManager = userManager;
+            this.gameLogic = new GameLogic();
+
         }
 
+
+
         // POST: api/<GameController>/StartGame
-        [HttpPost("StartGame")]
+        [HttpPost("StartGameNoUserNoTopic")]
+        public async Task<ActionResult<IEnumerable<Word>>> StartGameNoTopic(int numberOfWords = 10)
+        {
+            
+            
+           List<Word> words = (List<Word>)await wrd.GetAllWords();
+
+            // Group words by their Original property and select one word from each group
+            var distinctWords = words.GroupBy(w => w.Original).Select(g => g.First()).ToList();
+
+            numberOfWords = Math.Min(numberOfWords, distinctWords.Count);
+
+            
+
+            // Select random words from the wordsFromTopics list
+            var random = new Random();
+            var selectedWords = new List<Word>();
+            for (int i = 0; i < numberOfWords; i++)
+            {
+                int randomIndex = random.Next(0, words.Count);
+                selectedWords.Add(words[randomIndex]);
+                words.RemoveAt(randomIndex);
+            }        
+
+
+
+
+            return Ok(selectedWords.Select(w => w.Original));
+            
+            /*
+            List<Word> selected = await gameLogic.selectedWordsNotopicAsync(wrd, numberOfWords);
+
+            // return Ok(await gameLogic.selectedWordsNotopicAsync(wrd));
+
+            return Ok(selected);*/
+        }
+
+
+
+        // POST: api/<GameController>/StartGame
+        [HttpPost("StartGameNoUserWithTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] string[] topicIds, int numberOfWords = 10)
         {
+
+           
 
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
@@ -30,7 +85,12 @@ namespace WordQuiz.Controllers
                 wordsFromTopics.AddRange(words);
             }
 
-            numberOfWords = Math.Min(numberOfWords, wordsFromTopics.Count);
+            // Group words by their Original property and select one word from each group
+            var distinctWords = wordsFromTopics.GroupBy(w => w.Original).Select(g => g.First()).ToList();
+
+            numberOfWords = Math.Min(numberOfWords, distinctWords.Count);
+
+
 
             // Select random words from the wordsFromTopics list
             var random = new Random();
@@ -45,9 +105,22 @@ namespace WordQuiz.Controllers
             return Ok(selectedWords.Select(w => w.Original));
         }
 
+
+
+
+
+
+        [AllowAnonymous]
         [HttpPost("StartGameWeighted")]
-        public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, string player, int numberOfWords = 10)
+        public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords = 10)
         {
+
+            var player = await userManager.GetUserAsync(User);
+            if (player == null)
+            {
+                return Unauthorized();
+            }
+
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
@@ -56,7 +129,11 @@ namespace WordQuiz.Controllers
                 wordsFromTopics.AddRange(words);
             }
 
-            numberOfWords = Math.Min(numberOfWords, wordsFromTopics.Count);
+            // Group words by their Original property and select one word from each group
+            var distinctWords = wordsFromTopics.GroupBy(w => w.Original).Select(g => g.First()).ToList();
+
+            numberOfWords = Math.Min(numberOfWords, distinctWords.Count);
+
 
             // Get word statistics for the current player
             var currentPlayerStats = wrdst.GetAllAsync().Result.Where(x => x.Player.PlayerName.Equals(player));

@@ -61,7 +61,7 @@ namespace WordQuiz.Controllers
                 Email = model.Email,
                 UserName = model.UserName,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                PlayerName = model.PlayerName
+                PlayerName = model.UserName
                 
                 //PhotoContentType = model.PhotoContentType,
                 //PhotoData = model.PhotoData
