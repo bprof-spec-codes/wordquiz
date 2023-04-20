@@ -14,7 +14,9 @@ namespace WordQuiz.Data.Repositories
 
         public IEnumerable<Topic> GetAllTopics()
         {
-            return _context.Topics.Include(t => t.Words).ToList();
+            return _context.Topics
+                .Include(t => t.Words)
+                .ToList();
         }
 
         public Topic GetTopicById(string id)
@@ -39,18 +41,10 @@ namespace WordQuiz.Data.Repositories
 
         public void DeleteTopic(string id)
         {
-            /*
             var topic = _context.Topics.FirstOrDefault(t => t.Id == id);
             if (topic != null)
             {
                 _context.Topics.Remove(topic);
-                _context.SaveChanges();
-            }*/
-
-            var topic = _context.Words.Find(id);
-            if (topic != null)
-            {
-                _context.Words.Remove(topic);
                 _context.SaveChanges();
             }
         }

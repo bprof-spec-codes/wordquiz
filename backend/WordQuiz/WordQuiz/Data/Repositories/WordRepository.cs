@@ -35,7 +35,7 @@ namespace WordQuiz.Data.Repositories
         public async Task<Word> CreateWord(Word word)
         {
             _dbContext.Words.Add(word);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
             return word;
         }
 
