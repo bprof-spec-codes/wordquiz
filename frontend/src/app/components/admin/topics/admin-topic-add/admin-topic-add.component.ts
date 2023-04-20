@@ -21,8 +21,6 @@ export class AdminTopicAddComponent {
     ) {}
 
     onAddTopic() {
-        console.log('Adding');
-
         this.topicService
             .create({
                 title: this.addForm.value.title!,
