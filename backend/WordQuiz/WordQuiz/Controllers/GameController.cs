@@ -128,7 +128,7 @@ namespace WordQuiz.Controllers
                 int randomNumber = random.Next(1, totalWeight + 1);
                 int cumulativeWeight = 0;
 
-                foreach (var word in wordsFromTopics)
+                foreach (var word in distinctWords)
                 {
                     var wordStat = currentPlayerStats.FirstOrDefault(ws => ws.Word.Id == word.Id);
                     int wordWeight = wordStat != null ? wordStat.Score : 0;
