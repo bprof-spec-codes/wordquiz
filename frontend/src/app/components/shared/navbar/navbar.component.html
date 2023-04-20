@@ -10,8 +10,18 @@
 
             <div class="col-6 text-end mt-2">
                 <div *ngIf="authService.isLoggedIn">
-                    <div class="mx-2 d-inline">
-                        Hello, {{ authService.currentUser?.playerName }}
+                    <div *ngIf="authService.currentUser" class="mx-2 d-inline">
+                        <a
+                            [routerLink]="['/admin/topics']"
+                            class="btn btn-link"
+                            *ngIf="authService.currentUser.admin"
+                            >[Admin]</a
+                        >
+                        &nbsp;
+                        <span
+                            >Hello,
+                            {{ authService.currentUser.playerName }}</span
+                        >
                         <button class="btn btn-link" (click)="logout()">
                             Logout
                         </button>

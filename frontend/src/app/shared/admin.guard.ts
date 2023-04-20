@@ -6,18 +6,25 @@ import {
     UrlTree,
 } from '@angular/router';
 import { Injectable, inject } from '@angular/core';
+import { Observable, firstValueFrom } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
-import { Observable } from 'rxjs';
 
-export const AuthGuard = (
-    next: ActivatedRouteSnapshot,
+export const AdminGuard = async (
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
 ) => {
     const authService = inject(AuthService);
     const router = inject(Router);
-    if (authService.isLoggedIn !== true) {
-        router.navigate(['user/login']);
+
+    const isAdmin = await firstValueFrom(authService.getUserProfile()).then(
+        (user) => !!user && user.admin
+    );
+
+    if (!isAdmin) {
+        console.log('Unauthorized');
+        router.navigate(['/']);
     }
+
     return true;
 };
