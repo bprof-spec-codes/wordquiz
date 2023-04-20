@@ -1,1 +1,75 @@
-<p>admin-topic-details works!</p>
+<app-secondary-region header="Topic details">
+    <div class="py-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a [routerLink]="['/admin/topics']">Topics</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ (topic | async)!.title }}
+                </li>
+            </ol>
+        </nav>
+
+        <div *ngIf="topic">
+            <h1 class="fancy-font">{{ (topic | async)!.title }}</h1>
+        </div>
+
+        <div class="mb-5">
+            <form
+                class="form-signin"
+                [formGroup]="addForm"
+                (ngSubmit)="onAddWord()"
+            >
+                <div class="row mt-2">
+                    <div class="form-group text-end col-6">
+                        <label>Original</label>
+                        <input
+                            type="text"
+                            class="form-control text-end"
+                            #originalBox
+                            formControlName="original"
+                            required
+                        />
+                    </div>
+                    <div class="form-group col-6">
+                        <label>Translation</label>
+                        <input
+                            class="form-control"
+                            rows="5"
+                            formControlName="translation"
+                            required
+                        />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-primary w-100">
+                    Add word
+                </button>
+            </form>
+        </div>
+
+        <div>
+            <div
+                *ngFor="let word of (topic | async)!.words"
+                class="row justify-content-md-center my-0"
+            >
+                <div class="row gx-0 py-0">
+                    <div class="col-6 text-end">
+                        {{ word.original }}
+                        <span class="text-muted lh-lg">..........</span>
+                    </div>
+                    <div class="col-6 text-left">
+                        <span class="text-muted lh-lg">..........</span>
+                        {{ word.translation }}
+                        <button
+                            (click)="onDeleteClicked(word.id)"
+                            class="text-danger btn btn-label"
+                        >
+                            ✗
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-secondary-region>

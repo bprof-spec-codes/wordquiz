@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Word } from './game.service';
+import { Word } from './word.service';
 import { environment } from 'src/environments/environment';
 
 export type Topic = {
@@ -32,5 +32,9 @@ export class TopicService {
 
     create(topic: AddTopicBody) {
         return this.http.post<Topic>(environment.apiUrl + 'Topic/', topic);
+    }
+
+    delete(id: string) {
+        return this.http.delete<Topic>(environment.apiUrl + 'Topic/' + id);
     }
 }
