@@ -38,7 +38,7 @@ export type RegisterRequest = {
 })
 export class AuthService {
     headers = new HttpHeaders().set('Content-Type', 'application/json');
-    currentUser: User | undefined = undefined;
+    public currentUser: User | undefined = undefined;
     loading = false;
     signInError = '';
     constructor(private http: HttpClient, public router: Router) {}
@@ -100,11 +100,11 @@ export class AuthService {
     }
 
     // User profile
-    getUserProfile(): Observable<any> {
+    getUserProfile(): Observable<User> {
         let api = `${environment.apiUrl}Player`;
         return this.http.get(api, { headers: this.headers }).pipe(
             map((res) => {
-                return res || {};
+                return res as User;
             }),
             catchError(this.handleError)
         );

@@ -5,32 +5,26 @@ import {
     RouterStateSnapshot,
     UrlTree,
 } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import { Observable, firstValueFrom } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class AdminGuard implements CanActivate {
-    constructor(public authService: AuthService, public router: Router) {}
+export const AdminGuard = async (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+) => {
+    const authService = inject(AuthService);
+    const router = inject(Router);
 
-    canActivate(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ):
-        | Observable<boolean | UrlTree>
-        | Promise<boolean | UrlTree>
-        | boolean
-        | UrlTree {
-        if (
-            this.authService.isLoggedIn !== true ||
-            !this.authService.currentUser ||
-            this.authService.currentUser.admin
-        ) {
-            this.router.navigate(['/']);
-        }
-        return true;
+    const isAdmin = await firstValueFrom(authService.getUserProfile()).then(
+        (user) => !!user && user.admin
+    );
+
+    if (!isAdmin) {
+        console.log('Unauthorized');
+        router.navigate(['/']);
     }
-}
+
+    return true;
+};
