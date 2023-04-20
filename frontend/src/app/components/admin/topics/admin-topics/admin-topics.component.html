@@ -1,5 +1,36 @@
-<div>
-    <div class="my-3" *ngFor="let topic of topics | async">
-        <a [routerLink]="['admin/topics/', topic.id]">{{ topic.title }}</a>
+<app-secondary-region header="Admin - topics">
+    <div class="py-5">
+        <h1 class="fancy-font text-center">Topics</h1>
+
+        <table class="table text-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">no. words</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let topic of topics | async">
+                    <td>
+                        {{ topic.title }}
+                    </td>
+
+                    <td
+                        [ngClass]="{
+                            'text-danger': topic.words.length === 0
+                        }"
+                    >
+                        {{ topic.words.length }}
+                    </td>
+
+                    <td>
+                        <a [routerLink]="['/admin/topics/', topic.id]"
+                            >Manage</a
+                        >
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-</div>
+</app-secondary-region>
