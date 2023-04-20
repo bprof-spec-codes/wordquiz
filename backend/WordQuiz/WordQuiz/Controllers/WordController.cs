@@ -19,7 +19,7 @@ namespace WordQuiz.Controllers
     //[Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+   // [Authorize]
     public class WordController : ControllerBase
     {   
         IWordRepository wrd;
@@ -80,6 +80,50 @@ namespace WordQuiz.Controllers
         //    return Ok(jsonString);
         //}
         #endregion
+
+
+        // GET: api/<WordController>
+        [HttpGet("Random/{idRandom}")]
+        public async Task<IEnumerable<Word>> GetRandom(int idRandom)
+        {
+            // Retrieve the authenticated user
+            var user = await userManager.GetUserAsync(User);
+
+            // Retrieve all words from the database
+            var words = await wrd.GetAllWords();
+            var statistic = await wrdst.GetAllAsync();
+            List<Word> result = new List<Word>();
+            int i = 0;
+
+            var currentPlayerWords = statistic.Where(x => x.PlayerId == user.Id);
+
+            // ...
+
+            return result;
+        }
+
+        [HttpGet("RandomWithTopics/{idRandomWithTopic}")]
+        public async Task<IEnumerable<Word>> GetRandomWithTopics(int idRandomWithTopic, [FromQuery] List<string> mytopicstitle)
+        {
+            // Retrieve the authenticated user
+            var user = await userManager.GetUserAsync(User);
+
+            // Retrieve all words from the database
+            var words = await wrd.GetAllWords();
+            var statistic = await wrdst.GetAllAsync();
+            List<Word> result = new List<Word>();
+            int i = 0;
+            var topics = await tp.GetAllTopics();
+            List<Topic> current_tp = new List<Topic>();
+
+            var currentPlayerWords = statistic.Where(x => x.PlayerId == user.Id);
+
+            // ...
+
+            return result;
+        }
+
+
 
         // POST api/<WordController>
         [HttpPost]
@@ -153,5 +197,9 @@ namespace WordQuiz.Controllers
 
             return Ok();
         }
+
+
+
+
     }
 }
