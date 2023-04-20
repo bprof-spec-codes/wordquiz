@@ -1,6 +1,8 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { AdminTopicDetailsComponent } from './components/admin/topics/admin-topic-details/admin-topic-details.component';
+import { AdminTopicsComponent } from './components/admin/topics/admin-topics/admin-topics.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from '../app/shared/authconfig.interceptor.ts';
@@ -34,6 +36,8 @@ import { TopicSelectionComponent } from './components/topic/topic-selection/topi
         RegisterComponent,
         GameResultComponent,
         GameStartComponent,
+        AdminTopicsComponent,
+        AdminTopicDetailsComponent,
     ],
     imports: [
         BrowserModule,

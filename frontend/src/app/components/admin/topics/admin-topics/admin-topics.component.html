@@ -1,0 +1,5 @@
+<div>
+    <div class="my-3" *ngFor="let topic of topics | async">
+        <a [routerLink]="['admin/topics/', topic.id]">{{ topic.title }}</a>
+    </div>
+</div>
