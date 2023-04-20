@@ -11,9 +11,9 @@ namespace WordQuiz.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        IWordRepository wrd;
-        IWordStaticRepository wrdst;
-        IPlayerRepository player;
+        IWordRepository wordRepository;
+        IWordStaticRepository wordStatRepository;
+        IPlayerRepository playerRepository;
         GameLogic gameLogic;
 
 
@@ -21,29 +21,22 @@ namespace WordQuiz.Controllers
 
         public GameController(IWordRepository wrd, IWordStaticRepository wrdst, UserManager<Player> userManager)
         {
-            this.wrd = wrd;
-            this.wrdst = wrdst;
+            this.wordRepository = wrd;
+            this.wordStatRepository = wrdst;
             this.userManager = userManager;
             this.gameLogic = new GameLogic();
-
         }
-
-
 
         // POST: api/<GameController>/StartGame
         [HttpPost("StartGameNoUserNoTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameNoTopic(int numberOfWords = 10)
         {
-            
-            
-           List<Word> words = (List<Word>)await wrd.GetAllWords();
+            List<Word> words = (List<Word>)await wordRepository.GetAllWords();
 
             // Group words by their Original property and select one word from each group
             var distinctWords = words.GroupBy(w => w.Original).Select(g => g.First()).ToList();
 
             numberOfWords = Math.Min(numberOfWords, distinctWords.Count);
-
-            
 
             // Select random words from the wordsFromTopics list
             var random = new Random();
@@ -53,13 +46,10 @@ namespace WordQuiz.Controllers
                 int randomIndex = random.Next(0, words.Count);
                 selectedWords.Add(words[randomIndex]);
                 words.RemoveAt(randomIndex);
-            }        
-
-
-
+            }
 
             return Ok(selectedWords.Select(w => w.Original));
-            
+
             /*
             List<Word> selected = await gameLogic.selectedWordsNotopicAsync(wrd, numberOfWords);
 
@@ -74,14 +64,11 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameNoUserWithTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] string[] topicIds, int numberOfWords = 10)
         {
-
-           
-
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
             {
-                var words = await wrd.GetWordsByTopicIdAsync(topicId);
+                var words = await wordRepository.GetWordsByTopicIdAsync(topicId);
                 wordsFromTopics.AddRange(words);
             }
 
@@ -89,7 +76,6 @@ namespace WordQuiz.Controllers
             var distinctWords = wordsFromTopics.GroupBy(w => w.Original).Select(g => g.First()).ToList();
 
             numberOfWords = Math.Min(numberOfWords, distinctWords.Count);
-
 
 
             // Select random words from the wordsFromTopics list
@@ -105,27 +91,16 @@ namespace WordQuiz.Controllers
             return Ok(selectedWords.Select(w => w.Original));
         }
 
-
-
-
-
-
-        [AllowAnonymous]
         [HttpPost("StartGameWeighted")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords = 10)
         {
-
             var player = await userManager.GetUserAsync(User);
-            if (player == null)
-            {
-                return Unauthorized();
-            }
 
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
             {
-                var words = await wrd.GetWordsByTopicIdAsync(topicId);
+                var words = await wordRepository.GetWordsByTopicIdAsync(topicId);
                 wordsFromTopics.AddRange(words);
             }
 
@@ -136,7 +111,7 @@ namespace WordQuiz.Controllers
 
 
             // Get word statistics for the current player
-            var currentPlayerStats = wrdst.GetAllAsync().Result.Where(x => x.Player.PlayerName.Equals(player));
+            var currentPlayerStats = wordStatRepository.GetAllAsync().Result.Where(x => x.Player.PlayerName.Equals(player));
 
             // Calculate the total weight of all the words
             int totalWeight = currentPlayerStats.Sum(w => w.Score);
@@ -176,17 +151,17 @@ namespace WordQuiz.Controllers
 
             foreach (var guess in guesses)
             {
-                var word = await wrd.GetWordById(guess.Key);
+                var word = await wordRepository.GetWordById(guess.Key);
                 if (word != null)
                 {
                     results.Add(guess.Key, word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase));
 
                     // Update the word statistics
-                    var wordStatistic = await wrdst.GetByIdAsync(guess.Key);
+                    var wordStatistic = await wordStatRepository.GetByIdAsync(guess.Key);
                     if (wordStatistic != null)
                     {
                         wordStatistic.Score = results[guess.Key] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
-                        await wrdst.UpdateAsync(wordStatistic);
+                        await wordStatRepository.UpdateAsync(wordStatistic);
                     }
                 }
             }
