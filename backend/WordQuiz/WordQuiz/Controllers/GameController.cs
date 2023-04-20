@@ -32,9 +32,7 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameNoUserNoTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameNoTopic(int numberOfWords = 10)
         {
-
-
-            List<Word> words = (List<Word>)await wrd.GetAllWords();
+            List<Word> words = (List<Word>)await wordRepository.GetAllWords();
 
             // Group words by their Original property and select one word from each group
             var distinctWords = words.GroupBy(w => w.Original).Select(g => g.First()).ToList();
@@ -69,9 +67,6 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameNoUserWithTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] string[] topicIds, int numberOfWords = 10)
         {
-
-
-
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
@@ -160,7 +155,7 @@ namespace WordQuiz.Controllers
 
             foreach (var guess in guesses)
             {
-                var word = await wrd.GetWordByOriginal(guess.Key);
+                var word = await wordRepository.GetWordByOriginal(guess.Key);
                 if (word != null)
                 {
                     results.Add(guess.Key, word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase));
@@ -170,7 +165,7 @@ namespace WordQuiz.Controllers
                     if (wordStatistic != null)
                     {
                         wordStatistic.Score = results[guess.Value] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
-                        await wrdst.UpdateAsync(wordStatistic);
+                        await wordStatRepository.UpdateAsync(wordStatistic);
                     }
                 }
             }
@@ -190,18 +185,18 @@ namespace WordQuiz.Controllers
 
             foreach (var guess in guesses)
             {
-                var word = await wrd.GetWordByOriginal(guess.Key.Original);
+                var word = await wordRepository.GetWordByOriginal(guess.Key.Original);
                 if (word != null)
                 {
                     results.Add(guess.Key.Original, word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase));
 
 
                     // Update the word statistics
-                    var wordStatistic = await wrdst.GetByIdAsync(guess.Key.Original);
+                    var wordStatistic = await wordStatRepository.GetByIdAsync(guess.Key.Original);
                     if (wordStatistic != null)
                     {
                         wordStatistic.Score = results[guess.Value] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
-                        await wrdst.UpdateAsync(wordStatistic);
+                        await wordStatRepository.UpdateAsync(wordStatistic);
                     }
                 }
             }

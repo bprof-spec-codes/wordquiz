@@ -12,14 +12,14 @@ using Microsoft.AspNetCore.SignalR;
 namespace WordQuiz.Controllers
 {
 
-  //  [Authorize(Roles = "Player, Admin")]
+    //  [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
+    // [Authorize]
     public class PlayerController : ControllerBase
     {
 
-        IPlayerRepository playerRepository;       
+        IPlayerRepository playerRepository;
 
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
@@ -69,11 +69,11 @@ namespace WordQuiz.Controllers
 
         // GET api/<PlayerController>/5
         [HttpGet("{id}")]
-        public async Task<object> GetPlayer(string id = null)
+        public async Task<object> GetPlayer(string id)
         {
-            
             Player p = playerRepository.GetPlayerById(id).Result;
-            return new {
+            return new
+            {
                 email = p.Email,
                 id = p.Id,
                 playerName = p.PlayerName,
@@ -87,7 +87,6 @@ namespace WordQuiz.Controllers
         [Authorize]
         public async Task<object> GetPlayer()
         {
-            // FIXME cannot get user from userManager.GetUserAsync(User)
             Player p = (await userManager.GetUserAsync(User));
             return new
             {
@@ -99,13 +98,11 @@ namespace WordQuiz.Controllers
             };
         }
 
-
-
         // POST api/<PlayerController>
         [HttpPost]
         public async void AddPlayer([FromBody] Player value)
         {
-           await playerRepository.CreatePlayer(value);
+            await playerRepository.CreatePlayer(value);
 
         }
 
@@ -114,11 +111,6 @@ namespace WordQuiz.Controllers
         public async Task<IActionResult> EditPlayer(int id, [FromBody] Player value)
         {
             await playerRepository.UpdatePlayer(value);
-
-
-
-
-
             return Ok();
         }
 
@@ -126,7 +118,7 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePlayer(string id)
         {
-          await playerRepository.DeletePlayer(id);
+            await playerRepository.DeletePlayer(id);
             return Ok();
         }
     }
