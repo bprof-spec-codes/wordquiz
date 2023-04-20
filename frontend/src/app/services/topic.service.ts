@@ -11,6 +11,11 @@ export type Topic = {
     words: Word[];
 };
 
+export type AddTopicBody = {
+    title: string;
+    description: string;
+};
+
 @Injectable({
     providedIn: 'root',
 })
@@ -23,5 +28,9 @@ export class TopicService {
 
     getOne(id: string) {
         return this.http.get<Topic>(environment.apiUrl + 'Topic/' + id);
+    }
+
+    create(topic: AddTopicBody) {
+        return this.http.post<Topic>(environment.apiUrl + 'Topic/', topic);
     }
 }
