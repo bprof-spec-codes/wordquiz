@@ -22,6 +22,16 @@ namespace WordQuiz.Data.Repositories
             return await _dbContext.Words.Include(w => w.Topic).SingleOrDefaultAsync(w => w.Id == wordId);
         }
 
+        public async Task<Word> GetWordByOriginal(string wordOriginal)
+        {
+            return await _dbContext.Words.Include(w => w.Topic).SingleOrDefaultAsync(w => w.Original == wordOriginal);
+        }
+
+        public async Task<Word> GetWordByTranslation(string wordT)
+        {
+            return await _dbContext.Words.Include(w => w.Topic).SingleOrDefaultAsync(w => w.Translation == wordT);
+        }
+
         public async Task<Word> CreateWord(Word word)
         {
             _dbContext.Words.Add(word);

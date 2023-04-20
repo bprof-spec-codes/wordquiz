@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using WordQuiz.Data.Repositories;
 using WordQuiz.Models;
 using WordQuiz.Logics;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Newtonsoft.Json.Linq;
 
 namespace WordQuiz.Controllers
 {
@@ -34,16 +36,16 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameNoUserNoTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameNoTopic(int numberOfWords = 10)
         {
-            
-            
-           List<Word> words = (List<Word>)await wrd.GetAllWords();
+
+
+            List<Word> words = (List<Word>)await wrd.GetAllWords();
 
             // Group words by their Original property and select one word from each group
             var distinctWords = words.GroupBy(w => w.Original).Select(g => g.First()).ToList();
 
             numberOfWords = Math.Min(numberOfWords, distinctWords.Count);
 
-            
+
 
             // Select random words from the wordsFromTopics list
             var random = new Random();
@@ -53,13 +55,13 @@ namespace WordQuiz.Controllers
                 int randomIndex = random.Next(0, words.Count);
                 selectedWords.Add(words[randomIndex]);
                 words.RemoveAt(randomIndex);
-            }        
+            }
 
 
 
 
             return Ok(selectedWords.Select(w => w.Original));
-            
+
             /*
             List<Word> selected = await gameLogic.selectedWordsNotopicAsync(wrd, numberOfWords);
 
@@ -75,7 +77,7 @@ namespace WordQuiz.Controllers
         public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] string[] topicIds, int numberOfWords = 10)
         {
 
-           
+
 
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
@@ -169,14 +171,14 @@ namespace WordQuiz.Controllers
         }
 
         // POST: api/<GameController>/end
-        [HttpPost("end")]
+        [HttpPost("endStringSting")]
         public async Task<ActionResult<Dictionary<string, bool>>> EndGame([FromBody] Dictionary<string, string> guesses)
         {
             Dictionary<string, bool> results = new Dictionary<string, bool>();
 
             foreach (var guess in guesses)
             {
-                var word = await wrd.GetWordById(guess.Key);
+                var word = await wrd.GetWordByOriginal(guess.Key);
                 if (word != null)
                 {
                     results.Add(guess.Key, word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase));
@@ -185,13 +187,49 @@ namespace WordQuiz.Controllers
                     var wordStatistic = await wrdst.GetByIdAsync(guess.Key);
                     if (wordStatistic != null)
                     {
-                        wordStatistic.Score = results[guess.Key] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
+                        wordStatistic.Score = results[guess.Value] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
                         await wrdst.UpdateAsync(wordStatistic);
                     }
                 }
             }
 
-            return Ok(results);
+            // Convert the dictionary to a JSON object
+            JObject resultJson = JObject.FromObject(results);
+
+            return Ok(resultJson);
         }
+
+
+        // POST: api/<GameController>/end
+        [HttpPost("end")]
+        public async Task<ActionResult<Dictionary<string, bool>>> EndGameNoPlayer([FromBody] Dictionary<Word, string> guesses)
+        {
+            Dictionary<string, bool> results = new Dictionary<string, bool>();
+
+            foreach (var guess in guesses)
+            {
+                var word = await wrd.GetWordByOriginal(guess.Key.Original);
+                if (word != null)
+                {
+                    results.Add(guess.Key.Original, word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase));
+
+
+                    // Update the word statistics
+                    var wordStatistic = await wrdst.GetByIdAsync(guess.Key.Original);
+                    if (wordStatistic != null)
+                    {
+                        wordStatistic.Score = results[guess.Value] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
+                        await wrdst.UpdateAsync(wordStatistic);
+                    }
+                }
+            }
+
+            // Convert the dictionary to a JSON object
+            JObject resultJson = JObject.FromObject(results);
+
+            return Ok(resultJson);
+        }
+
+
     }
 }
