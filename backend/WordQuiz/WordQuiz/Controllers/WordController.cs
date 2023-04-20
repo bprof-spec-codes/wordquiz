@@ -113,7 +113,7 @@ namespace WordQuiz.Controllers
             var statistic = await wrdst.GetAllAsync();
             List<Word> result = new List<Word>();
             int i = 0;
-            var topics = await tp.GetAllTopics();
+            var topics = tp.GetAllTopics();
             List<Topic> current_tp = new List<Topic>();
 
             var currentPlayerWords = statistic.Where(x => x.PlayerId == user.Id);
@@ -158,7 +158,7 @@ namespace WordQuiz.Controllers
             foreach (var word in words)
             {
                 // Check if the topic exists
-                var existingTopic = await tp.GetTopicById(word.TopicId);
+                var existingTopic = tp.GetTopicById(word.TopicId);
 
                 // If the topic doesn't exist, create it
                 if (existingTopic == null)
@@ -173,7 +173,7 @@ namespace WordQuiz.Controllers
                             Description = word.Topic.Description
                         };
 
-                        await tp.AddTopic(newTopic);
+                        tp.AddTopic(newTopic);
                         existingTopic = newTopic;
                     }
                     else

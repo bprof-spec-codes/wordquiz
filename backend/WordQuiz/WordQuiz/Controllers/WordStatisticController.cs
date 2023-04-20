@@ -13,10 +13,10 @@ namespace WordQuiz.Controllers
     //[Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
+    // [Authorize]
     public class WordStatisticController : ControllerBase
     {
-        
+
         IWordStaticRepository wrdst;
         IWordRepository wrd;
         ITopicRepository tp;
@@ -69,7 +69,7 @@ namespace WordQuiz.Controllers
         public async Task<IActionResult> EditWordStatistic(int id, [FromBody] WordStatistic value)
         {
 
-           await wrdst.UpdateAsync(value);
+            await wrdst.UpdateAsync(value);
             return Ok();
         }
 
@@ -77,27 +77,22 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWordStatistic(string id)
         {
-          await wrdst.DeleteAsync(id);
+            await wrdst.DeleteAsync(id);
             return Ok();
 
         }
-        
+
         // GET: api/<WordController>
         [HttpGet("{idRandom}")]
         public IEnumerable<Word> GetRandom(int idRandom, string player)
         {
-
-
-
             // Retrieve all words from the database
             var words = wrd.GetAllWords().Result;
             var statistic = wrdst.GetAllAsync().Result;
             List<Word> result = new List<Word>();
             int i = 0;
 
-            var currentPlayerWords = statistic.Where(x => x.Player.PlayerName.Equals(player));  
-
-           
+            var currentPlayerWords = statistic.Where(x => x.Player.PlayerName.Equals(player));
 
             // Calculate the total weight of all the words
 
@@ -111,7 +106,7 @@ namespace WordQuiz.Controllers
             foreach (var word in words)
             {
                 i++;
-                if (i< idRandom)
+                if (i < idRandom)
                 {
                     randomNumber -= currentPlayerWords.ToArray()[i].Score;
                     if (randomNumber <= 0)
@@ -125,7 +120,7 @@ namespace WordQuiz.Controllers
                 {
                     break;
                 }
-             
+
             }
 
             return result;
@@ -134,9 +129,6 @@ namespace WordQuiz.Controllers
         [HttpGet("{idRandomWithTopic}")]
         public IEnumerable<Word> GetRandomWithTopics(int idRandomWithTopic, string player, List<string> mytopicstitle)
         {
-
-
-
             // Retrieve all words from the database
             var words = wrd.GetAllWords().Result;
             var statistic = wrdst.GetAllAsync().Result;
@@ -145,18 +137,14 @@ namespace WordQuiz.Controllers
             var topics = tp.GetAllTopics();
             List<Topic> current_tp = new List<Topic>();
 
-
-
             var currentPlayerWords = statistic.Where(x => x.Player.PlayerName.Equals(player));
 
 
-            var currentTopics = topics.Result.Where(x => x.Title.Equals(mytopicstitle))  ;
+            var currentTopics = topics.Where(x => x.Title.Equals(mytopicstitle));
 
             foreach (var topictitle in mytopicstitle)
             {
-                               
-                current_tp.Add(tp.GetTopicById(topictitle).Result);
-
+                current_tp.Add(tp.GetTopicById(topictitle));
             }
 
             // Calculate the total weight of all the words
@@ -188,7 +176,7 @@ namespace WordQuiz.Controllers
                         break;
                     }
                 }
-              
+
 
             }
 
@@ -197,7 +185,7 @@ namespace WordQuiz.Controllers
 
     }
 
- 
+
 
 }
 

@@ -15,13 +15,11 @@ namespace WordQuiz.Controllers
     //[Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-  //  [Authorize]
+    //  [Authorize]
     public class TopicController : ControllerBase
     {
-
-        
         ITopicRepository tp;
-       
+
 
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
@@ -44,7 +42,7 @@ namespace WordQuiz.Controllers
         [HttpGet]
         public IEnumerable<Topic> GetAllTopic()
         {
-            return tp.GetAllTopics().Result;
+            return tp.GetAllTopics();
         }
 
         [AllowAnonymous]
@@ -52,41 +50,36 @@ namespace WordQuiz.Controllers
         [HttpGet("{id}")]
         public Topic? GetTopic(string id)
         {
-            return tp.GetTopicById(id).Result;
+            return tp.GetTopicById(id);
         }
-
-
-
-
-
 
         // POST api/<TopicController>
         [HttpPost]
-        public async void AddTopic([FromBody] Topic value)
+        public IActionResult AddTopic([FromBody] Topic value)
         {
-            await tp.AddTopic(value);
+            return Ok(tp.AddTopic(value));
         }
 
         // PUT api/<TopicController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditTopic(int id, [FromBody] Topic value)
+        public IActionResult EditTopic(int id, [FromBody] Topic value)
         {
-          await tp.UpdateTopic(value);
+            tp.UpdateTopic(value);
             return Ok();
         }
 
         // DELETE api/<TopicController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTopic(string id)
+        public IActionResult DeleteTopic(string id)
         {
-            await tp.DeleteTopic(id);
+            tp.DeleteTopic(id);
             return Ok();
         }
 
 
         // GET api/<WordController>/ExportWords
         [HttpGet("ExportTopics")]
-        public async Task<ActionResult> Exporttopics()
+        public ActionResult Exporttopics()
         {
             /*var words = await wrd.GetAllWords();
             var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
@@ -98,7 +91,7 @@ namespace WordQuiz.Controllers
 
             */
 
-            var topics = await tp.GetAllTopics();
+            var topics = tp.GetAllTopics();
             var options = new JsonSerializerOptions { WriteIndented = true };
             var jsonString = System.Text.Json.JsonSerializer.Serialize(topics, options);
 
