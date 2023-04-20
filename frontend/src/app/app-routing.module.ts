@@ -1,5 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminGuard } from './shared/admin.guard';
+import { AdminTopicsComponent } from './components/admin/topics/admin-topics/admin-topics.component';
 import { AuthGuard } from './shared/auth.guard';
 import { GameComponent } from './components/game/game.component';
 import { HomeComponent } from './components/home/home.component';
@@ -21,6 +23,12 @@ const routes: Routes = [
         path: 'play/:topicId',
         component: GameComponent,
         canActivate: [AuthGuard],
+    },
+
+    {
+        path: 'admin/topics',
+        component: AdminTopicsComponent,
+        canActivate: [AuthGuard, AdminGuard],
     },
 ];
 
