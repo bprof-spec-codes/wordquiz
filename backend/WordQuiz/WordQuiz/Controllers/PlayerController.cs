@@ -46,14 +46,14 @@ namespace WordQuiz.Controllers
 
         // GET: api/<PlayerController>/all
         [HttpGet("all")]
-        public async Task<IEnumerable<PlayerInfo>> GetAllPlayers()
+        public async Task<IEnumerable<PlayerInfoViewModel>> GetAllPlayers()
         {
             var players = await playerRepository.GetAllPlayers();
 
-            var playerInfos = new List<PlayerInfo>();
+            var playerInfos = new List<PlayerInfoViewModel>();
             foreach (var player in players)
             {
-                playerInfos.Add(new PlayerInfo
+                playerInfos.Add(new PlayerInfoViewModel
                 {
                     Id = player.Id,
                     Email = player.Email,
