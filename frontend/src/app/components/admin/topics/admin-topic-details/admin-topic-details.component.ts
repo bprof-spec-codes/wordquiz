@@ -1,7 +1,7 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Topic, TopicService } from 'src/app/services/topic.service';
 
-import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { WordService } from 'src/app/services/word.service';
@@ -27,7 +27,8 @@ export class AdminTopicDetailsComponent implements OnInit {
         private topicService: TopicService,
         private wordService: WordService,
         private formBuilder: FormBuilder,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -54,7 +55,14 @@ export class AdminTopicDetailsComponent implements OnInit {
         this.topic = this.topicService.getOne(this.topicId);
     }
 
-    onDeleteClicked(id: string) {
+    onDeleteWordClicked(id: string) {
         this.wordService.delete(id).subscribe(() => this.refreshTopic());
+    }
+
+    onDeleteTopicClicked() {
+        if (confirm('Are you sure you want to delete this topic?'))
+            this.topicService
+                .delete(this.topicId)
+                .subscribe(() => this.router.navigate(['/admin/topics']));
     }
 }

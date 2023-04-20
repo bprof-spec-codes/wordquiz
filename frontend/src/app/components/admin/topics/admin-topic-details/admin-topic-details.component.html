@@ -6,13 +6,13 @@
                     <a [routerLink]="['/admin/topics']">Topics</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    {{ (topic | async)!.title }}
+                    {{ (topic | async)?.title }}
                 </li>
             </ol>
         </nav>
 
         <div *ngIf="topic">
-            <h1 class="fancy-font">{{ (topic | async)!.title }}</h1>
+            <h1 class="fancy-font">{{ (topic | async)?.title }}</h1>
         </div>
 
         <div class="mb-5">
@@ -50,7 +50,7 @@
 
         <div>
             <div
-                *ngFor="let word of (topic | async)!.words"
+                *ngFor="let word of (topic | async)?.words"
                 class="row justify-content-md-center my-0"
             >
                 <div class="row gx-0 py-0">
@@ -62,7 +62,7 @@
                         <span class="text-muted lh-lg">..........</span>
                         {{ word.translation }}
                         <button
-                            (click)="onDeleteClicked(word.id)"
+                            (click)="onDeleteWordClicked(word.id)"
                             class="text-danger btn btn-label"
                         >
                             ✗
@@ -70,6 +70,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
+            <button (click)="onDeleteTopicClicked()" class="btn btn-danger">
+                Delete topic
+            </button>
         </div>
     </div>
 </app-secondary-region>
