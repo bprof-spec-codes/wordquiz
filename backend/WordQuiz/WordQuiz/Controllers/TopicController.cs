@@ -15,7 +15,7 @@ namespace WordQuiz.Controllers
     //[Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+  //  [Authorize]
     public class TopicController : ControllerBase
     {
 
@@ -54,6 +54,11 @@ namespace WordQuiz.Controllers
         {
             return tp.GetTopicById(id).Result;
         }
+
+
+
+
+
 
         // POST api/<TopicController>
         [HttpPost]
