@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -20,6 +21,7 @@ namespace WordQuiz.Models
 
         [NotMapped]
         [JsonIgnore]
+        [ValidateNever]
         public Topic Topic { get; set; }
 
         public Word()
