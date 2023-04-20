@@ -88,8 +88,7 @@ namespace WordQuiz.Controllers
         public async Task<object> GetPlayer()
         {
             // FIXME cannot get user from userManager.GetUserAsync(User)
-            string id = this.userManager.GetUserId(User);
-            Player p = (await this.playerRepository.GetAllPlayers()).First(p => p.Email == id);
+            Player p = (await userManager.GetUserAsync(User));
             return new
             {
                 email = p.Email,

@@ -29,9 +29,9 @@ namespace WordQuiz.Controllers
             {
                 var claim = new List<Claim>
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                     new Claim(JwtRegisteredClaimNames.Name, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
+                    new Claim(JwtRegisteredClaimNames.NameId, user.Id),
                 };
                 foreach (var role in await _userManager.GetRolesAsync(user))
                 {

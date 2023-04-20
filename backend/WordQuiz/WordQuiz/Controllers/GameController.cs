@@ -94,7 +94,7 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameWeighted")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords = 10)
         {
-            var player = await userManager.GetUserAsync(User);
+            Player player = await userManager.GetUserAsync(User);
 
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
