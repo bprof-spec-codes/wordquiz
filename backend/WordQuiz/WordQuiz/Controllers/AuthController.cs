@@ -59,12 +59,9 @@ namespace WordQuiz.Controllers
             var user = new Player
             {
                 Email = model.Email,
-                UserName = model.UserName,
+                UserName = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                PlayerName = model.UserName
-                
-                //PhotoContentType = model.PhotoContentType,
-                //PhotoData = model.PhotoData
+                PlayerName = model.PlayerName
             };
             await _userManager.CreateAsync(user, model.Password);
             await _userManager.AddToRoleAsync(user, "Player");
