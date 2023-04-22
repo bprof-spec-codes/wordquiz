@@ -46,9 +46,9 @@ namespace WordQuiz.Controllers
 
         // GET: api/<PlayerController>/all
         [HttpGet("all")]
-        public async Task<IEnumerable<PlayerInfoViewModel>> GetAllPlayers()
+        public async  Task<IEnumerable<PlayerInfoViewModel>> GetAllPlayers()
         {
-            var players = await playerRepository.GetAllPlayers();
+            var players =  playerRepository.GetAllPlayers();
 
             var playerInfos = new List<PlayerInfoViewModel>();
             foreach (var player in players)
@@ -71,7 +71,7 @@ namespace WordQuiz.Controllers
         [HttpGet("{id}")]
         public async Task<object> GetPlayer(string id)
         {
-            Player p = playerRepository.GetPlayerById(id).Result;
+            Player p = playerRepository.GetPlayerById(id);
             return new
             {
                 email = p.Email,
@@ -102,7 +102,7 @@ namespace WordQuiz.Controllers
         [HttpPost]
         public async void AddPlayer([FromBody] Player value)
         {
-            await playerRepository.CreatePlayer(value);
+             playerRepository.CreatePlayer(value);
 
         }
 
@@ -110,7 +110,7 @@ namespace WordQuiz.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditPlayer(int id, [FromBody] Player value)
         {
-            await playerRepository.UpdatePlayer(value);
+             playerRepository.UpdatePlayer(value);
             return Ok();
         }
 
@@ -118,7 +118,7 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePlayer(string id)
         {
-            await playerRepository.DeletePlayer(id);
+             playerRepository.DeletePlayer(id);
             return Ok();
         }
     }

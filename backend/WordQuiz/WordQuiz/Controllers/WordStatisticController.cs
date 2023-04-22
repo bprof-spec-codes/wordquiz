@@ -47,21 +47,21 @@ namespace WordQuiz.Controllers
         [HttpGet]
         public IEnumerable<WordStatistic> Get()
         {
-            return wrdst.GetAllAsync().Result;
+            return wrdst.GetAll();
         }
 
         // GET api/<WordStatisticController>/5
         [HttpGet("{id}")]
         public WordStatistic? GetWordStatistic(string word)
         {
-            return wrdst.GetByIdAsync(word).Result;
+            return wrdst.GetById(word);
         }
 
         // POST api/<WordStatisticController>
         [HttpPost]
         public async void AddWordStatistic([FromBody] WordStatistic value)
         {
-            await wrdst.AddAsync(value);
+             wrdst.Add(value);
         }
 
         // PUT api/<WordStatisticController>/5
@@ -69,7 +69,7 @@ namespace WordQuiz.Controllers
         public async Task<IActionResult> EditWordStatistic(int id, [FromBody] WordStatistic value)
         {
 
-            await wrdst.UpdateAsync(value);
+             wrdst.Update(value);
             return Ok();
         }
 
@@ -77,7 +77,7 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWordStatistic(string id)
         {
-            await wrdst.DeleteAsync(id);
+             wrdst.Delete(id);
             return Ok();
 
         }
@@ -87,8 +87,8 @@ namespace WordQuiz.Controllers
         public IEnumerable<Word> GetRandom(int idRandom, string player)
         {
             // Retrieve all words from the database
-            var words = wrd.GetAllWords().Result;
-            var statistic = wrdst.GetAllAsync().Result;
+            var words = wrd.GetAllWords();
+            var statistic = wrdst.GetAll();
             List<Word> result = new List<Word>();
             int i = 0;
 
@@ -130,8 +130,8 @@ namespace WordQuiz.Controllers
         public IEnumerable<Word> GetRandomWithTopics(int idRandomWithTopic, string player, List<string> mytopicstitle)
         {
             // Retrieve all words from the database
-            var words = wrd.GetAllWords().Result;
-            var statistic = wrdst.GetAllAsync().Result;
+            var words = wrd.GetAllWords();
+            var statistic = wrdst.GetAll();
             List<Word> result = new List<Word>();
             int i = 0;
             var topics = tp.GetAllTopics();

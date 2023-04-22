@@ -12,53 +12,53 @@ namespace WordQuiz.Data.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<Word>> GetAllWords()
+        public IEnumerable<Word> GetAllWords()
         {
-            return await _dbContext.Words.Include(w => w.Topic).ToListAsync();
+            return  _dbContext.Words.Include(w => w.Topic).ToList();
         }
 
-        public async Task<Word> GetWordById(string wordId)
+        public Word GetWordById(string wordId)
         {
-            return await _dbContext.Words.Include(w => w.Topic).SingleOrDefaultAsync(w => w.Id == wordId);
+            return  _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Id == wordId);
         }
 
-        public async Task<Word> GetWordByOriginal(string wordOriginal)
+        public  Word GetWordByOriginal(string wordOriginal)
         {
-            return await _dbContext.Words.Include(w => w.Topic).SingleOrDefaultAsync(w => w.Original == wordOriginal);
+            return  _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Original == wordOriginal);
         }
 
-        public async Task<Word> GetWordByTranslation(string wordT)
+        public  Word GetWordByTranslation(string wordT)
         {
-            return await _dbContext.Words.Include(w => w.Topic).SingleOrDefaultAsync(w => w.Translation == wordT);
+            return  _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Translation == wordT);
         }
 
-        public async Task<Word> CreateWord(Word word)
+        public Word CreateWord(Word word)
         {
             _dbContext.Words.Add(word);
             _dbContext.SaveChanges();
             return word;
         }
 
-        public async Task<Word> UpdateWord(Word word)
+        public  Word UpdateWord(Word word)
         {
             _dbContext.Entry(word).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+             _dbContext.SaveChanges();
             return word;
         }
 
-        public async Task DeleteWord(string wordId)
+        public  void DeleteWord(string wordId)
         {
-            var word = await _dbContext.Words.FindAsync(wordId);
+            var word =  _dbContext.Words.Find(wordId);
             if (word != null)
             {
                 _dbContext.Words.Remove(word);
-                await _dbContext.SaveChangesAsync();
+                 _dbContext.SaveChanges();
             }
         }
 
-        public async Task<IEnumerable<Word>> GetWordsByTopicIdAsync(string topicId)
+        public  IEnumerable<Word> GetWordsByTopicId(string topicId)
         {
-            return await _dbContext.Words.Where(w => w.Topic.Id == topicId).ToListAsync();
+            return  _dbContext.Words.Where(w => w.Topic.Id == topicId).ToList();
         }
     }
 }

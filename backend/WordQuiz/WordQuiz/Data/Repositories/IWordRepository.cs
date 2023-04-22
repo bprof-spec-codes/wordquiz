@@ -4,16 +4,16 @@ namespace WordQuiz.Data.Repositories
 {
     public interface IWordRepository
     {
-        Task<Word> CreateWord(Word word);
-        Task DeleteWord(string wordId);
-        Task<IEnumerable<Word>> GetAllWords();
-        Task<Word> GetWordById(string wordId);
+        Word CreateWord(Word word);
+        void DeleteWord(string wordId);
+        IEnumerable<Word> GetAllWords();
+        Word GetWordById(string wordId);
 
-        Task<Word> GetWordByOriginal(string wordId);
-        Task<Word> GetWordByTranslation(string word);
+        Word GetWordByOriginal(string wordId);
+        Word GetWordByTranslation(string word);
 
-        Task<Word> UpdateWord(Word word);
+        Word UpdateWord(Word word);
 
-        Task<IEnumerable<Word>> GetWordsByTopicIdAsync(string topicId);
+        IEnumerable<Word> GetWordsByTopicId(string topicId);
     }
 }

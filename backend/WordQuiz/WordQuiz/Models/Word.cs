@@ -8,7 +8,7 @@ namespace WordQuiz.Models
     public class Word
     {
         [Key]
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         [Required]
         public string Original { get; set; }

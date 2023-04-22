@@ -17,7 +17,7 @@ namespace WordQuiz.Logics
             {
 
 
-                List<Word> words = (List<Word>)await wrd.GetAllWords();
+                List<Word> words = (List<Word>) wrd.GetAllWords();
 
 
                   numberOfWords = Math.Min(numberOfWords, words.Count);

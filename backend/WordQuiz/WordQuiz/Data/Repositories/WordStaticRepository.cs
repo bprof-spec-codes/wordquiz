@@ -12,33 +12,34 @@ namespace WordQuiz.Data.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<WordStatistic>> GetAllAsync()
+        public  IEnumerable<WordStatistic> GetAll()
         {
-            return await _context.WordStatistics.Include(ws => ws.Player).Include(ws => ws.Word).ToListAsync();
+            return  _context.WordStatistics.Include(ws => ws.Player).Include(ws => ws.Word).ToList();
         }
 
-        public async Task<WordStatistic> GetByIdAsync(string id)
+        public  WordStatistic GetById(string id)
         {
-            return await _context.WordStatistics.Include(ws => ws.Player).Include(ws => ws.Word).FirstOrDefaultAsync(ws => ws.Id == id);
+            return  _context.WordStatistics.Include(ws => ws.Player).Include(ws => ws.Word).FirstOrDefault(ws => ws.Id == id);
         }
 
-        public async Task AddAsync(WordStatistic entity)
+        public  void Add(WordStatistic entity)
         {
-            await _context.WordStatistics.AddAsync(entity);
-            await _context.SaveChangesAsync();
+             _context.WordStatistics.Add(entity);
+             _context.SaveChanges();
         }
 
-        public async Task UpdateAsync(WordStatistic entity)
+        public WordStatistic Update(WordStatistic entity)
         {
             _context.WordStatistics.Update(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
+            return entity;
         }
 
-        public async Task DeleteAsync(string id)
+        public  void Delete(string id)
         {
-            var wordStatistic = await _context.WordStatistics.FindAsync(id);
+            var wordStatistic =  _context.WordStatistics.Find(id);
             _context.WordStatistics.Remove(wordStatistic);
-            await _context.SaveChangesAsync();
+             _context.SaveChangesAsync();
         }
     }
 }

@@ -90,8 +90,8 @@ namespace WordQuiz.Controllers
             var user = await userManager.GetUserAsync(User);
 
             // Retrieve all words from the database
-            var words = await wrd.GetAllWords();
-            var statistic = await wrdst.GetAllAsync();
+            var words =  wrd.GetAllWords();
+            var statistic =  wrdst.GetAll();
             List<Word> result = new List<Word>();
             int i = 0;
 
@@ -109,8 +109,8 @@ namespace WordQuiz.Controllers
             var user = await userManager.GetUserAsync(User);
 
             // Retrieve all words from the database
-            var words = await wrd.GetAllWords();
-            var statistic = await wrdst.GetAllAsync();
+            var words =  wrd.GetAllWords();
+            var statistic =  wrdst.GetAll();
             List<Word> result = new List<Word>();
             int i = 0;
             var topics = tp.GetAllTopics();
@@ -130,7 +130,7 @@ namespace WordQuiz.Controllers
         public async void AddWord([FromBody] Word value)
         {
 
-            await wrd.CreateWord(value);
+             wrd.CreateWord(value);
         }
 
         // PUT api/<WordController>/5
@@ -138,7 +138,7 @@ namespace WordQuiz.Controllers
         public async Task<IActionResult> EditWord(int id, [FromBody] Word value)
         {
 
-            await wrd.UpdateWord(value);
+             wrd.UpdateWord(value);
             return Ok();
         }
 
@@ -146,7 +146,7 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWord(string id)
         {
-            await wrd.DeleteWord(id);
+             wrd.DeleteWord(id);
             return Ok();
 
         }
@@ -186,12 +186,12 @@ namespace WordQuiz.Controllers
                 word.Topic = existingTopic;
 
                 // Check if the word already exists
-                var existingWord = await wrd.GetWordById(word.Id);
+                var existingWord =  wrd.GetWordById(word.Id);
 
                 // If the word doesn't exist, add it to the database
                 if (existingWord == null)
                 {
-                    await wrd.CreateWord(word);
+                     wrd.CreateWord(word);
                 }
             }
 

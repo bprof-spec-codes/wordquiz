@@ -4,10 +4,10 @@ namespace WordQuiz.Data.Repositories
 {
     public interface IPlayerRepository
     {
-        Task<Player> CreatePlayer(Player player);
-        Task DeletePlayer(string playerId);
-        Task<IEnumerable<Player>> GetAllPlayers();
-        Task<Player> GetPlayerById(string playerId);
-        Task<Player> UpdatePlayer(Player player);
+        Player CreatePlayer(Player player);
+        void DeletePlayer(string playerId);
+        IEnumerable<Player> GetAllPlayers();
+        Player GetPlayerById(string playerId);
+        Player UpdatePlayer(Player player);
     }
 }

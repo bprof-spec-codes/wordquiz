@@ -14,37 +14,37 @@ namespace WordQuiz.Data.Repositories
 
 
 
-        public async Task<IEnumerable<Player>> GetAllPlayers()
+        public  IEnumerable<Player> GetAllPlayers()
         {
-            return await _dbContext.Users.ToListAsync();
+            return  _dbContext.Users.ToList();
         }
 
-        public async Task<Player> GetPlayerById(string playerId)
+        public Player GetPlayerById(string playerId)
         {
-            return await _dbContext.Users.FindAsync(playerId);
+            return  _dbContext.Users.Find(playerId);
         }
 
-        public async Task<Player> CreatePlayer(Player player)
+        public  Player CreatePlayer(Player player)
         {
             _dbContext.Users.Add(player);
-            await _dbContext.SaveChangesAsync();
+             _dbContext.SaveChanges();
             return player;
         }
 
-        public async Task<Player> UpdatePlayer(Player player)
+        public  Player UpdatePlayer(Player player)
         {
             _dbContext.Entry(player).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+             _dbContext.SaveChanges();
             return player;
         }
 
-        public async Task DeletePlayer(string playerId)
+        public  void DeletePlayer(string playerId)
         {
-            var player = await _dbContext.Users.FindAsync(playerId);
+            var player =  _dbContext.Users.Find(playerId);
             if (player != null)
             {
                 _dbContext.Users.Remove(player);
-                await _dbContext.SaveChangesAsync();
+                 _dbContext.SaveChanges();
             }
         }
     }

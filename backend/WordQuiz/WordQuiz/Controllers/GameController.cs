@@ -32,7 +32,7 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameNoUserNoTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameNoTopic(int numberOfWords = 10)
         {
-            List<Word> words = (List<Word>)await wordRepository.GetAllWords();
+            List<Word> words = (List<Word>) wordRepository.GetAllWords();
 
 
        
@@ -74,7 +74,7 @@ namespace WordQuiz.Controllers
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
             {
-                var words = await wordRepository.GetWordsByTopicIdAsync(topicId);
+                var words =  wordRepository.GetWordsByTopicId(topicId);
                 wordsFromTopics.AddRange(words);
             }
 
@@ -107,7 +107,7 @@ namespace WordQuiz.Controllers
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
             {
-                var words = await wordRepository.GetWordsByTopicIdAsync(topicId);
+                var words =  wordRepository.GetWordsByTopicId(topicId);
                 wordsFromTopics.AddRange(words);
             }
 
@@ -118,7 +118,7 @@ namespace WordQuiz.Controllers
 
 
             // Get word statistics for the current player
-            var currentPlayerStats = wordStatRepository.GetAllAsync().Result.Where(x => x.Player.PlayerName.Equals(player));
+            var currentPlayerStats = wordStatRepository.GetAll().Where(x => x.Player.PlayerName.Equals(player));
 
             // Calculate the total weight of all the words
             int totalWeight = currentPlayerStats.Sum(w => w.Score);
@@ -158,17 +158,17 @@ namespace WordQuiz.Controllers
 
             foreach (var guess in guesses)
             {
-                var word = await wordRepository.GetWordByOriginal(guess.Key);
+                var word =  wordRepository.GetWordByOriginal(guess.Key);
                 if (word != null)
                 {
                     results.Add(guess.Key, word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase));
 
                     // Update the word statistics
-                    var wordStatistic = await wordStatRepository.GetByIdAsync(guess.Key);
+                    var wordStatistic =  wordStatRepository.GetById(guess.Key);
                     if (wordStatistic != null)
                     {
                         wordStatistic.Score = results[guess.Value] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
-                        await wordStatRepository.UpdateAsync(wordStatistic);
+                         wordStatRepository.Update(wordStatistic);
                     }
                 }
             }
@@ -188,18 +188,18 @@ namespace WordQuiz.Controllers
 
             foreach (var guess in guesses)
             {
-                var word = await wordRepository.GetWordByOriginal(guess.Key.Original);
+                var word =  wordRepository.GetWordByOriginal(guess.Key.Original);
                 if (word != null)
                 {
                     results.Add(guess.Key.Original, word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase));
 
 
                     // Update the word statistics
-                    var wordStatistic = await wordStatRepository.GetByIdAsync(guess.Key.Original);
+                    var wordStatistic =  wordStatRepository.GetById(guess.Key.Original);
                     if (wordStatistic != null)
                     {
                         wordStatistic.Score = results[guess.Value] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
-                        await wordStatRepository.UpdateAsync(wordStatistic);
+                         wordStatRepository.Update(wordStatistic);
                     }
                 }
             }

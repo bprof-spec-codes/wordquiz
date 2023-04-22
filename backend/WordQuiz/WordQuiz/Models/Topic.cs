@@ -8,6 +8,7 @@ namespace WordQuiz.Models
     public class Topic
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
         [Required]

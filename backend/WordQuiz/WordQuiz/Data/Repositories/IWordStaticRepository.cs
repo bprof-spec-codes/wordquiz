@@ -4,10 +4,10 @@ namespace WordQuiz.Data.Repositories
 {
     public interface IWordStaticRepository
     {
-        Task AddAsync(WordStatistic entity);
-        Task DeleteAsync(string id);
-        Task<IEnumerable<WordStatistic>> GetAllAsync();
-        Task<WordStatistic> GetByIdAsync(string id);
-        Task UpdateAsync(WordStatistic entity);
+        void Add(WordStatistic entity);
+        void Delete(string id);
+        IEnumerable<WordStatistic> GetAll();
+        WordStatistic GetById(string id);
+        WordStatistic Update(WordStatistic entity);
     }
 }
