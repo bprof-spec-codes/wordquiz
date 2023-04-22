@@ -1,6 +1,6 @@
 ﻿namespace WordQuiz.Models
 {
-    public class PlayerInfo
+    public class PlayerInfoViewModel
     {
         public string Id { get; set; }
         public string Email { get; set; }

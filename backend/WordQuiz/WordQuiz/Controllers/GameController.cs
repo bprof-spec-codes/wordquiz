@@ -32,9 +32,10 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameNoUserNoTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameNoTopic(int numberOfWords = 10)
         {
-
-
             List<Word> words = (List<Word>)await wordRepository.GetAllWords();
+
+
+       
 
             // Group words by their Original property and select one word from each group
             var distinctWords = words.GroupBy(w => w.Original).Select(g => g.First()).ToList();
@@ -69,9 +70,6 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameNoUserWithTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] string[] topicIds, int numberOfWords = 10)
         {
-
-
-
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
@@ -103,7 +101,7 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameWeighted")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords = 10)
         {
-            var player = await userManager.GetUserAsync(User);
+            Player player = await userManager.GetUserAsync(User);
 
             // Get words from the provided topics
             var wordsFromTopics = new List<Word>();
@@ -133,7 +131,7 @@ namespace WordQuiz.Controllers
                 int randomNumber = random.Next(1, totalWeight + 1);
                 int cumulativeWeight = 0;
 
-                foreach (var word in wordsFromTopics)
+                foreach (var word in distinctWords)
                 {
                     var wordStat = currentPlayerStats.FirstOrDefault(ws => ws.Word.Id == word.Id);
                     int wordWeight = wordStat != null ? wordStat.Score : 0;

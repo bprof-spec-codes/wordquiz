@@ -1,6 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
+import { AdminTopicAddComponent } from './components/admin/topics/admin-topic-add/admin-topic-add.component';
 import { AdminTopicDetailsComponent } from './components/admin/topics/admin-topic-details/admin-topic-details.component';
 import { AdminTopicsComponent } from './components/admin/topics/admin-topics/admin-topics.component';
 import { AppComponent } from './app.component';
@@ -38,6 +39,7 @@ import { TopicSelectionComponent } from './components/topic/topic-selection/topi
         GameStartComponent,
         AdminTopicsComponent,
         AdminTopicDetailsComponent,
+        AdminTopicAddComponent,
     ],
     imports: [
         BrowserModule,

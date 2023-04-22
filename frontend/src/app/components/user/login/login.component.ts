@@ -15,9 +15,6 @@ export class LoginComponent implements OnInit {
         password: [''],
     });
 
-    /**
-     *
-     */
     constructor(
         private formBuilder: FormBuilder,
         public authService: AuthService,

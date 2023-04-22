@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminGuard } from './shared/admin.guard';
+import { AdminTopicAddComponent } from './components/admin/topics/admin-topic-add/admin-topic-add.component';
 import { AdminTopicDetailsComponent } from './components/admin/topics/admin-topic-details/admin-topic-details.component';
 import { AdminTopicsComponent } from './components/admin/topics/admin-topics/admin-topics.component';
 import { AuthGuard } from './shared/auth.guard';
@@ -29,6 +30,12 @@ const routes: Routes = [
     {
         path: 'admin/topics',
         component: AdminTopicsComponent,
+        canActivate: [AuthGuard, AdminGuard],
+    },
+
+    {
+        path: 'admin/topics/add',
+        component: AdminTopicAddComponent,
         canActivate: [AuthGuard, AdminGuard],
     },
 

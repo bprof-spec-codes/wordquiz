@@ -3,12 +3,6 @@ import { Injectable } from '@angular/core';
 import { Topic } from './topic.service';
 import { environment } from 'src/environments/environment';
 
-export type Word = {
-    original: string;
-    id: string;
-    translation: string;
-};
-
 export type GuessResult = {
     original: string;
     guess: string;
@@ -117,7 +111,7 @@ export class GameService {
         const body = [this.topic?.id];
 
         return this.http.post<string[]>(
-            environment.apiUrl + 'Game/StartGame',
+            environment.apiUrl + 'Game/StartGameWeighted',
             body,
             { headers }
         );
