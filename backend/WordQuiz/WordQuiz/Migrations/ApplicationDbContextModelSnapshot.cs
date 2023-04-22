@@ -247,6 +247,7 @@ namespace WordQuiz.Migrations
             modelBuilder.Entity("WordQuiz.Models.Topic", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -264,37 +265,37 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            Id = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Description = "Learn how to address your or your partner's family at gatherings.",
                             Title = "Family"
                         },
                         new
                         {
-                            Id = "9dd65c01-6126-4af1-8a74-a775a30991ba",
+                            Id = "b329be7a-718b-4b4a-9b7e-fd2f758a39ec",
                             Description = "These words will help you cheer for your favorite team.",
                             Title = "Sports"
                         },
                         new
                         {
-                            Id = "4cfe0f00-1809-41c8-89f4-88f1643d9e5e",
+                            Id = "5e6a0b8b-61fe-41ed-86f8-a4c6cd8cb4c0",
                             Description = "Become an Oxford level green-thumb with this vocabulary.",
                             Title = "Gardening"
                         },
                         new
                         {
-                            Id = "502ebbe2-e45c-42b3-95f5-8b3d380ff15b",
+                            Id = "5186ea84-9fae-49bd-b091-81b858ed8209",
                             Description = "Words related to traveling abroad.",
                             Title = "Travel"
                         },
                         new
                         {
-                            Id = "263323b5-4a07-470d-a70f-bcfa9bc31a52",
+                            Id = "e266f8de-4cab-489f-946b-e4ba0030cf00",
                             Description = "Everything you need to know regarding fashion or about simply going shopping for clothes.",
                             Title = "Clothing"
                         },
                         new
                         {
-                            Id = "f22a21a2-1500-49ca-91dd-e5920fee812b",
+                            Id = "01c7e63d-a0bd-4513-bded-f3fa3583b087",
                             Description = "A vocabulary aimed to help you avoid embarrassment while going out to eat.",
                             Title = "Food"
                         });
@@ -303,6 +304,7 @@ namespace WordQuiz.Migrations
             modelBuilder.Entity("WordQuiz.Models.Word", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Original")
@@ -326,65 +328,65 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5dbea794-8d23-422c-b7cb-82fb7fcb3a0c",
+                            Id = "64df23fc-affa-4f2a-ba05-4a6a33a806f1",
                             Original = "Father",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Apa"
                         },
                         new
                         {
-                            Id = "636cd12c-15e2-4b17-a96b-a1dabbd950ad",
+                            Id = "44ca629f-caf9-442c-89f7-0044d813e44d",
                             Original = "Mother",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Anya"
                         },
                         new
                         {
-                            Id = "6eac9ea4-f47e-4fd4-8925-d95a951de3df",
+                            Id = "eca96797-769d-4b44-a227-1e7663ab9239",
                             Original = "Aunt",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Nagynéni"
                         },
                         new
                         {
-                            Id = "8c58a2ce-c035-4e3d-83e4-fa4e7ff3d331",
+                            Id = "68f2fbf1-73b2-410e-a253-078c79963de9",
                             Original = "Uncle",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Nagybácsi"
                         },
                         new
                         {
-                            Id = "c3afa9ac-065f-415e-81d2-f0800e291bb3",
+                            Id = "d9500322-ad26-4a19-af78-f2904fdf6458",
                             Original = "Grandmother",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Nagymama"
                         },
                         new
                         {
-                            Id = "b7d86a56-5ae7-4204-9735-0e605c1d1b28",
+                            Id = "4d94613f-7678-4fbe-aa8c-1964aac78e82",
                             Original = "Grandfather",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Nagypapa"
                         },
                         new
                         {
-                            Id = "f3dd361f-6f2a-4e8e-9fbc-300435cc44ca",
+                            Id = "0adc971c-135e-49e6-a43d-96788d3fd40c",
                             Original = "Grandfather",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Nagyapa"
                         },
                         new
                         {
-                            Id = "2f726723-73da-4713-8cc2-f8bcc0cb0cd4",
+                            Id = "948d4b8c-0f2f-4813-be5c-048bebb94672",
                             Original = "Mother-in-law",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Anyós"
                         },
                         new
                         {
-                            Id = "753aaea6-7696-48ad-854e-9161c4610b66",
+                            Id = "e97b766e-424d-4a9e-8c99-050cc9a0503c",
                             Original = "Father-in-law",
-                            TopicId = "36beb080-cc92-49a1-b695-982bd6d6fced",
+                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
                             Translation = "Após"
                         });
                 });
@@ -392,6 +394,7 @@ namespace WordQuiz.Migrations
             modelBuilder.Entity("WordQuiz.Models.WordStatistic", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PlayerId")
@@ -427,16 +430,16 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a5bcff92-c0bc-4eca-8155-af2e96520a60",
+                            Id = "f2be584a-90b9-407a-a31c-a50451149bb3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a10f5ca0-fcd9-4272-8ea0-5f9d932e1e89",
+                            ConcurrencyStamp = "02acf529-0552-4249-9059-42dcbe985410",
                             Email = "seedplayer@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SEEDPLAYER@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI2bRoKvO0V95+rmhvkyCIbvOVOZIzdaAAL/j1pNi9djW2/j87vN28h9IAj3yg1oXg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHVpTewDlnJDmsqPOTaZpA++Ymi7jEMUIKC92OOjt4ei3o/rvYCTfFB1y0zPF7XcKQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "52f5bfc3-c7ec-41b1-9527-be246a471a69",
+                            SecurityStamp = "084ad8d1-bd2a-4030-a51f-26c18f66c1a3",
                             TwoFactorEnabled = false,
                             UserName = "seedplayer@gmail.com",
                             PlayerName = "SeedPlayer"

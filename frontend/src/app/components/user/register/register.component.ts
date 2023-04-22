@@ -29,10 +29,14 @@ export class RegisterComponent implements OnInit {
     }
 
     register() {
-        this.authService.signUp({
-            email: this.registerForm.value.emailAddress!,
-            playerName: this.registerForm.value.displayName!,
-            password: this.registerForm.value.displayName!,
-        });
+        this.authService
+            .signUp({
+                email: this.registerForm.value.emailAddress!,
+                playerName: this.registerForm.value.displayName!,
+                password: this.registerForm.value.displayName!,
+            })
+            .subscribe(() => {
+                this.router.navigate(['/user/login']);
+            });
     }
 }

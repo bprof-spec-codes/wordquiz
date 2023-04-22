@@ -53,7 +53,7 @@ namespace WordQuiz.Controllers
             return Unauthorized();
         }
 
-        [HttpPut]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
         {
             var user = new Player

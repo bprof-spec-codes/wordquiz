@@ -45,7 +45,7 @@ export class AuthService {
 
     // Sign-up
     signUp(user: RegisterRequest): Observable<any> {
-        let api = environment.apiUrl + 'player';
+        let api = environment.apiUrl + 'Auth/register';
         return this.http.post(api, user).pipe(catchError(this.handleError));
     }
 

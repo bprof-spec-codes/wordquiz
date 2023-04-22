@@ -12,39 +12,37 @@ namespace WordQuiz.Data.Repositories
             _dbContext = dbContext;
         }
 
-
-
-        public  IEnumerable<Player> GetAllPlayers()
+        public IEnumerable<Player> GetAllPlayers()
         {
-            return  _dbContext.Users.ToList();
+            return _dbContext.Users.ToList();
         }
 
         public Player GetPlayerById(string playerId)
         {
-            return  _dbContext.Users.Find(playerId);
+            return _dbContext.Users.Find(playerId);
         }
 
-        public  Player CreatePlayer(Player player)
+        public Player CreatePlayer(Player player)
         {
             _dbContext.Users.Add(player);
-             _dbContext.SaveChanges();
+            _dbContext.SaveChanges();
             return player;
         }
 
-        public  Player UpdatePlayer(Player player)
+        public Player UpdatePlayer(Player player)
         {
             _dbContext.Entry(player).State = EntityState.Modified;
-             _dbContext.SaveChanges();
+            _dbContext.SaveChanges();
             return player;
         }
 
-        public  void DeletePlayer(string playerId)
+        public void DeletePlayer(string playerId)
         {
-            var player =  _dbContext.Users.Find(playerId);
+            var player = _dbContext.Users.Find(playerId);
             if (player != null)
             {
                 _dbContext.Users.Remove(player);
-                 _dbContext.SaveChanges();
+                _dbContext.SaveChanges();
             }
         }
     }
