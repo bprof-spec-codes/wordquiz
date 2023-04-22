@@ -98,19 +98,20 @@ namespace WordQuiz.Controllers
             };
         }
 
-        // POST api/<PlayerController>
-        [HttpPost]
-        public async void AddPlayer([FromBody] Player value)
-        {
-             playerRepository.CreatePlayer(value);
+        //// POST api/<PlayerController>
+        //[HttpPost]
+        //public async void AddPlayer([FromBody] Player value)
+        //{
+        //     playerRepository.CreatePlayer(value);
 
-        }
+        //}
 
         // PUT api/<PlayerController>/5
+
         [HttpPut("{id}")]
         public async Task<IActionResult> EditPlayer(int id, [FromBody] Player value)
         {
-             playerRepository.UpdatePlayer(value);
+            playerRepository.UpdatePlayer(value);
             return Ok();
         }
 
@@ -118,7 +119,7 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePlayer(string id)
         {
-             playerRepository.DeletePlayer(id);
+            playerRepository.DeletePlayer(id);
             return Ok();
         }
     }
