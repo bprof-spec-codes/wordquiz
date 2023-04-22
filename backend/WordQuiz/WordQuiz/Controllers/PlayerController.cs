@@ -98,15 +98,16 @@ namespace WordQuiz.Controllers
             };
         }
 
-        // POST api/<PlayerController>
-        [HttpPost]
-        public async void AddPlayer([FromBody] Player value)
-        {
-            playerRepository.CreatePlayer(value);
+        //// POST api/<PlayerController>
+        //[HttpPost]
+        //public async void AddPlayer([FromBody] Player value)
+        //{
+        //     playerRepository.CreatePlayer(value);
 
-        }
+        //}
 
         // PUT api/<PlayerController>/5
+
         [HttpPut("{id}")]
         public async Task<IActionResult> EditPlayer(int id, [FromBody] Player value)
         {
