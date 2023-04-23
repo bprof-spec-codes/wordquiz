@@ -84,11 +84,6 @@ Monitor player's progress and performance
 Update statistics after each game session
 Encourage improvement and learning
 
- Real-time Communication with SignalR:
- 
-Real-time updates and notifications
-Enhance user experience and engagement
-Potential for multiplayer and collaborative features
 
 Future Plans:
 
