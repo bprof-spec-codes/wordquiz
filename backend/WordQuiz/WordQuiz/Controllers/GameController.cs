@@ -6,6 +6,7 @@ using WordQuiz.Models;
 using WordQuiz.Logics;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace WordQuiz.Controllers
 {
@@ -101,11 +102,11 @@ namespace WordQuiz.Controllers
 
         //[Authorize]
         [HttpPost("StartGameWeighted")]
-        public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords = 2)
+        public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords )
         {
             if (numberOfWords ==0 || numberOfWords==null )
             {
-                numberOfWords = 2;
+                numberOfWords = 10;
             }
 
             Player player = await userManager.GetUserAsync(User);
@@ -242,7 +243,7 @@ namespace WordQuiz.Controllers
             return results;
         }
         */
-        // POST: api/<GameController>/end
+       
         // POST: api/<GameController>/end
         [HttpPost("EndGame")]
         public IEnumerable<Result> EndGame(List<GuessInput> guesses)
@@ -265,13 +266,29 @@ namespace WordQuiz.Controllers
 
             foreach (var guess in guesses)
             {
-                var word = wordRepository.GetWordByOriginal(guess.Original);
-                if (word != null)
+                List<Word> words  = wordRepository.GetAllWordsByOriginal(guess.Original);
+              
+                
+                
+                if (words != null)
                 {
                     Result r = new Result();
                     r.original = guess.Original;
                     r.guess = guess.Guess;
-                    r.correct = word.Translation.Equals(guess.Guess, StringComparison.OrdinalIgnoreCase);
+                    List<Word> cwords = words.Where(x => x.Translation.Equals( guess.Guess)).ToList();
+                    if (cwords == null || cwords.Count==0)
+                    {
+                        r.correct = false;
+
+                    }
+                    else
+                    {
+                        r.correct = true;
+                    }
+
+
+
+
 
                     r.translations = new List<string>();
 
@@ -295,6 +312,7 @@ namespace WordQuiz.Controllers
                     {
                         // Update the word statistics
                         wordStatistic = currentPlayerStats.FirstOrDefault(ws => ws.Word.Original == r.original);
+
                     }
 
                     if (wordStatistic != null)
@@ -304,6 +322,26 @@ namespace WordQuiz.Controllers
                         wordStatistic.Score = r.correct ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
                         wordStatRepository.Update(wordStatistic);
                     }
+                    else
+                    {
+                       
+
+
+                        foreach (var w in words)
+                        {
+                            WordStatistic nwst = new WordStatistic();
+                            nwst.PlayerId = playerid;
+                            nwst.WordId = w.Id;
+                            nwst.Word = w;
+                            nwst.Player = player;
+                            nwst.Score = 0;
+                            wordStatRepository.Add(nwst);
+                            nwst.Score = r.correct ? nwst.Score + 1 : nwst.Score - 1;
+                            wordStatRepository.Update(nwst);
+                        }
+
+                      
+                    }
                 }
             }
 
@@ -312,7 +350,7 @@ namespace WordQuiz.Controllers
 
             return results;
         }
-        
+        /*
 
         // POST: api/<GameController>/end
         [HttpPost("endWordString")]
@@ -364,6 +402,6 @@ namespace WordQuiz.Controllers
             return Ok(resultJson);
         }
 
-
+        */
     }
 }

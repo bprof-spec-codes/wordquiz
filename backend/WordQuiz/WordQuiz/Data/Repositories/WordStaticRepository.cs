@@ -14,7 +14,8 @@ namespace WordQuiz.Data.Repositories
 
         public  IEnumerable<WordStatistic> GetAll()
         {
-            return  _context.WordStatistics.Include(ws => ws.Player).Include(ws => ws.Word).ToList();
+            // return  _context.WordStatistics.Include(ws => ws.Player).Include(ws => ws.Word).ToList();
+            return _context.WordStatistics.ToList();
         }
 
         public  WordStatistic GetById(string id)

@@ -17,5 +17,6 @@ namespace WordQuiz.Data.Repositories
         Word UpdateWord(Word word);
 
         IEnumerable<Word> GetWordsByTopicId(string topicId);
+  
     }
 }
