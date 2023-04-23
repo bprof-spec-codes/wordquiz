@@ -12,6 +12,8 @@ namespace WordQuiz.Data.Repositories
         Word GetWordByOriginal(string wordId);
         Word GetWordByTranslation(string word);
 
+        List<Word> GetAllWordsByOriginal(string wordOriginal);
+        List<Word> GetAllWordsByTranslation(string wordT);
         Word UpdateWord(Word word);
 
         IEnumerable<Word> GetWordsByTopicId(string topicId);

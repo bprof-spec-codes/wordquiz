@@ -22,14 +22,24 @@ namespace WordQuiz.Data.Repositories
             return  _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Id == wordId);
         }
 
-        public  Word GetWordByOriginal(string wordOriginal)
+        public Word GetWordByOriginal(string wordOriginal)
         {
-            return  _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Original == wordOriginal);
+            return _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Original == wordOriginal);
         }
 
-        public  Word GetWordByTranslation(string wordT)
+        public List<Word> GetAllWordsByOriginal(string wordOriginal)
         {
-            return  _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Translation == wordT);
+            return _dbContext.Words.Include(w => w.Topic).Where(w => w.Original == wordOriginal).ToList();
+        }
+
+        public Word GetWordByTranslation(string wordT)
+        {
+            return _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Translation == wordT);
+        }
+
+        public List<Word> GetAllWordsByTranslation(string wordT)
+        {
+            return _dbContext.Words.Include(w => w.Topic).Where(w => w.Translation == wordT).ToList();
         }
 
         public Word CreateWord(Word word)

@@ -85,7 +85,7 @@ export class GameService {
     endGame() {
         clearInterval(this.interval);
         this.phase = 'submitting';
-
+/*
         // TODO remove this
         this.results = this.guesses.map((guess, index) => {
             return {
@@ -96,14 +96,14 @@ export class GameService {
             };
         });
         this.phase = 'finished';
-
+*/
         // TODO uncomment
-        /*
+
         this.submitGuesses().subscribe((results) => {
             this.results = results;
             this.phase = 'finished';
         });
-        */
+
     }
 
     private getWords() {
