@@ -267,7 +267,7 @@ namespace WordQuiz.Controllers
             foreach (var guess in guesses)
             {
                 List<Word> words  = wordRepository.GetAllWordsByOriginal(guess.Original);
-              
+
                 
                 
                 if (words != null)
@@ -275,7 +275,7 @@ namespace WordQuiz.Controllers
                     Result r = new Result();
                     r.original = guess.Original;
                     r.guess = guess.Guess;
-                    List<Word> cwords = words.Where(x => x.Translation.Equals( guess.Guess)).ToList();
+                    List<Word> cwords = words.Where(x => x.Translation.ToUpper().Equals(guess.Guess.ToUpper())).ToList();
                     if (cwords == null || cwords.Count==0)
                     {
                         r.correct = false;
