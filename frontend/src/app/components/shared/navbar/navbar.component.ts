@@ -9,10 +9,6 @@ import { Location } from '@angular/common';
     styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-    user: User | undefined;
-    /**
-     *
-     */
     constructor(public authService: AuthService) {}
 
     logout() {
