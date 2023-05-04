@@ -6,7 +6,7 @@ import { AdminTopicDetailsComponent } from './components/admin/topics/admin-topi
 import { AdminTopicsComponent } from './components/admin/topics/admin-topics/admin-topics.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthInterceptor } from '../app/shared/authconfig.interceptor.ts';
+import { AuthInterceptor } from '../app/shared/authconfig.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { GameComponent } from './components/game/game.component';
