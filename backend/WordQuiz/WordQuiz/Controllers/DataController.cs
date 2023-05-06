@@ -80,25 +80,52 @@ namespace WordQuiz.Controllers
         // GET api/data/export/topics
         [HttpGet("export/topics")]
         public async Task<IActionResult> ExportTopics()
-        {/*
-            try
-            {
-                var topics = topicRepository.GetAllTopics();
-                string jsonString = JsonConvert.SerializeObject(topics, Formatting.Indented);
-
-                var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
-                return File(stream, "application/octet-stream", "topics.json");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error exporting topics: {ex.Message}");
-            }*/
+        {
             var topics = topicRepository.GetAllTopics();
             var options = new JsonSerializerOptions { WriteIndented = true };
             var jsonString = System.Text.Json.JsonSerializer.Serialize(topics, options);
 
             return Ok(jsonString);
         }
+
+
+        [HttpPost("import/words")]
+        public async Task<IActionResult> ImportWords([FromForm] IFormFile file)
+        {
+            try
+            {
+                using var reader = new StreamReader(file.OpenReadStream());
+                var jsonString = await reader.ReadToEndAsync();
+                var importedWords = JsonConvert.DeserializeObject<IEnumerable<Word>>(jsonString);
+
+                foreach (var word in importedWords)
+                {
+                    // Check if the word already exists in the database
+                    var existingWordT =  wordRepository.GetWordByTranslation(word.Translation);
+                    var existingWordO =  wordRepository.GetWordByOriginal(word.Original);
+                    if (existingWordT == null && existingWordO==null)
+                    {
+                        // If the word does not exist, add it to the database
+                         wordRepository.CreateWord(word);
+                    }
+                    else
+                    {
+                        // If the word exists, update its data
+                        
+                    }
+                }
+
+                return Ok(new { message = "Words imported successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = $"An error occurred: {ex.Message}" });
+            }
+        }
+
+
+
+
 
 
 
@@ -112,10 +139,7 @@ namespace WordQuiz.Controllers
 
             switch (dataType.ToLower())
             {
-                case "words":
-                    var words = JsonConvert.DeserializeObject<List<Word>>(jsonString);
-                   wordRepository.AddRange(words);
-                    break;
+               
                 case "users":
                     var users = JsonConvert.DeserializeObject<List<Player>>(jsonString);
                     playerRepository.AddRange(users);

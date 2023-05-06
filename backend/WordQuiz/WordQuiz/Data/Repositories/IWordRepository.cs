@@ -21,5 +21,6 @@ namespace WordQuiz.Data.Repositories
         void AddRange(List<Word> words);
 
 
+
     }
 }
