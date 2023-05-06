@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WordQuiz.Migrations
 {
-    public partial class PlayerRole : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -217,17 +217,45 @@ namespace WordQuiz.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1", null, "Admin", "ADMIN" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2", null, "Player", "PLAYER" });
+                values: new object[,]
+                {
+                    { "1", null, "Admin", "ADMIN" },
+                    { "2", null, "Player", "PLAYER" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PlayerName", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "d266f818-d255-4b9f-adbf-c866c68d9609", 0, "3ae80698-3925-4e85-8a68-d5d9d3ec69d6", "Player", "seedplayer@gmail.com", true, false, null, null, "SEEDPLAYER@gmail.com", "AQAAAAEAACcQAAAAEPl/ncIbm2q6kwaGISjyKbdYg8jyVMR8B9jdAYWG+YC8uwFXMsvZ3udsuStZtu3wGQ==", null, false, "SeedPlayer", "02a6400a-0717-445f-988b-dc23b93d000c", false, "seedplayer@gmail.com" });
+                values: new object[] { "00c5f6ce-9c79-4bc7-86a6-1cc0bca0d057", 0, "bb208166-b8a9-4cfd-9ed5-7fb371c5e504", "Player", "seedplayer@gmail.com", true, false, null, null, "SEEDPLAYER@gmail.com", "AQAAAAEAACcQAAAAEKOEf5fZrn1LOzMtIwWGuLzm/d9YFbkVIAC519CE0eNlufwGKizyySbxLeNUAZ4CLA==", null, false, "SeedPlayer", "4655201c-f9c3-4210-ab9e-4947cbe52584", false, "seedplayer@gmail.com" });
+
+            migrationBuilder.InsertData(
+                table: "Topics",
+                columns: new[] { "Id", "Description", "Title" },
+                values: new object[,]
+                {
+                    { "54e6c4e9-dd20-49ad-92c2-901ad3396f11", "A vocabulary aimed to help you avoid embarrassment while going out to eat.", "Food" },
+                    { "693e9275-5a47-4d22-b6bd-bbfc725dbf2a", "Words related to traveling abroad.", "Travel" },
+                    { "868f7280-4d68-44c9-9f4c-1274028e02db", "Learn how to address your or your partner's family at gatherings.", "Family" },
+                    { "92ab9f35-4f55-4b20-a16e-9c885ba87acb", "Become an Oxford level green-thumb with this vocabulary.", "Gardening" },
+                    { "a220a032-2712-4414-8a13-f886a0e9e328", "These words will help you cheer for your favorite team.", "Sports" },
+                    { "cbc07fde-c6ea-4c52-a4f2-83728d5661f1", "Everything you need to know regarding fashion or about simply going shopping for clothes.", "Clothing" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Words",
+                columns: new[] { "Id", "Original", "TopicId", "Translation" },
+                values: new object[,]
+                {
+                    { "2805055b-239e-4d23-b69e-321d8787c817", "Aunt", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagynéni" },
+                    { "30e4656b-9885-4b11-b57f-2a91508c9c73", "Uncle", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagybácsi" },
+                    { "3a4c935c-11c1-4ed5-9b17-018672fcff66", "Mother-in-law", "868f7280-4d68-44c9-9f4c-1274028e02db", "Anyós" },
+                    { "4195b94f-7e17-4766-9b0f-723f1c62751a", "Grandfather", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagypapa" },
+                    { "6440b19a-75ba-4d97-98ba-20bfa7c2b3b8", "Father-in-law", "868f7280-4d68-44c9-9f4c-1274028e02db", "Após" },
+                    { "6c3dcf71-1aef-4a21-90ee-2d82e2730964", "Grandfather", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagyapa" },
+                    { "701983b6-3293-4492-86df-55aafd7bba2d", "Father", "868f7280-4d68-44c9-9f4c-1274028e02db", "Apa" },
+                    { "96b5c21e-0a8a-4268-ba6a-da9e98e05c1e", "Mother", "868f7280-4d68-44c9-9f4c-1274028e02db", "Anya" },
+                    { "e5f39a4d-07e9-4136-ba01-f6dd220ba382", "Grandmother", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagymama" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

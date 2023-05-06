@@ -63,9 +63,20 @@ namespace WordQuiz.Controllers
                 SecurityStamp = Guid.NewGuid().ToString(),
                 PlayerName = model.PlayerName
             };
-            await _userManager.CreateAsync(user, model.Password);
-            await _userManager.AddToRoleAsync(user, "Player");
-            return Ok();
+            // Check the result of the user creation
+            var createUserResult = await _userManager.CreateAsync(user, model.Password);
+
+            if (createUserResult.Succeeded)
+            {
+                // Only add the role if the user was created successfully
+                await _userManager.AddToRoleAsync(user, "Player");
+                return Ok();
+            }
+            else
+            {
+                // Return a meaningful error message if the user creation failed
+                return BadRequest(createUserResult.Errors);
+            }
         }
 
         [HttpPost]

@@ -265,37 +265,37 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            Id = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Description = "Learn how to address your or your partner's family at gatherings.",
                             Title = "Family"
                         },
                         new
                         {
-                            Id = "b329be7a-718b-4b4a-9b7e-fd2f758a39ec",
+                            Id = "a220a032-2712-4414-8a13-f886a0e9e328",
                             Description = "These words will help you cheer for your favorite team.",
                             Title = "Sports"
                         },
                         new
                         {
-                            Id = "5e6a0b8b-61fe-41ed-86f8-a4c6cd8cb4c0",
+                            Id = "92ab9f35-4f55-4b20-a16e-9c885ba87acb",
                             Description = "Become an Oxford level green-thumb with this vocabulary.",
                             Title = "Gardening"
                         },
                         new
                         {
-                            Id = "5186ea84-9fae-49bd-b091-81b858ed8209",
+                            Id = "693e9275-5a47-4d22-b6bd-bbfc725dbf2a",
                             Description = "Words related to traveling abroad.",
                             Title = "Travel"
                         },
                         new
                         {
-                            Id = "e266f8de-4cab-489f-946b-e4ba0030cf00",
+                            Id = "cbc07fde-c6ea-4c52-a4f2-83728d5661f1",
                             Description = "Everything you need to know regarding fashion or about simply going shopping for clothes.",
                             Title = "Clothing"
                         },
                         new
                         {
-                            Id = "01c7e63d-a0bd-4513-bded-f3fa3583b087",
+                            Id = "54e6c4e9-dd20-49ad-92c2-901ad3396f11",
                             Description = "A vocabulary aimed to help you avoid embarrassment while going out to eat.",
                             Title = "Food"
                         });
@@ -328,65 +328,65 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "64df23fc-affa-4f2a-ba05-4a6a33a806f1",
+                            Id = "701983b6-3293-4492-86df-55aafd7bba2d",
                             Original = "Father",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Apa"
                         },
                         new
                         {
-                            Id = "44ca629f-caf9-442c-89f7-0044d813e44d",
+                            Id = "96b5c21e-0a8a-4268-ba6a-da9e98e05c1e",
                             Original = "Mother",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Anya"
                         },
                         new
                         {
-                            Id = "eca96797-769d-4b44-a227-1e7663ab9239",
+                            Id = "2805055b-239e-4d23-b69e-321d8787c817",
                             Original = "Aunt",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Nagynéni"
                         },
                         new
                         {
-                            Id = "68f2fbf1-73b2-410e-a253-078c79963de9",
+                            Id = "30e4656b-9885-4b11-b57f-2a91508c9c73",
                             Original = "Uncle",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Nagybácsi"
                         },
                         new
                         {
-                            Id = "d9500322-ad26-4a19-af78-f2904fdf6458",
+                            Id = "e5f39a4d-07e9-4136-ba01-f6dd220ba382",
                             Original = "Grandmother",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Nagymama"
                         },
                         new
                         {
-                            Id = "4d94613f-7678-4fbe-aa8c-1964aac78e82",
+                            Id = "4195b94f-7e17-4766-9b0f-723f1c62751a",
                             Original = "Grandfather",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Nagypapa"
                         },
                         new
                         {
-                            Id = "0adc971c-135e-49e6-a43d-96788d3fd40c",
+                            Id = "6c3dcf71-1aef-4a21-90ee-2d82e2730964",
                             Original = "Grandfather",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Nagyapa"
                         },
                         new
                         {
-                            Id = "948d4b8c-0f2f-4813-be5c-048bebb94672",
+                            Id = "3a4c935c-11c1-4ed5-9b17-018672fcff66",
                             Original = "Mother-in-law",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Anyós"
                         },
                         new
                         {
-                            Id = "e97b766e-424d-4a9e-8c99-050cc9a0503c",
+                            Id = "6440b19a-75ba-4d97-98ba-20bfa7c2b3b8",
                             Original = "Father-in-law",
-                            TopicId = "e446888d-3e3a-4f72-9675-16b9a864b181",
+                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
                             Translation = "Após"
                         });
                 });
@@ -430,16 +430,16 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f2be584a-90b9-407a-a31c-a50451149bb3",
+                            Id = "00c5f6ce-9c79-4bc7-86a6-1cc0bca0d057",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "02acf529-0552-4249-9059-42dcbe985410",
+                            ConcurrencyStamp = "bb208166-b8a9-4cfd-9ed5-7fb371c5e504",
                             Email = "seedplayer@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SEEDPLAYER@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHVpTewDlnJDmsqPOTaZpA++Ymi7jEMUIKC92OOjt4ei3o/rvYCTfFB1y0zPF7XcKQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKOEf5fZrn1LOzMtIwWGuLzm/d9YFbkVIAC519CE0eNlufwGKizyySbxLeNUAZ4CLA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "084ad8d1-bd2a-4030-a51f-26c18f66c1a3",
+                            SecurityStamp = "4655201c-f9c3-4210-ab9e-4947cbe52584",
                             TwoFactorEnabled = false,
                             UserName = "seedplayer@gmail.com",
                             PlayerName = "SeedPlayer"

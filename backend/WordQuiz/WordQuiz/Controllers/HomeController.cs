@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace WordQuiz.Controllers
 {
+   // [Authorize(Roles = "Player, Admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace WordQuiz.Controllers
 {
+  //  [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
@@ -70,6 +71,7 @@ namespace WordQuiz.Controllers
 
 
         // POST: api/<GameController>/StartGame
+        [Authorize]
         [HttpPost("StartGameNoUserWithTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGame([FromBody] string[] topicIds, int numberOfWords = 10)
         {
@@ -100,7 +102,7 @@ namespace WordQuiz.Controllers
             return Ok(selectedWords.Select(w => w.Original));
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost("StartGameWeighted")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords )
         {

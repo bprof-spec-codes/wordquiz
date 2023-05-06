@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
             .signUp({
                 email: this.registerForm.value.emailAddress!,
                 playerName: this.registerForm.value.displayName!,
-                password: this.registerForm.value.displayName!,
+                password: this.registerForm.value.password!,
             })
             .subscribe(() => {
                 this.router.navigate(['/user/login']);
