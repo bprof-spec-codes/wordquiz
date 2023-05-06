@@ -54,5 +54,11 @@ namespace WordQuiz.Data.Repositories
             return _context.Topics.Include(t => t.Words)
                 .SingleOrDefault(t => t.Title == name);
         }
+
+        public void AddRange(List<Topic> topics)
+        {
+            _context.AddRange(topics);
+            _context.SaveChanges();
+        }
     }
 }

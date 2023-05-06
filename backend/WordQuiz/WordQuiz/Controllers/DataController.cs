@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace WordQuiz.Controllers
 {
@@ -101,6 +103,70 @@ namespace WordQuiz.Controllers
 
 
 
+        // POST api/data/import/{dataType}
+        [HttpPost("import/{dataType}")]
+        public async Task<IActionResult> ImportData(string dataType, [FromForm] IFormFile file)
+        {
+            using var streamReader = new StreamReader(file.OpenReadStream());
+            var jsonString = await streamReader.ReadToEndAsync();
+
+            switch (dataType.ToLower())
+            {
+                case "words":
+                    var words = JsonConvert.DeserializeObject<List<Word>>(jsonString);
+                   wordRepository.AddRange(words);
+                    break;
+                case "users":
+                    var users = JsonConvert.DeserializeObject<List<Player>>(jsonString);
+                    playerRepository.AddRange(users);
+                    break;
+                case "wordstatistics":
+                    var wordStatistics = JsonConvert.DeserializeObject<List<WordStatistic>>(jsonString);
+                    wordStatRepository.AddRange(wordStatistics);
+                    break;
+                default:
+                    return BadRequest("Invalid data type specified.");
+            }
+
+
+            return Ok();
+        }
+
+        // GET api/data/export/{dataType}
+        [HttpGet("export/{dataType}")]
+        public async Task<IActionResult> ExportData(string dataType)
+        {
+            object data;
+
+            switch (dataType.ToLower())
+            {
+                case "words":
+                    data = wordRepository.GetAllWords();
+                    break;
+                case "users":
+                    data = playerRepository.GetAllPlayers();
+                    break;
+                case "wordstatistics":
+                    data = wordStatRepository.GetAll();
+                    break;
+                default:
+                    return BadRequest("Invalid data type specified.");
+            }
+
+
+            //    var words = await wrd.GetAllWords();
+            //    var options = new JsonSerializerOptions { WriteIndented = true };
+            //    var jsonString = System.Text.Json.JsonSerializer.Serialize(words, options);
+
+            //    return Ok(jsonString);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var jsonString = System.Text.Json.JsonSerializer.Serialize(data, options);
+            //var jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
+            var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(jsonString));
+
+            return File(stream, "application/octet-stream", $"{dataType}_export.json");
+        }
 
     }
 }

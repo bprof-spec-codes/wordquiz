@@ -42,5 +42,11 @@ namespace WordQuiz.Data.Repositories
             _context.WordStatistics.Remove(wordStatistic);
              _context.SaveChangesAsync();
         }
+
+        public void AddRange(List<WordStatistic> wordsstatistics)
+        {
+            _context.WordStatistics.AddRange(wordsstatistics);
+            _context.SaveChanges();
+        }
     }
 }

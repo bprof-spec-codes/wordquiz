@@ -70,5 +70,11 @@ namespace WordQuiz.Data.Repositories
         {
             return  _dbContext.Words.Where(w => w.Topic.Id == topicId).ToList();
         }
+
+        public void AddRange(List<Word> words)
+        {
+            _dbContext.AddRange(words);
+            _dbContext.SaveChanges();
+        }
     }
 }

@@ -45,6 +45,12 @@ namespace WordQuiz.Data.Repositories
                 _dbContext.SaveChanges();
             }
         }
+
+        public void AddRange(List<Player> playeres)
+        {
+            _dbContext.AddRange(playeres);
+            _dbContext.SaveChanges ();
+        }
     }
 
 }

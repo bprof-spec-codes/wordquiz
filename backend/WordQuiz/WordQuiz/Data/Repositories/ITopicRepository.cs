@@ -11,5 +11,7 @@ namespace WordQuiz.Data.Repositories
         Topic UpdateTopic(Topic topic);
         Topic GetTopicByName(string name);
 
+        void AddRange(List<Topic> topics);
+
     }
 }

@@ -9,5 +9,6 @@ namespace WordQuiz.Data.Repositories
         IEnumerable<Player> GetAllPlayers();
         Player GetPlayerById(string playerId);
         Player UpdatePlayer(Player player);
+        void AddRange(List<Player> playeres);
     }
 }
