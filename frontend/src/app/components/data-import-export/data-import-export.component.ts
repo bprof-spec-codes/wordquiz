@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
+import { environment } from 'src/environments/environment';
 
 
 
 @Component({
-  selector: 'app-data-import-export',
-  templateUrl: './data-import-export.component.html',
-  styleUrls: ['./data-import-export.component.css']
-})
-export class DataImportExportComponent {
+    selector: 'app-data-import-export',
+    templateUrl: './data-import-export.component.html',
+    styleUrls: ['./data-import-export.component.scss'],
+  })
+export class DataImportExportComponent implements OnInit  {
 
 
     constructor(private http: HttpClient) {}
@@ -26,7 +27,7 @@ export class DataImportExportComponent {
       const formData = new FormData();
       formData.append('file', this.selectedFile, this.selectedFile.name);
 
-      this.http.post(`/api/data/import/${this.selectedDataType}`, formData).subscribe(
+      this.http.post(environment.apiUrl + `data/import/${this.selectedDataType}`, formData).subscribe(
         (res) => {
           console.log(res);
           alert('Data uploaded successfully');
@@ -42,7 +43,7 @@ export class DataImportExportComponent {
   }
 
   downloadData() {
-    this.http.get(`/api/data/export/${this.selectedDataType}`, { responseType: 'blob' }).subscribe(
+    this.http.get( environment.apiUrl +`data/export/${this.selectedDataType}`, { responseType: 'blob' }).subscribe(
       (data) => {
         saveAs(data, `${this.selectedDataType}.json`);
       },
