@@ -9,5 +9,7 @@ namespace WordQuiz.Data.Repositories
         IEnumerable<Topic> GetAllTopics();
         Topic GetTopicById(string id);
         Topic UpdateTopic(Topic topic);
+        Topic GetTopicByName(string name);
+
     }
 }

@@ -12,6 +12,8 @@ import { NgModule } from '@angular/core';
 import { RegisterComponent } from './components/user/register/register.component';
 import { TopicDetailsComponent } from './components/topic/topic-details/topic-details.component';
 import { TopicSelectionComponent } from './components/topic/topic-selection/topic-selection.component';
+import { DataImportExportComponent  } from './components/data-import-export/data-import-export.component';
+
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -43,6 +45,11 @@ const routes: Routes = [
         path: 'admin/topics/:topicId',
         component: AdminTopicDetailsComponent,
         canActivate: [AuthGuard, AdminGuard],
+    },
+    {
+        path: 'data-import-export',
+        component: DataImportExportComponent
+
     },
 ];
 

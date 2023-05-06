@@ -48,5 +48,11 @@ namespace WordQuiz.Data.Repositories
                 _context.SaveChanges();
             }
         }
+
+        public Topic GetTopicByName(string name)
+        {
+            return _context.Topics.Include(t => t.Words)
+                .SingleOrDefault(t => t.Title == name);
+        }
     }
 }
