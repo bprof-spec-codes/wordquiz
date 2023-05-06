@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartDataset, ChartOptions, Color, LabelItem } from 'chart.js';
-import {  BaseChartDirective  } from 'ng2-charts';
-import {  baseColors  } from 'ng2-charts';
+import { ChartDataset, ChartOptions, Color } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { WordStatisticService } from 'src/app/services/word-statistic.service';
 
 @Component({
@@ -11,10 +10,10 @@ import { WordStatisticService } from 'src/app/services/word-statistic.service';
 })
 export class WordStatisticsComponent implements OnInit {
 
-    barChartOptions: ChartOptions = {
+  barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: Color[] = [];
+  barChartLabels: string[] = [];
   barChartType: string = 'bar';
   barChartLegend = true;
   barChartData: ChartDataset[] = [];
@@ -23,16 +22,12 @@ export class WordStatisticsComponent implements OnInit {
 
   ngOnInit(): void {
     this.wordStatisticService.getWordStatistics().subscribe((statistics: any[]) => {
-      this.barChartLabels = statistics.map((stat) => stat.wordName);
+      this.barChartLabels = statistics.map((stat) => stat.word.original);
       console.log(statistics);
       this.barChartData = [
         {
-          data: statistics.map((stat) => stat.correctCount),
-          label: 'Correct',
-        },
-        {
-          data: statistics.map((stat) => stat.wrongCount),
-          label: 'Incorrect',
+          data: statistics.map((stat) => stat.score),
+          label: 'Score',
         },
       ];
     });
