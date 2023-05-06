@@ -77,7 +77,16 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWordStatistic(string id)
         {
-             wrdst.Delete(id);
+            wrdst.Delete(id);
+            return Ok();
+
+        }
+
+        // DELETE api/<WordStatisticController>/5
+        [HttpDelete("/all")]
+        public async Task<IActionResult> DeleteAllWordStatistic()
+        {
+            wrdst.DeleteAll();
             return Ok();
 
         }

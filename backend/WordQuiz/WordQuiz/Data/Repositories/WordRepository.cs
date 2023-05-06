@@ -19,12 +19,12 @@ namespace WordQuiz.Data.Repositories
 
         public Word GetWordById(string wordId)
         {
-            return  _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Id == wordId);
+            return  _dbContext.Words.Include(w => w.Topic).FirstOrDefault(w => w.Id == wordId);
         }
 
         public Word GetWordByOriginal(string wordOriginal)
         {
-            return _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Original == wordOriginal);
+            return _dbContext.Words.Include(w => w.Topic).FirstOrDefault(w => w.Original == wordOriginal);
         }
 
         public List<Word> GetAllWordsByOriginal(string wordOriginal)
@@ -34,7 +34,7 @@ namespace WordQuiz.Data.Repositories
 
         public Word GetWordByTranslation(string wordT)
         {
-            return _dbContext.Words.Include(w => w.Topic).SingleOrDefault(w => w.Translation == wordT);
+            return _dbContext.Words.Include(w => w.Topic).FirstOrDefault(w => w.Translation == wordT);
         }
 
         public List<Word> GetAllWordsByTranslation(string wordT)

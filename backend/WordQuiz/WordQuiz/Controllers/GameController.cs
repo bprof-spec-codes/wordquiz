@@ -256,12 +256,12 @@ namespace WordQuiz.Controllers
             List<Result> results = new List<Result> { };
 
             List<WordStatistic> currentPlayerStats = new List<WordStatistic>();
-            WordStatistic wordStatistic = new WordStatistic();
+           
 
             if (player != null)
             {
                 // Get word statistics for the current player
-                currentPlayerStats = wordStatRepository.GetAll().Where(x => x.Player.PlayerName.Equals(player)).ToList();
+                currentPlayerStats = wordStatRepository.GetAll().Where(x => x.Player.PlayerName.Equals(player.PlayerName)).ToList();
             }
 
 
@@ -308,27 +308,22 @@ namespace WordQuiz.Controllers
                     results.Add(r);
 
 
+                    WordStatistic wordStatistic = new WordStatistic();
 
-
-                    if (currentPlayerStats != null)
+                    if (currentPlayerStats != null && currentPlayerStats.Count > 0)
                     {
                         // Update the word statistics
-                        wordStatistic = currentPlayerStats.FirstOrDefault(ws => ws.Word.Original == r.original);
-
+                        wordStatistic = currentPlayerStats.FirstOrDefault(ws => ws.WordId == wordRepository.GetWordByOriginal(r.original).Id );
                     }
 
-                    if (wordStatistic != null)
+
+                    if (wordStatistic != null && wordStatistic.Player!=null)
                     {
-
-
                         wordStatistic.Score = r.correct ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
                         wordStatRepository.Update(wordStatistic);
                     }
                     else
                     {
-                       
-
-
                         foreach (var w in words)
                         {
                             WordStatistic nwst = new WordStatistic();
@@ -336,14 +331,11 @@ namespace WordQuiz.Controllers
                             nwst.WordId = w.Id;
                             nwst.Word = w;
                             nwst.Player = player;
-                            nwst.Score = 0;
+                            nwst.Score = r.correct ? 1 : -1;
                             wordStatRepository.Add(nwst);
-                            nwst.Score = r.correct ? nwst.Score + 1 : nwst.Score - 1;
-                            wordStatRepository.Update(nwst);
                         }
-
-                      
                     }
+
                 }
             }
 

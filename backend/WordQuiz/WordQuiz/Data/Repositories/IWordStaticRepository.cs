@@ -14,5 +14,7 @@ namespace WordQuiz.Data.Repositories
 
         IEnumerable<WordStatistic> GetUserWordStatistics(string userId);
 
+        void DeleteAll();
+
     }
 }
