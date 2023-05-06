@@ -12,5 +12,7 @@ namespace WordQuiz.Data.Repositories
 
         void AddRange(List<WordStatistic> wordsstatistics);
 
+        IEnumerable<WordStatistic> GetUserWordStatistics(string userId);
+
     }
 }

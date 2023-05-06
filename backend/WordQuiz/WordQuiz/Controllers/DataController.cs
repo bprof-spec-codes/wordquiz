@@ -16,6 +16,8 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace WordQuiz.Controllers
 {
@@ -68,7 +70,7 @@ namespace WordQuiz.Controllers
                     }
                 }
 
-               // await topicRepository.sa();
+                // await topicRepository.sa();
                 return Ok("Topics imported successfully.");
             }
             catch (Exception ex)
@@ -101,17 +103,17 @@ namespace WordQuiz.Controllers
                 foreach (var word in importedWords)
                 {
                     // Check if the word already exists in the database
-                    var existingWordT =  wordRepository.GetWordByTranslation(word.Translation);
-                    var existingWordO =  wordRepository.GetWordByOriginal(word.Original);
-                    if (existingWordT == null && existingWordO==null)
+                    var existingWordT = wordRepository.GetWordByTranslation(word.Translation);
+                    var existingWordO = wordRepository.GetWordByOriginal(word.Original);
+                    if (existingWordT == null && existingWordO == null)
                     {
                         // If the word does not exist, add it to the database
-                         wordRepository.CreateWord(word);
+                        wordRepository.CreateWord(word);
                     }
                     else
                     {
                         // If the word exists, update its data
-                        
+
                     }
                 }
 
@@ -129,7 +131,7 @@ namespace WordQuiz.Controllers
 
 
 
-
+        /*
         // POST api/data/import/{dataType}
         [HttpPost("import/{dataType}")]
         public async Task<IActionResult> ImportData(string dataType, [FromForm] IFormFile file)
@@ -154,7 +156,7 @@ namespace WordQuiz.Controllers
 
 
             return Ok();
-        }
+        }*/
 
         // GET api/data/export/{dataType}
         [HttpGet("export/{dataType}")]
@@ -191,6 +193,21 @@ namespace WordQuiz.Controllers
 
             return File(stream, "application/octet-stream", $"{dataType}_export.json");
         }
+
+
+
+        // GET api/data/user/wordstatistics
+        [HttpGet("user/wordstatistics")]
+        [Authorize]
+        public async Task<IActionResult> GetUserWordStatistics()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var wordStatistics = wordStatRepository.GetUserWordStatistics(userId);
+
+            return Ok(wordStatistics);
+        }
+
 
     }
 }

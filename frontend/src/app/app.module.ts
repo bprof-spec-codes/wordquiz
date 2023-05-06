@@ -28,6 +28,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { WordStatisticsComponent } from './components/word-statistics/word-statistics.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -50,6 +52,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         AdminTopicDetailsComponent,
         AdminTopicAddComponent,
         DataImportExportComponent,
+        WordStatisticsComponent,
     ],
     imports: [
         BrowserModule,
@@ -63,6 +66,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         MatInputModule,
         MatIconModule,
         MatFormFieldModule,
+        NgChartsModule,
     ],
     providers: [
         {
