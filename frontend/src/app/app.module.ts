@@ -22,7 +22,12 @@ import { RouterModule } from '@angular/router';
 import { SecondaryRegionComponent } from './components/shared/secondary-region/secondary-region.component';
 import { TopicDetailsComponent } from './components/topic/topic-details/topic-details.component';
 import { TopicSelectionComponent } from './components/topic/topic-selection/topic-selection.component';
-
+import { DataImportExportComponent  } from './components/data-import-export/data-import-export.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -44,6 +49,7 @@ import { TopicSelectionComponent } from './components/topic/topic-selection/topi
         AdminTopicsComponent,
         AdminTopicDetailsComponent,
         AdminTopicAddComponent,
+        DataImportExportComponent,
     ],
     imports: [
         BrowserModule,
@@ -52,6 +58,11 @@ import { TopicSelectionComponent } from './components/topic/topic-selection/topi
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatInputModule,
+        MatIconModule,
+        MatFormFieldModule,
     ],
     providers: [
         {
@@ -60,6 +71,7 @@ import { TopicSelectionComponent } from './components/topic/topic-selection/topi
             multi: true,
         },
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
+
 })
 export class AppModule {}

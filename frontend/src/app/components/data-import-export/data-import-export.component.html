@@ -1,1 +1,24 @@
-<p>data-import-export works!</p>
+<div class="data-import-export">
+    <h2>Data Import/Export</h2>
+
+    <div>
+      <label for="dataType">Data Type:</label>
+      <select id="dataType" [(ngModel)]="selectedDataType">
+        <option value="topics">Topics</option>
+        <option value="words">Words</option>
+        <option value="users">Users</option>
+        <option value="wordstatistics">Word Statistics</option>
+      </select>
+    </div>
+
+    <div>
+      <h3>Import</h3>
+      <input type="file" (change)="onFileSelected($event)" />
+      <button (click)="uploadData()">Upload</button>
+    </div>
+
+    <div>
+      <h3>Export</h3>
+      <button (click)="downloadData()">Download</button>
+    </div>
+  </div>
