@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WordQuiz.Migrations
 {
-    public partial class init : Migration
+    public partial class seedWords : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -226,19 +226,19 @@ namespace WordQuiz.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PlayerName", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00c5f6ce-9c79-4bc7-86a6-1cc0bca0d057", 0, "bb208166-b8a9-4cfd-9ed5-7fb371c5e504", "Player", "seedplayer@gmail.com", true, false, null, null, "SEEDPLAYER@gmail.com", "AQAAAAEAACcQAAAAEKOEf5fZrn1LOzMtIwWGuLzm/d9YFbkVIAC519CE0eNlufwGKizyySbxLeNUAZ4CLA==", null, false, "SeedPlayer", "4655201c-f9c3-4210-ab9e-4947cbe52584", false, "seedplayer@gmail.com" });
+                values: new object[] { "e05685b5-6e69-4747-a282-d6c4a35f26a5", 0, "f34da1b7-ec61-4e6d-9cde-4ffeebfadba9", "Player", "seedplayer@gmail.com", true, false, null, null, "SEEDPLAYER@gmail.com", "AQAAAAEAACcQAAAAEEAsipOlfrSQEpimSfKVXMmkLnrgEjO4nbK2JlRMyzuAS9gjARM/xKgWV2vlHMZQzw==", null, false, "SeedPlayer", "64e70670-d2ec-4456-bdcd-8fd467a77ad6", false, "seedplayer@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "Topics",
                 columns: new[] { "Id", "Description", "Title" },
                 values: new object[,]
                 {
-                    { "54e6c4e9-dd20-49ad-92c2-901ad3396f11", "A vocabulary aimed to help you avoid embarrassment while going out to eat.", "Food" },
-                    { "693e9275-5a47-4d22-b6bd-bbfc725dbf2a", "Words related to traveling abroad.", "Travel" },
-                    { "868f7280-4d68-44c9-9f4c-1274028e02db", "Learn how to address your or your partner's family at gatherings.", "Family" },
-                    { "92ab9f35-4f55-4b20-a16e-9c885ba87acb", "Become an Oxford level green-thumb with this vocabulary.", "Gardening" },
-                    { "a220a032-2712-4414-8a13-f886a0e9e328", "These words will help you cheer for your favorite team.", "Sports" },
-                    { "cbc07fde-c6ea-4c52-a4f2-83728d5661f1", "Everything you need to know regarding fashion or about simply going shopping for clothes.", "Clothing" }
+                    { "5257a489-8112-47a3-a34d-767d665c25c2", "A vocabulary aimed to help you avoid embarrassment while going out to eat.", "Food" },
+                    { "6f6b38ac-da17-467a-a890-0181abb08965", "Become an Oxford level green-thumb with this vocabulary.", "Gardening" },
+                    { "9749a65a-200d-47fc-9402-bdf3955440b5", "Words related to traveling abroad.", "Travel" },
+                    { "bc508cd2-0db1-4c78-8d08-adfcd201ff51", "Everything you need to know regarding fashion or about simply going shopping for clothes.", "Clothing" },
+                    { "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Learn how to address your or your partner's family at gatherings.", "Family" },
+                    { "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "These words will help you cheer for your favorite team.", "Sports" }
                 });
 
             migrationBuilder.InsertData(
@@ -246,15 +246,33 @@ namespace WordQuiz.Migrations
                 columns: new[] { "Id", "Original", "TopicId", "Translation" },
                 values: new object[,]
                 {
-                    { "2805055b-239e-4d23-b69e-321d8787c817", "Aunt", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagynéni" },
-                    { "30e4656b-9885-4b11-b57f-2a91508c9c73", "Uncle", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagybácsi" },
-                    { "3a4c935c-11c1-4ed5-9b17-018672fcff66", "Mother-in-law", "868f7280-4d68-44c9-9f4c-1274028e02db", "Anyós" },
-                    { "4195b94f-7e17-4766-9b0f-723f1c62751a", "Grandfather", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagypapa" },
-                    { "6440b19a-75ba-4d97-98ba-20bfa7c2b3b8", "Father-in-law", "868f7280-4d68-44c9-9f4c-1274028e02db", "Após" },
-                    { "6c3dcf71-1aef-4a21-90ee-2d82e2730964", "Grandfather", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagyapa" },
-                    { "701983b6-3293-4492-86df-55aafd7bba2d", "Father", "868f7280-4d68-44c9-9f4c-1274028e02db", "Apa" },
-                    { "96b5c21e-0a8a-4268-ba6a-da9e98e05c1e", "Mother", "868f7280-4d68-44c9-9f4c-1274028e02db", "Anya" },
-                    { "e5f39a4d-07e9-4136-ba01-f6dd220ba382", "Grandmother", "868f7280-4d68-44c9-9f4c-1274028e02db", "Nagymama" }
+                    { "14238d69-bcdc-4f2c-9eee-8a02214cceba", "Team", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Csapat" },
+                    { "30bdc2b3-aa79-4fad-8ed4-f0b44b454fd0", "Corn", "5257a489-8112-47a3-a34d-767d665c25c2", "Kukorica" },
+                    { "3b5d99bc-b9b6-4f3e-a64b-4f33f3fae42f", "Peach", "5257a489-8112-47a3-a34d-767d665c25c2", "Barack" },
+                    { "3f31de49-5c4e-4f24-8b99-21387a856dff", "Uncle", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Nagybácsi" },
+                    { "479a54d0-4cf4-4c76-8551-006a1e485af4", "Mother-in-law", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Anyós" },
+                    { "4851bcd0-498c-4bff-871f-d324ab41b7e4", "Father-in-law", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Após" },
+                    { "4a1c36f9-e9a0-4d1c-8dd0-f727b67446d4", "Swimming", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Úszás" },
+                    { "5153d2e3-0c9a-4b2e-91eb-ed1abffcc24a", "Grandmother", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Nagymama" },
+                    { "5c444e98-58e9-4438-a589-08bccf34149e", "Grandfather", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Nagyapa" },
+                    { "608b552d-5134-4bcb-94f6-b2c7dacab8a7", "Opponent", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Ellenfél" },
+                    { "68ff04fc-ff73-42ad-ac6d-8c1664338b17", "Carrot", "5257a489-8112-47a3-a34d-767d665c25c2", "Répa" },
+                    { "6a6f011c-6667-4488-aa58-647c6d810fd5", "Mushroom", "5257a489-8112-47a3-a34d-767d665c25c2", "Gomba" },
+                    { "75a166f5-2952-4201-b4bc-3ee66d3c39a7", "Broccoli", "5257a489-8112-47a3-a34d-767d665c25c2", "Brokkoli" },
+                    { "90ec983e-2c5f-4d22-8c39-3aa44ccc71a0", "Coach", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Edző" },
+                    { "9757a31a-f635-4e51-b86c-d67a021b3a62", "Rope", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Kötél" },
+                    { "9818f431-91ce-48ef-9fed-0878a59f4de2", "Grandfather", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Nagypapa" },
+                    { "9d8227d3-b049-420c-9377-a264fe2c3764", "Finish", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Cél" },
+                    { "a7cb3c50-71a0-42cd-9838-def0a47b10d3", "Mother", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Anya" },
+                    { "a843dc55-b8af-4c4c-a1c6-8e23e546bb88", "Pea", "5257a489-8112-47a3-a34d-767d665c25c2", "Borsó" },
+                    { "beb4c76c-d9fa-4207-9601-29bbc2f86852", "Running", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Futás" },
+                    { "c0a10236-ffdf-44dd-b752-cc5c0a0b36bb", "Stadium", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Stadion" },
+                    { "cac94c6b-4dbc-40a4-b700-69c2cebcd85e", "Rice", "5257a489-8112-47a3-a34d-767d665c25c2", "Rizs" },
+                    { "d1af9757-f0b3-4d3c-b8bd-0e8c07677076", "Lemon", "5257a489-8112-47a3-a34d-767d665c25c2", "Citrom" },
+                    { "d3806da7-8498-47af-bd6c-2f4461305fef", "Bean", "5257a489-8112-47a3-a34d-767d665c25c2", "Bab" },
+                    { "dc20d280-f009-4b27-b052-24cf33e175c9", "Final", "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234", "Döntő" },
+                    { "dc6ced7b-7749-46e1-899d-e725c79a2ece", "Father", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Apa" },
+                    { "fe938b14-1a96-434e-9edb-26e617768ebf", "Aunt", "cfe64dcb-e9a9-471c-a0f4-c97110d900a9", "Nagynéni" }
                 });
 
             migrationBuilder.CreateIndex(

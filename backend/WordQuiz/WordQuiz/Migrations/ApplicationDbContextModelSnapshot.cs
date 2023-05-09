@@ -265,37 +265,37 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            Id = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Description = "Learn how to address your or your partner's family at gatherings.",
                             Title = "Family"
                         },
                         new
                         {
-                            Id = "a220a032-2712-4414-8a13-f886a0e9e328",
+                            Id = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
                             Description = "These words will help you cheer for your favorite team.",
                             Title = "Sports"
                         },
                         new
                         {
-                            Id = "92ab9f35-4f55-4b20-a16e-9c885ba87acb",
+                            Id = "6f6b38ac-da17-467a-a890-0181abb08965",
                             Description = "Become an Oxford level green-thumb with this vocabulary.",
                             Title = "Gardening"
                         },
                         new
                         {
-                            Id = "693e9275-5a47-4d22-b6bd-bbfc725dbf2a",
+                            Id = "9749a65a-200d-47fc-9402-bdf3955440b5",
                             Description = "Words related to traveling abroad.",
                             Title = "Travel"
                         },
                         new
                         {
-                            Id = "cbc07fde-c6ea-4c52-a4f2-83728d5661f1",
+                            Id = "bc508cd2-0db1-4c78-8d08-adfcd201ff51",
                             Description = "Everything you need to know regarding fashion or about simply going shopping for clothes.",
                             Title = "Clothing"
                         },
                         new
                         {
-                            Id = "54e6c4e9-dd20-49ad-92c2-901ad3396f11",
+                            Id = "5257a489-8112-47a3-a34d-767d665c25c2",
                             Description = "A vocabulary aimed to help you avoid embarrassment while going out to eat.",
                             Title = "Food"
                         });
@@ -328,66 +328,192 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "701983b6-3293-4492-86df-55aafd7bba2d",
+                            Id = "dc6ced7b-7749-46e1-899d-e725c79a2ece",
                             Original = "Father",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Apa"
                         },
                         new
                         {
-                            Id = "96b5c21e-0a8a-4268-ba6a-da9e98e05c1e",
+                            Id = "a7cb3c50-71a0-42cd-9838-def0a47b10d3",
                             Original = "Mother",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Anya"
                         },
                         new
                         {
-                            Id = "2805055b-239e-4d23-b69e-321d8787c817",
+                            Id = "fe938b14-1a96-434e-9edb-26e617768ebf",
                             Original = "Aunt",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Nagynéni"
                         },
                         new
                         {
-                            Id = "30e4656b-9885-4b11-b57f-2a91508c9c73",
+                            Id = "3f31de49-5c4e-4f24-8b99-21387a856dff",
                             Original = "Uncle",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Nagybácsi"
                         },
                         new
                         {
-                            Id = "e5f39a4d-07e9-4136-ba01-f6dd220ba382",
+                            Id = "5153d2e3-0c9a-4b2e-91eb-ed1abffcc24a",
                             Original = "Grandmother",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Nagymama"
                         },
                         new
                         {
-                            Id = "4195b94f-7e17-4766-9b0f-723f1c62751a",
+                            Id = "9818f431-91ce-48ef-9fed-0878a59f4de2",
                             Original = "Grandfather",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Nagypapa"
                         },
                         new
                         {
-                            Id = "6c3dcf71-1aef-4a21-90ee-2d82e2730964",
+                            Id = "5c444e98-58e9-4438-a589-08bccf34149e",
                             Original = "Grandfather",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Nagyapa"
                         },
                         new
                         {
-                            Id = "3a4c935c-11c1-4ed5-9b17-018672fcff66",
+                            Id = "479a54d0-4cf4-4c76-8551-006a1e485af4",
                             Original = "Mother-in-law",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Anyós"
                         },
                         new
                         {
-                            Id = "6440b19a-75ba-4d97-98ba-20bfa7c2b3b8",
+                            Id = "4851bcd0-498c-4bff-871f-d324ab41b7e4",
                             Original = "Father-in-law",
-                            TopicId = "868f7280-4d68-44c9-9f4c-1274028e02db",
+                            TopicId = "cfe64dcb-e9a9-471c-a0f4-c97110d900a9",
                             Translation = "Após"
+                        },
+                        new
+                        {
+                            Id = "14238d69-bcdc-4f2c-9eee-8a02214cceba",
+                            Original = "Team",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Csapat"
+                        },
+                        new
+                        {
+                            Id = "608b552d-5134-4bcb-94f6-b2c7dacab8a7",
+                            Original = "Opponent",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Ellenfél"
+                        },
+                        new
+                        {
+                            Id = "c0a10236-ffdf-44dd-b752-cc5c0a0b36bb",
+                            Original = "Stadium",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Stadion"
+                        },
+                        new
+                        {
+                            Id = "beb4c76c-d9fa-4207-9601-29bbc2f86852",
+                            Original = "Running",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Futás"
+                        },
+                        new
+                        {
+                            Id = "9d8227d3-b049-420c-9377-a264fe2c3764",
+                            Original = "Finish",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Cél"
+                        },
+                        new
+                        {
+                            Id = "4a1c36f9-e9a0-4d1c-8dd0-f727b67446d4",
+                            Original = "Swimming",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Úszás"
+                        },
+                        new
+                        {
+                            Id = "9757a31a-f635-4e51-b86c-d67a021b3a62",
+                            Original = "Rope",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Kötél"
+                        },
+                        new
+                        {
+                            Id = "90ec983e-2c5f-4d22-8c39-3aa44ccc71a0",
+                            Original = "Coach",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Edző"
+                        },
+                        new
+                        {
+                            Id = "dc20d280-f009-4b27-b052-24cf33e175c9",
+                            Original = "Final",
+                            TopicId = "e4f8cb9d-d365-4cc5-80e4-9a3a003e8234",
+                            Translation = "Döntő"
+                        },
+                        new
+                        {
+                            Id = "d1af9757-f0b3-4d3c-b8bd-0e8c07677076",
+                            Original = "Lemon",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Citrom"
+                        },
+                        new
+                        {
+                            Id = "3b5d99bc-b9b6-4f3e-a64b-4f33f3fae42f",
+                            Original = "Peach",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Barack"
+                        },
+                        new
+                        {
+                            Id = "d3806da7-8498-47af-bd6c-2f4461305fef",
+                            Original = "Bean",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Bab"
+                        },
+                        new
+                        {
+                            Id = "a843dc55-b8af-4c4c-a1c6-8e23e546bb88",
+                            Original = "Pea",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Borsó"
+                        },
+                        new
+                        {
+                            Id = "75a166f5-2952-4201-b4bc-3ee66d3c39a7",
+                            Original = "Broccoli",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Brokkoli"
+                        },
+                        new
+                        {
+                            Id = "30bdc2b3-aa79-4fad-8ed4-f0b44b454fd0",
+                            Original = "Corn",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Kukorica"
+                        },
+                        new
+                        {
+                            Id = "cac94c6b-4dbc-40a4-b700-69c2cebcd85e",
+                            Original = "Rice",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Rizs"
+                        },
+                        new
+                        {
+                            Id = "6a6f011c-6667-4488-aa58-647c6d810fd5",
+                            Original = "Mushroom",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Gomba"
+                        },
+                        new
+                        {
+                            Id = "68ff04fc-ff73-42ad-ac6d-8c1664338b17",
+                            Original = "Carrot",
+                            TopicId = "5257a489-8112-47a3-a34d-767d665c25c2",
+                            Translation = "Répa"
                         });
                 });
 
@@ -430,16 +556,16 @@ namespace WordQuiz.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "00c5f6ce-9c79-4bc7-86a6-1cc0bca0d057",
+                            Id = "e05685b5-6e69-4747-a282-d6c4a35f26a5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bb208166-b8a9-4cfd-9ed5-7fb371c5e504",
+                            ConcurrencyStamp = "f34da1b7-ec61-4e6d-9cde-4ffeebfadba9",
                             Email = "seedplayer@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SEEDPLAYER@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKOEf5fZrn1LOzMtIwWGuLzm/d9YFbkVIAC519CE0eNlufwGKizyySbxLeNUAZ4CLA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEAsipOlfrSQEpimSfKVXMmkLnrgEjO4nbK2JlRMyzuAS9gjARM/xKgWV2vlHMZQzw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4655201c-f9c3-4210-ab9e-4947cbe52584",
+                            SecurityStamp = "64e70670-d2ec-4456-bdcd-8fd467a77ad6",
                             TwoFactorEnabled = false,
                             UserName = "seedplayer@gmail.com",
                             PlayerName = "SeedPlayer"
