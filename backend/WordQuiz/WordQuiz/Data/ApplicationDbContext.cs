@@ -73,6 +73,19 @@ namespace WordQuiz.Data
                 new Word() { Original = "Father-in-law", Translation = "Após", TopicId = family.Id }
             );
 
+            builder.Entity<Word>().HasData(
+                /* Sport */
+                new Word() { Original = "Team", Translation = "Csapat", TopicId = sports.Id },
+                new Word() { Original = "Opponent", Translation = "Ellenfél", TopicId = sports.Id },
+                new Word() { Original = "Stadium", Translation = "Stadion", TopicId = sports.Id },
+                new Word() { Original = "Running", Translation = "Futás", TopicId = sports.Id },
+                new Word() { Original = "Finish", Translation = "Cél", TopicId = sports.Id },
+                new Word() { Original = "Swimming", Translation = "Úszás", TopicId = sports.Id },
+                new Word() { Original = "Rope", Translation = "Kötél", TopicId = sports.Id },
+                new Word() { Original = "Coach", Translation = "Edző", TopicId = sports.Id },
+                new Word() { Original = "Final", Translation = "Döntő", TopicId = sports.Id }
+            );
+
             base.OnModelCreating(builder);
         }
     }
