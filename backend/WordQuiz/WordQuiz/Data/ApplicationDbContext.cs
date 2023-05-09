@@ -86,6 +86,19 @@ namespace WordQuiz.Data
                 new Word() { Original = "Final", Translation = "Döntő", TopicId = sports.Id }
             );
 
+            builder.Entity<Word>().HasData(
+                /* Food */
+                new Word() { Original = "Lemon", Translation = "Citrom", TopicId = food.Id },
+                new Word() { Original = "Peach", Translation = "Barack", TopicId = food.Id },
+                new Word() { Original = "Bean", Translation = "Bab", TopicId = food.Id },
+                new Word() { Original = "Pea", Translation = "Borsó", TopicId = food.Id },
+                new Word() { Original = "Broccoli", Translation = "Brokkoli", TopicId = food.Id },
+                new Word() { Original = "Corn", Translation = "Kukorica", TopicId = food.Id },
+                new Word() { Original = "Rice", Translation = "Rizs", TopicId = food.Id },
+                new Word() { Original = "Mushroom", Translation = "Gomba", TopicId = food.Id },
+                new Word() { Original = "Carrot", Translation = "Répa", TopicId = food.Id }
+            );
+
             base.OnModelCreating(builder);
         }
     }
