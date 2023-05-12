@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class WordStatisticService {
-  private apiUrl = environment.apiUrl;
+    private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
-  getWordStatistics(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}data/user/wordstatistics`);
-  }
+    getWordStatistics(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}data/user/wordstatistics`);
+    }
 }
