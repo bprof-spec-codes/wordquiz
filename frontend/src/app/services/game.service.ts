@@ -14,6 +14,10 @@ export type GuessResults = GuessResult[];
 
 type ApiGuesses = { original: string; guess: string }[];
 
+type WordObject = {
+    id: string;
+    word: string;
+};
 @Injectable({
     providedIn: 'root',
 })
@@ -28,7 +32,7 @@ export class GameService {
     topic!: Topic | undefined;
 
     /** The words provided by the API */
-    words!: string[];
+    words!: WordObject[];
 
     /** The guesses entered by the user. */
     guesses!: string[];
@@ -123,21 +127,21 @@ export class GameService {
             this.endGame();
         } else this.timeRemaining = Math.max(0, this.timeRemaining - 1);
     }
-
     private submitGuesses() {
         if (this.topic == undefined || this.words.length === 0)
             throw new Error('Something went wrong.');
-
-        const guessesToApi: ApiGuesses = this.words.map((word, idx) => {
-            return { original: word, guess: this.guesses[idx] };
+    
+        const guessesToApi: ApiGuesses = this.words.map((wordObject, idx) => {
+            return { WordId: wordObject.id, original: wordObject.word, guess: this.guesses[idx] };
         });
-
+    
         const headers = { 'Content-Type': 'application/json' };
-
+    
         return this.http.post<GuessResults>(
             environment.apiUrl + 'Game/EndGame',
             guessesToApi,
             { headers }
         );
     }
+    
 }
