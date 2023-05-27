@@ -125,7 +125,7 @@ namespace WordQuiz.Logics
         {
             foreach (var guess in guesses)
             {
-                var word = await wordRepository.GetWordByIdAsync(guess.WordId);
+                var word = await wordRepository.GetWordByIdAsync(guess.Original);
                 if (word == null)
                 {
                     continue;
