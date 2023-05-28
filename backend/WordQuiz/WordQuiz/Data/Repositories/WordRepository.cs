@@ -76,26 +76,5 @@ namespace WordQuiz.Data.Repositories
             _dbContext.AddRange(words);
             _dbContext.SaveChanges();
         }
-
-        public async Task<List<Word>> GetWordsByTopicIdAsync(string topicId)
-        {
-            return await _dbContext.Words
-                .Where(w => w.Topic.Id == topicId)
-                .ToListAsync();
-        }
-
-        public async Task<Word> GetWordByIdAsync(string wordId)
-        {
-            return await _dbContext.Words
-                .Include(w => w.Topic)
-                .FirstOrDefaultAsync(w => w.Id == wordId);
-        }
-
-
-        public async Task SaveChangesAsync()
-        {
-            await _dbContext.SaveChangesAsync();
-        }
-
     }
 }

@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace WordQuiz.Controllers
 {
-    //  [Authorize(Roles = "Player, Admin")]
+  //  [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
@@ -36,10 +36,10 @@ namespace WordQuiz.Controllers
         [HttpPost("StartGameNoUserNoTopic")]
         public async Task<ActionResult<IEnumerable<Word>>> StartGameNoTopic(int numberOfWords = 10)
         {
-            List<Word> words = (List<Word>)wordRepository.GetAllWords();
+            List<Word> words = (List<Word>) wordRepository.GetAllWords();
 
 
-
+       
 
             // Group words by their Original property and select one word from each group
             var distinctWords = words.GroupBy(w => w.Original).Select(g => g.First()).ToList();
@@ -79,7 +79,7 @@ namespace WordQuiz.Controllers
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
             {
-                var words = wordRepository.GetWordsByTopicId(topicId);
+                var words =  wordRepository.GetWordsByTopicId(topicId);
                 wordsFromTopics.AddRange(words);
             }
 
@@ -104,9 +104,9 @@ namespace WordQuiz.Controllers
 
         [Authorize]
         [HttpPost("StartGameWeighted")]
-        public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords)
+        public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted([FromBody] List<string> topicIds, int numberOfWords )
         {
-            if (numberOfWords == 0 || numberOfWords == null)
+            if (numberOfWords ==0 || numberOfWords==null )
             {
                 numberOfWords = 10;
             }
@@ -117,7 +117,7 @@ namespace WordQuiz.Controllers
             var wordsFromTopics = new List<Word>();
             foreach (var topicId in topicIds)
             {
-                var words = wordRepository.GetWordsByTopicId(topicId);
+                var words =  wordRepository.GetWordsByTopicId(topicId);
                 wordsFromTopics.AddRange(words);
             }
 
@@ -245,18 +245,18 @@ namespace WordQuiz.Controllers
             return results;
         }
         */
-
+       
         // POST: api/<GameController>/end
         [HttpPost("EndGame")]
         public IEnumerable<Result> EndGame(List<GuessInput> guesses)
-        {
+        { 
             string playerid = userManager.GetUserId(User);
             Player player = playerRepository.GetPlayerById(playerid);
 
             List<Result> results = new List<Result> { };
 
             List<WordStatistic> currentPlayerStats = new List<WordStatistic>();
-
+           
 
             if (player != null)
             {
@@ -268,17 +268,17 @@ namespace WordQuiz.Controllers
 
             foreach (var guess in guesses)
             {
-                List<Word> words = wordRepository.GetAllWordsByOriginal(guess.Original);
+                List<Word> words  = wordRepository.GetAllWordsByOriginal(guess.Original);
 
-
-
+                
+                
                 if (words != null)
                 {
                     Result r = new Result();
                     r.original = guess.Original;
                     r.guess = guess.Guess;
                     List<Word> cwords = words.Where(x => x.Translation.ToUpper().Equals(guess.Guess.ToUpper())).ToList();
-                    if (cwords == null || cwords.Count == 0)
+                    if (cwords == null || cwords.Count==0)
                     {
                         r.correct = false;
 
@@ -313,11 +313,11 @@ namespace WordQuiz.Controllers
                     if (currentPlayerStats != null && currentPlayerStats.Count > 0)
                     {
                         // Update the word statistics
-                        wordStatistic = currentPlayerStats.FirstOrDefault(ws => ws.WordId == wordRepository.GetWordByOriginal(r.original).Id);
+                        wordStatistic = currentPlayerStats.FirstOrDefault(ws => ws.WordId == wordRepository.GetWordByOriginal(r.original).Id );
                     }
 
 
-                    if (wordStatistic != null && wordStatistic.Player != null)
+                    if (wordStatistic != null && wordStatistic.Player!=null)
                     {
                         wordStatistic.Score = r.correct ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
                         wordStatRepository.Update(wordStatistic);

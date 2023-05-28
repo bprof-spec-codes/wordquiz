@@ -21,8 +21,6 @@ namespace WordQuiz.Data.Repositories
         void AddRange(List<Word> words);
 
 
-        Task<List<Word>> GetWordsByTopicIdAsync(string topicId);
-        Task<Word> GetWordByIdAsync(string wordId);
-        Task SaveChangesAsync();
+
     }
 }

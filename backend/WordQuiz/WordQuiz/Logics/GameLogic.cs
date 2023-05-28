@@ -13,27 +13,27 @@ namespace WordQuiz.Logics
 
 
 
-        public async Task<List<Word>> selectedWordsNotopicAsync(IWordRepository wrd, int numberOfWords = 10)
-        {
-
-
-            List<Word> words = (List<Word>)wrd.GetAllWords();
-
-
-            numberOfWords = Math.Min(numberOfWords, words.Count);
-
-            // Select random words from the wordsFromTopics list
-            var random = new Random();
-            List<Word> selectedWords = new List<Word>();
-            for (int i = 0; i < numberOfWords; i++)
+              public async Task<List<Word>> selectedWordsNotopicAsync(IWordRepository wrd, int numberOfWords = 10)
             {
-                int randomIndex = random.Next(0, words.Count);
-                selectedWords.Add(words[randomIndex]);
-                words.RemoveAt(randomIndex);
-            }
 
-            return (List<Word>)selectedWords.Select(w => w.Original);
-        }
+
+                List<Word> words = (List<Word>) wrd.GetAllWords();
+
+
+                  numberOfWords = Math.Min(numberOfWords, words.Count);
+
+                // Select random words from the wordsFromTopics list
+                var random = new Random();
+                List<Word> selectedWords = new List<Word>();
+                for (int i = 0; i < numberOfWords; i++)
+                {
+                    int randomIndex = random.Next(0, words.Count);
+                    selectedWords.Add(words[randomIndex]);
+                    words.RemoveAt(randomIndex);
+                }
+
+                return (List<Word>)selectedWords.Select(w => w.Original);
+            }
 
 
         /*
@@ -146,8 +146,9 @@ namespace WordQuiz.Logics
 
                 return Ok(results);
             }*/
-
+        
     }
 
 
 }
+
