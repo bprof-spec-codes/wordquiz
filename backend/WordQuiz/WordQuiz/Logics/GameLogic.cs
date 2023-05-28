@@ -1,159 +1,153 @@
-﻿using WordQuiz.Data.Repositories;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using WordQuiz.Data.Repositories;
 using WordQuiz.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System;
 
 namespace WordQuiz.Logics
 {
     public class GameLogic
     {
-        public List<Word> SelectWordsWithoutTopic(List<Word> words, int numberOfWords)
+
+        public GameLogic() { }
+
+
+
+        public async Task<List<Word>> selectedWordsNotopicAsync(IWordRepository wrd, int numberOfWords = 10)
         {
-            var distinctWords = words.GroupBy(w => w.Original).Select(g => g.First()).ToList();
 
-            numberOfWords = Math.Min(numberOfWords, distinctWords.Count);
 
+            List<Word> words = (List<Word>)wrd.GetAllWords();
+
+
+            numberOfWords = Math.Min(numberOfWords, words.Count);
+
+            // Select random words from the wordsFromTopics list
             var random = new Random();
-            var selectedWords = new List<Word>();
-
-            while (selectedWords.Count < numberOfWords)
+            List<Word> selectedWords = new List<Word>();
+            for (int i = 0; i < numberOfWords; i++)
             {
-                var randomIndex = random.Next(distinctWords.Count);
-                var word = distinctWords[randomIndex];
-                selectedWords.Add(word);
-                distinctWords.RemoveAt(randomIndex);
+                int randomIndex = random.Next(0, words.Count);
+                selectedWords.Add(words[randomIndex]);
+                words.RemoveAt(randomIndex);
             }
 
-            return selectedWords;
+            return (List<Word>)selectedWords.Select(w => w.Original);
         }
 
-        public async Task<List<Word>> GetWordsFromTopics(IWordRepository wordRepository, string[] topicIds)
-        {
-            var wordsFromTopics = new List<Word>();
 
-            foreach (var topicId in topicIds)
+        /*
+            public async Task<ActionResult<IEnumerable<Word>>> StartGame( string[] topicIds, int numberOfWords = 10)
             {
-                var words = await wordRepository.GetWordsByTopicIdAsync(topicId);
-                wordsFromTopics.AddRange(words);
-            }
 
-            return wordsFromTopics;
-        }
 
-        public List<Word> SelectWordsFromTopics(List<Word> wordsFromTopics, int numberOfWords)
-        {
-            var distinctWords = wordsFromTopics.GroupBy(w => w.Original).Select(g => g.First()).ToList();
 
-            numberOfWords = Math.Min(numberOfWords, distinctWords.Count);
-
-            var random = new Random();
-            var selectedWords = new List<Word>();
-
-            while (selectedWords.Count < numberOfWords)
-            {
-                var randomIndex = random.Next(distinctWords.Count);
-                var word = distinctWords[randomIndex];
-                selectedWords.Add(word);
-                distinctWords.RemoveAt(randomIndex);
-            }
-
-            return selectedWords;
-        }
-
-        public List<Word> SelectWeightedWords(List<Word> wordsFromTopics, int numberOfWords, PlayerStatistics currentPlayerStats)
-        {
-            var distinctWords = wordsFromTopics.GroupBy(w => w.Original).Select(g => g.First()).ToList();
-            var weightedWords = GetWeightedWords(distinctWords, currentPlayerStats);
-
-            numberOfWords = Math.Min(numberOfWords, weightedWords.Count);
-
-            var random = new Random();
-            var selectedWords = new List<Word>();
-
-            while (selectedWords.Count < numberOfWords)
-            {
-                var randomIndex = random.Next(weightedWords.Count);
-                var word = weightedWords[randomIndex];
-                selectedWords.Add(word);
-                weightedWords.RemoveAt(randomIndex);
-            }
-
-            return selectedWords;
-        }
-
-        public List<Word> GetWeightedWords(List<Word> words, PlayerStatistics currentPlayerStats)
-        {
-            var weightedWords = new List<Word>();
-
-            foreach (var word in words)
-            {
-                var wordStat = currentPlayerStats.WordStatistics.FirstOrDefault(ws => ws.WordId == word.Id);
-
-                if (wordStat != null)
+                // Get words from the provided topics
+                var wordsFromTopics = new List<Word>();
+                foreach (var topicId in topicIds)
                 {
-                    var correctGuesses = wordStat.CorrectGuesses;
-                    var incorrectGuesses = wordStat.IncorrectGuesses;
+                    var words = await wrd.GetWordsByTopicIdAsync(topicId);
+                    wordsFromTopics.AddRange(words);
+                }
 
-                    var weight = CalculateWeight(correctGuesses, incorrectGuesses);
-                    for (var i = 0; i < weight; i++)
+                numberOfWords = Math.Min(numberOfWords, wordsFromTopics.Count);
+
+                // Select random words from the wordsFromTopics list
+                var random = new Random();
+                var selectedWords = new List<Word>();
+                for (int i = 0; i < numberOfWords; i++)
+                {
+                    int randomIndex = random.Next(0, wordsFromTopics.Count);
+                    selectedWords.Add(wordsFromTopics[randomIndex]);
+                    wordsFromTopics.RemoveAt(randomIndex);
+                }
+
+                return Ok(selectedWords.Select(w => w.Original));
+            }
+
+
+
+
+
+
+            public async Task<ActionResult<IEnumerable<Word>>> StartGameWeighted( List<string> topicIds, int numberOfWords = 10)
+            {
+
+                var player = await userManager.GetUserAsync(User);
+                if (player == null)
+                {
+                    return Unauthorized();
+                }
+
+                // Get words from the provided topics
+                var wordsFromTopics = new List<Word>();
+                foreach (var topicId in topicIds)
+                {
+                    var words = await wrd.GetWordsByTopicIdAsync(topicId);
+                    wordsFromTopics.AddRange(words);
+                }
+
+                numberOfWords = Math.Min(numberOfWords, wordsFromTopics.Count);
+
+                // Get word statistics for the current player
+                var currentPlayerStats = wrdst.GetAllAsync().Result.Where(x => x.Player.PlayerName.Equals(player));
+
+                // Calculate the total weight of all the words
+                int totalWeight = currentPlayerStats.Sum(w => w.Score);
+
+                // Select random words from the wordsFromTopics list based on the weight
+                var random = new Random();
+                var selectedWords = new List<Word>();
+                for (int i = 0; i < numberOfWords; i++)
+                {
+                    int randomNumber = random.Next(1, totalWeight + 1);
+                    int cumulativeWeight = 0;
+
+                    foreach (var word in wordsFromTopics)
                     {
-                        weightedWords.Add(word);
+                        var wordStat = currentPlayerStats.FirstOrDefault(ws => ws.Word.Id == word.Id);
+                        int wordWeight = wordStat != null ? wordStat.Score : 0;
+                        cumulativeWeight += wordWeight;
+
+                        if (randomNumber <= cumulativeWeight)
+                        {
+                            selectedWords.Add(word);
+                            wordsFromTopics.Remove(word);
+                            totalWeight -= wordWeight;
+                            break;
+                        }
                     }
                 }
+
+                return Ok(selectedWords.Select(w => w.Original));
             }
 
-            return weightedWords;
-        }
-
-        public int CalculateWeight(int correctGuesses, int incorrectGuesses)
-        {
-            var weight = 1;
-            var totalGuesses = correctGuesses + incorrectGuesses;
-
-            if (totalGuesses > 0)
+           
+            public async Task<ActionResult<Dictionary<string, bool>>> EndGame( Dictionary<string, string> guesses)
             {
-                var successRate = (double)correctGuesses / totalGuesses;
-                weight = (int)Math.Ceiling(1 / successRate);
-            }
+                Dictionary<string, bool> results = new Dictionary<string, bool>();
 
-            return weight;
-        }
-
-        public async Task UpdatePlayerStatistics(IWordRepository wordRepository, PlayerStatistics currentPlayerStats, List<GuessInput> guesses)
-        {
-            foreach (var guess in guesses)
-            {
-                var word = await wordRepository.GetWordByIdAsync(guess.Original);
-                if (word == null)
+                foreach (var guess in guesses)
                 {
-                    continue;
-                }
-
-                var wordStat = currentPlayerStats.WordStatistics.FirstOrDefault(ws => ws.WordId == word.Id);
-                if (wordStat == null)
-                {
-                    wordStat = new WordStatistic
+                    var word = await wrd.GetWordById(guess.Key);
+                    if (word != null)
                     {
-                        WordId = word.Id,
-                        CorrectGuesses = 0,
-                        IncorrectGuesses = 0
-                    };
-                    currentPlayerStats.WordStatistics.Add(wordStat);
+                        results.Add(guess.Key, word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase));
+
+                        // Update the word statistics
+                        var wordStatistic = await wrdst.GetByIdAsync(guess.Key);
+                        if (wordStatistic != null)
+                        {
+                            wordStatistic.Score = results[guess.Key] ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
+                            await wrdst.UpdateAsync(wordStatistic);
+                        }
+                    }
                 }
 
-                if (guess.IsCorrect)
-                {
-                    wordStat.CorrectGuesses++;
-                }
-                else
-                {
-                    wordStat.IncorrectGuesses++;
-                }
-            }
+                return Ok(results);
+            }*/
 
-            await wordRepository.SaveChangesAsync();
-        }
     }
+
+
 }
