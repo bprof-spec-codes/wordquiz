@@ -15,7 +15,6 @@ Features
 User authentication and authorization using JWT tokens
 CRUD operations for words, word statistics, and topics
 Fetch random words based on player's statistics and selected topics
-SignalR integration for real-time communication
 
 Prerequisites
 .NET SDK 6.0 or later
@@ -59,7 +58,6 @@ ASP.NET Core RESTful API
 Entity Framework Core for database access
 SQL Server or any other supported relational database
 JWT tokens for authentication
-SignalR for real-time communication
 
  Word Quiz API:
  
