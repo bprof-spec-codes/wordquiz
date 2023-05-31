@@ -60,12 +60,6 @@ namespace WordQuiz.Controllers
 
             return Ok(selectedWords.Select(w => w.Original));
 
-            /*
-            List<Word> selected = await gameLogic.selectedWordsNotopicAsync(wrd, numberOfWords);
-
-            // return Ok(await gameLogic.selectedWordsNotopicAsync(wrd));
-
-            return Ok(selected);*/
         }
 
 
@@ -174,78 +168,7 @@ namespace WordQuiz.Controllers
             return Ok(selectedWords.Select(w => w.Original));
 
         }
-        /*
-        // POST: api/<GameController>/end
-        [HttpPost("EndGame")]
-        public  IEnumerable<Result> EndGame( Dictionary<string, string> guesses)
-        {
-            string playerid =  userManager.GetUserId(User);
-            Player player = playerRepository.GetPlayerById(playerid);
-
-            List<Result> results = new List<Result> { };
-
-            List<WordStatistic> currentPlayerStats = new List<WordStatistic>();
-            WordStatistic wordStatistic = new WordStatistic();
-
-            if (player!=null)
-            {
-                // Get word statistics for the current player
-                 currentPlayerStats = wordStatRepository.GetAll().Where(x => x.Player.PlayerName.Equals(player)).ToList();
-            }
-           
-
-
-            foreach (var guess in guesses)
-            {
-                var word =  wordRepository.GetWordByOriginal(guess.Key);
-                if (word != null)
-                {
-                    Result r = new Result();
-                    r.original = guess.Key;
-                    r.guess = guess.Value;
-                    r.correct = word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase);
-
-                    r.translations = new List<string>();
-
-
-                    List<Word> twords = wordRepository.GetAllWordsByOriginal(r.original);
-
-                    foreach (var w in twords)
-                    {
-
-                        r.translations.Add(w.Translation);
-
-
-                    }
-
-                    results.Add(r);
-
-
-
-
-                    if (currentPlayerStats!=null)
-                    {
-                        // Update the word statistics
-                         wordStatistic = currentPlayerStats.FirstOrDefault(ws => ws.Word.Original == r.original);
-                    }
-              
-                    if (wordStatistic != null)
-                    {
-                        
-
-                        wordStatistic.Score = r.correct ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
-                         wordStatRepository.Update(wordStatistic);
-                    }
-                }
-            }
-
-            // Convert the dictionary to a JSON object
-           // JObject resultJson = JObject.FromObject(results);
-
-            return results;
-        }
-        */
-       
+        
         // POST: api/<GameController>/end
         [HttpPost("EndGame")]
         public IEnumerable<Result> EndGame(List<GuessInput> guesses)
@@ -338,64 +261,7 @@ namespace WordQuiz.Controllers
 
                 }
             }
-
-            // Convert the dictionary to a JSON object
-            // JObject resultJson = JObject.FromObject(results);
-
             return results;
         }
-        /*
-
-        // POST: api/<GameController>/end
-        [HttpPost("endWordString")]
-        public async Task<ActionResult<Dictionary<string, bool>>> EndGameNoPlayer([FromBody] Dictionary<Word, string> guesses)
-        {
-            List<Result> results = new List<Result> { };
-
-            foreach (var guess in guesses)
-            {
-                var word =  wordRepository.GetWordByOriginal(guess.Key.Original);
-                if (word != null)
-                {
-                    Result r = new Result();
-                    r.original = guess.Key.Original;
-                    r.guess = guess.Value;
-                    r.correct = word.Translation.Equals(guess.Value, StringComparison.OrdinalIgnoreCase);
-
-
-
-
-                    List<Word> twords = wordRepository.GetAllWordsByOriginal(r.original);
-
-                    foreach (var w in twords)
-                    {
-
-                        r.translations.Add(w.Translation);
-
-
-                    }
-
-                    results.Add(r);
-
-
-                    // Update the word statistics
-                    var wordStatistic =  wordStatRepository.GetById(guess.Key.Original);
-                    if (wordStatistic != null)
-                    {
-                        wordStatistic.Score = r.correct ? wordStatistic.Score + 1 : wordStatistic.Score - 1;
-                         wordStatRepository.Update(wordStatistic);
-                    }
-                }
-            }
-
-           
-
-            // Convert the dictionary to a JSON object
-            JObject resultJson = JObject.FromObject(results);
-
-            return Ok(resultJson);
-        }
-
-        */
     }
 }

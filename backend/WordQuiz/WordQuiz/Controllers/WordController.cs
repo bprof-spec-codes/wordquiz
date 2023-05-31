@@ -44,44 +44,6 @@ namespace WordQuiz.Controllers
 
         public RoleManager<IdentityRole> RoleManager => roleManager;
 
-        #region Probably never used endpoints
-        //// GET: api/<WordController>
-        //[HttpGet("all")]
-        //public async Task<IEnumerable<Word>> GetAllWord()
-        //{
-        //    return await wrd.GetAllWords();
-        //}
-
-        //// GET api/<WordController>/5
-        //[HttpGet("{id}")]
-        //public Word? GetWord(string id)
-        //{
-        //    return wrd.GetWordById(id).Result;
-        //}
-
-        // GET api/<WordController>/ExportWords
-        //[HttpGet("ExportWords")]
-        //public async Task<ActionResult> ExportWords()
-        //{
-        //    /*var words = await wrd.GetAllWords();
-        //    var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
-
-        //    */
-        //    /*
-        //    return Ok(await wrd.GetAllWords());
-
-
-        //    */
-
-        //    var words = await wrd.GetAllWords();
-        //    var options = new JsonSerializerOptions { WriteIndented = true };
-        //    var jsonString = System.Text.Json.JsonSerializer.Serialize(words, options);
-
-        //    return Ok(jsonString);
-        //}
-        #endregion
-
-
         // GET: api/<WordController>
         [HttpGet("Random/{idRandom}")]
         public async Task<IEnumerable<Word>> GetRandom(int idRandom)

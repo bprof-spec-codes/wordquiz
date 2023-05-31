@@ -84,23 +84,11 @@ namespace WordQuiz.Controllers
         [HttpGet("ExportTopics")]
         public ActionResult Exporttopics()
         {
-            /*var words = await wrd.GetAllWords();
-            var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
-
-            */
-            /*
-            return Ok(await wrd.GetAllWords());
-
-
-            */
-
             var topics = tp.GetAllTopics();
             var options = new JsonSerializerOptions { WriteIndented = true };
             var jsonString = System.Text.Json.JsonSerializer.Serialize(topics, options);
 
             return Ok(jsonString);
         }
-
-
     }
 }
