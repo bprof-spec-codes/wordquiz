@@ -59,10 +59,9 @@ Monitor player's progress and performance
 Update statistics after each game session
 Encourage improvement and learning
 
+## Starting the Project
 
-##Starting the Project
-
-##Backend
+## Backend
 
 
 1. **Prerequisites** : Make sure that .NET 6.0 SDK is installed on your local machine as the project is targeting .NET 6.0. You can download it from the [official Microsoft website](https://dotnet.microsoft.com/download/dotnet/6.0). To confirm the .NET version, you can run **dotnet --version** command in the terminal or command prompt.
@@ -99,7 +98,7 @@ Your application should now be running locally. You can access it by navigating 
 
 Remember to check that your firewall or any other network security settings are not blocking the application's ports (5000 for HTTP and 5001 for HTTPS by default).
 
-##Frontend:
+## Frontend:
 
 1. **Install Node.js and npm** : Before you start, make sure you have Node.js and npm installed on your computer. Angular requires Node.js version 10.9.0 or later and npm (which comes with Node.js) version 6 or later. You can download Node.js from the official [website](https://nodejs.org/). After installation, you can check the versions using the following commands:
 
