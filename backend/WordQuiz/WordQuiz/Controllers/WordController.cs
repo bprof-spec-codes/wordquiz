@@ -16,10 +16,10 @@ using System.Text.Json.Serialization;
 
 namespace WordQuiz.Controllers
 {
-    //[Authorize(Roles = "Player, Admin")]
+    [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
+    [Authorize]
     public class WordController : ControllerBase
     {   
         IWordRepository wrd;

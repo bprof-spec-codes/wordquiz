@@ -54,6 +54,7 @@ namespace WordQuiz.Controllers
         }
 
         // POST api/<TopicController>
+        [Authorize]
         [HttpPost]
         public IActionResult AddTopic([FromBody] Topic value)
         {
@@ -61,6 +62,7 @@ namespace WordQuiz.Controllers
         }
 
         // PUT api/<TopicController>/5
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult EditTopic(int id, [FromBody] Topic value)
         {
@@ -69,6 +71,7 @@ namespace WordQuiz.Controllers
         }
 
         // DELETE api/<TopicController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteTopic(string id)
         {

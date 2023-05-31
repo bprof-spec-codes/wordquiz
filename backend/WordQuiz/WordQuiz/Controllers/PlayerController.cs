@@ -12,10 +12,10 @@ using Microsoft.AspNetCore.SignalR;
 namespace WordQuiz.Controllers
 {
 
-   // [Authorize(Roles = "Player, Admin")]
+    [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
     public class PlayerController : ControllerBase
     {
 
