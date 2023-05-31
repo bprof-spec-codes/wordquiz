@@ -112,6 +112,19 @@ namespace WordQuiz.Data
                 new Word() { Original = "Passport", Translation = "Útlevél", TopicId = travel.Id }
             );
 
+            builder.Entity<Word>().HasData(
+                /* Clothing */
+                new Word() { Original = "Dress", Translation = "Ruha", TopicId = clothing.Id },
+                new Word() { Original = "Fashionable", Translation = "Divatos", TopicId = clothing.Id },
+                new Word() { Original = "Cap", Translation = "Sapka", TopicId = clothing.Id },
+                new Word() { Original = "Bathrobe", Translation = "Fürdőköpeny", TopicId = clothing.Id },
+                new Word() { Original = "Belt", Translation = "Öv", TopicId = clothing.Id },
+                new Word() { Original = "Jeans", Translation = "Farmer", TopicId = clothing.Id },
+                new Word() { Original = "Boots", Translation = "Csizma", TopicId = clothing.Id },
+                new Word() { Original = "Bracelet", Translation = "Karkötő", TopicId = clothing.Id },
+                new Word() { Original = "Coat", Translation = "Kabát", TopicId = clothing.Id }
+            );
+
             base.OnModelCreating(builder);
         }
     }
