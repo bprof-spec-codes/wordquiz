@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace WordQuiz.Controllers
 {
-  //  [Authorize(Roles = "Player, Admin")]
+    [Authorize(Roles = "Player, Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
