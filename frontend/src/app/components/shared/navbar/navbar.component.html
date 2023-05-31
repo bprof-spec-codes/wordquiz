@@ -1,51 +1,60 @@
 <nav>
     <div class="container py-2">
         <div class="row">
-            <div class="col-6">
+            <div class="col-4">
                 <a [routerLink]="'/'" class="logo">
                     <span class="text-primary logo-word">WORD</span>
                     <span class="logo-quiz">quiz</span>
                 </a>
             </div>
 
-            <div class="col-6 text-end mt-2">
-                <div *ngIf="authService.isLoggedIn">
-                    <div *ngIf="authService.currentUser" class="mx-2 d-inline">
+            <div
+                *ngIf="authService.isLoggedIn"
+                class="col-xxl text-end mt-2 col-8"
+            >
+                <div *ngIf="authService.currentUser" class="mx-2 d-inline">
+                    &nbsp;
+                    <span
+                        >Hello,
                         <a
-                            [routerLink]="['/admin/topics']"
-                            class="btn btn-link"
-                            *ngIf="authService.currentUser.admin"
-                            >[Admin]</a
-                        >
-                        &nbsp;
-                        <span
-                            >Hello,
-                            {{ authService.currentUser.playerName }}</span
-                        >
-                        <button class="btn btn-link" (click)="logout()">
-                            Logout
-                        </button>
-                    </div>
-                    <a [routerLink]="'/word-statistics'" class="btn btn-outline-primary">
-                        Word Statistics
-                      </a>
-
-                    <a [routerLink]="'/data-import-export'" class="btn btn-outline-primary">
-                        Download
-                    </a>
-
-                    <a [routerLink]="'/topics'" class="btn btn-outline-primary">
-                        Start playing
-                    </a>
-                </div>
-                <div *ngIf="!authService.isLoggedIn">
-                    <a
-                        [routerLink]="'/user/login'"
-                        class="btn btn-outline-primary"
+                            [routerLink]="'/word-statistics'"
+                            class="btn btn-link p-0"
+                            >{{ authService.currentUser.playerName }}</a
+                        ></span
                     >
-                        Log in&nbsp;/&nbsp;Sign up
-                    </a>
+                    <button class="btn btn-link" (click)="logout()">
+                        Logout
+                    </button>
                 </div>
+            </div>
+            <div class="text-end mt-2 col-8" *ngIf="!authService.isLoggedIn">
+                <a [routerLink]="'/user/login'" class="btn btn-outline-primary">
+                    Log in&nbsp;/&nbsp;Sign up
+                </a>
+            </div>
+
+            <div
+                *ngIf="authService.isLoggedIn"
+                class="col col-12 col-xxl-auto mt-2 text-lg-end text-center"
+            >
+                <a
+                    [routerLink]="'/data-import-export'"
+                    *ngIf="authService.currentUser?.admin"
+                    class="btn btn-outline-primary"
+                >
+                    Download
+                </a>
+
+                <a
+                    [routerLink]="['/admin/topics']"
+                    class="btn btn-outline-primary"
+                    *ngIf="authService.currentUser?.admin"
+                    >Word editor</a
+                >
+
+                <a [routerLink]="'/topics'" class="btn btn-outline-primary">
+                    Start playing
+                </a>
             </div>
         </div>
     </div>
