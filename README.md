@@ -341,4 +341,29 @@ Support for additional languages
 
 ## Difficulties
 
-TODO
+**Problems** :
+
+Problem:
+ - Fontend Word Statisctic score displayed every instance of a word in a different columb
+ Solution:
+ - Use of ChartDataset mapped barChartData to stat.score and barChartLabels to stat.word.original
+
+ Problem:
+ - Registartion would give a back a whole player object, with unsave attributes
+ Solution:
+ - Removed unnecessary response
+
+Problem:
+ - Backend creating Statistics without loged in user, would crach the backend.
+ Solution:
+ - Added several checks for logged in user and not making statistics a fixed step.
+
+Problem:
+ - Backend async API endpoints crushed the frontend server.
+ Solution:
+ - Changed problematic backend API endpoints to be sync.
+
+Problem:
+ - Backend Exporting topic would export all words related and exporting words would export in a loop.
+ Solution:
+ - Use of System.Text.Json.JsonSerializer.Serialize instead of Newtonsoft.Json
