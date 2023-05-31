@@ -125,6 +125,19 @@ namespace WordQuiz.Data
                 new Word() { Original = "Coat", Translation = "Kabát", TopicId = clothing.Id }
             );
 
+            builder.Entity<Word>().HasData(
+                /* Gardening */
+                new Word() { Original = "Flowerpot", Translation = "Virágcserép", TopicId = gardening.Id },
+                new Word() { Original = "Raking", Translation = "Gereblyézés", TopicId = gardening.Id },
+                new Word() { Original = "Seed", Translation = "Mag", TopicId = gardening.Id },
+                new Word() { Original = "Soil", Translation = "Termőföld", TopicId = gardening.Id },
+                new Word() { Original = "Hole", Translation = "Lyuk", TopicId = gardening.Id },
+                new Word() { Original = "Dirt", Translation = "Föld", TopicId = gardening.Id },
+                new Word() { Original = "Lawn mowing", Translation = "Fűnyírás", TopicId = gardening.Id },
+                new Word() { Original = "Spade", Translation = "Ásó", TopicId = gardening.Id },
+                new Word() { Original = "Wheelbarrow", Translation = "Talicska", TopicId = gardening.Id }
+            );
+
             base.OnModelCreating(builder);
         }
     }
