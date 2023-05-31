@@ -9,17 +9,59 @@
 | Budai Dávid   | Backend       |
 | Bognár Bence  | Teamleader    |
 
-## User manual
+## Summary
 
-Features
+
+
 User authentication and authorization using JWT tokens
 CRUD operations for words, word statistics, and topics
 Fetch random words based on player's statistics and selected topics
 
 
-##Starting the Project
+ Game Features:
+ 
+A fun and interactive word quiz game
+Test your vocabulary and language skills
+Learn new words and track your progress
+Random word generation
+Word statistics tracking
+Topic selection for personalized gameplay
 
-##Backend
+
+ Technology Stack :
+ 
+ Backend
+ASP.NET Core RESTful API
+Entity Framework Core for database access
+SQL Server or any other supported relational database
+JWT tokens for authentication
+
+ Word Quiz API:
+ 
+Backend service for the Word Quiz game
+Handles user authentication, word and topic management, and game logic
+Exposes RESTful endpoints for client applications
+
+ User Authentication & Authorization :
+ 
+Secure user registration and login
+Role-based access control
+JWT tokens for secure API access
+
+ Word & Topic Management:
+ 
+CRUD operations for words and topics
+Retrieve random words based on player's statistics and selected topics
+
+Word Statistics Tracking:
+
+Monitor player's progress and performance
+Update statistics after each game session
+Encourage improvement and learning
+
+## Starting the Project
+
+## Backend
 
 
 1. **Prerequisites** : Make sure that .NET 6.0 SDK is installed on your local machine as the project is targeting .NET 6.0. You can download it from the [official Microsoft website](https://dotnet.microsoft.com/download/dotnet/6.0). To confirm the .NET version, you can run **dotnet --version** command in the terminal or command prompt.
@@ -56,7 +98,7 @@ Your application should now be running locally. You can access it by navigating 
 
 Remember to check that your firewall or any other network security settings are not blocking the application's ports (5000 for HTTP and 5001 for HTTPS by default).
 
-##Frontend:
+## Frontend:
 
 1. **Install Node.js and npm** : Before you start, make sure you have Node.js and npm installed on your computer. Angular requires Node.js version 10.9.0 or later and npm (which comes with Node.js) version 6 or later. You can download Node.js from the official [website](https://nodejs.org/). After installation, you can check the versions using the following commands:
 
@@ -242,47 +284,50 @@ API documentation is available through the Swagger UI, which can be accessed at 
 
 
 
- Game Features:
- 
-A fun and interactive word quiz game
-Test your vocabulary and language skills
-Learn new words and track your progress
-Random word generation
-Word statistics tracking
-Topic selection for personalized gameplay
+## UI
 
 
- Technology Stack :
- 
- Backend
-ASP.NET Core RESTful API
-Entity Framework Core for database access
-SQL Server or any other supported relational database
-JWT tokens for authentication
+**Home Page:** This page provides an overview of the website. It includes several key sections: a header which advertises expanding vocabulary, a section showing some stats like the number of words and topics available, a showcase of popular topics, a section promoting a gaming feature for learning words, and testimonials from users.
 
- Word Quiz API:
- 
-Backend service for the Word Quiz game
-Handles user authentication, word and topic management, and game logic
-Exposes RESTful endpoints for client applications
+![](RackMultipart20230531-1-pq41ey_html_df6f735b728b2faa.png)
 
- User Authentication & Authorization :
- 
-Secure user registration and login
-Role-based access control
-JWT tokens for secure API access
+**Footer:** The footer contains a logo, links to the source code and the requirements on GitHub
 
- Word & Topic Management:
- 
-CRUD operations for words and topics
-Retrieve random words based on player's statistics and selected topics
+**Navbar:** This section includes a logo and a set of links. For logged-in users, it provides links to word statistics, data import/export, and game start, and greets the user by their name. It also provides an admin link for admin users. For users who aren't logged in, it provides a link to log in or sign up.
 
-Word Statistics Tracking:
+![](RackMultipart20230531-1-pq41ey_html_d61ac92c8ed303f7.png)
 
-Monitor player's progress and performance
-Update statistics after each game session
-Encourage improvement and learning
+**Topic Selection** : This section provides an overview of all available topics. Each topic card includes the title, description, and a link to start playing .
 
+![](RackMultipart20230531-1-pq41ey_html_87185051d28e4e91.png)
+**Game** :
+
+ This component prompts the user to start the game and provides information about the topic and the max time seconds. It also includes a button to start the game and a link to change the topic.
+
+
+ ![](RackMultipart20230531-1-pq41ey_html_ed9ab47e1dfd13e9.png)
+
+This is the main page for playing the vocabulary game. It displays the topic, provides an input box for the user to type their guess, shows the remaining time, displays a progress bar, and a button for submitting all guesses. Depending on the game phase, it can also show a game start component, a loading spinner, or a game result component.
+
+![](RackMultipart20230531-1-pq41ey_html_78789d91a067ae3d.png)
+
+**Results** :
+
+This component displays the user's score and a detailed result of each word including the user's guess and the correct answer. It also offers a button to try again or a link to change the topic.
+ ![](RackMultipart20230531-1-pq41ey_html_4ba41d482979fffe.png)
+
+**Statisctis** :
+ This page displays a bar chart of word statistics.
+
+ ![](RackMultipart20230531-1-pq41ey_html_1864eee481ffbdc8.png)
+
+**Admin Topic** : This is the administrative view for managing topics. It displays a table of topics with their respective number of words. From this view, an admin can manage each topic or add a new one.
+
+**Admin Topic Add** : This component is a form for creating a new topic. It asks for the title and description of the new topic.
+
+**Admin Topic Details** : This is the detailed administrative view for a specific topic. An admin can add new words to the topic (with their original form and translation) and delete the entire topic if needed.
+
+**Data Import/Export** : This section provides tools for importing and exporting data. It allows an admin to select a data type (topics, words, users, word statistics) and either import this data from a file or export it for download.
 
 Future Plans:
 
