@@ -289,39 +289,39 @@ API documentation is available through the Swagger UI, which can be accessed at 
 
 **Home Page:** This page provides an overview of the website. It includes several key sections: a header which advertises expanding vocabulary, a section showing some stats like the number of words and topics available, a showcase of popular topics, a section promoting a gaming feature for learning words, and testimonials from users.
 
-![](./images/Picture1.JPG)
+![](./Images/Picture1.JPG)
 
 **Footer:** The footer contains a logo, links to the source code and the requirements on GitHub
 
 **Navbar:** This section includes a logo and a set of links. For logged-in users, it provides links to word statistics, data import/export, and game start, and greets the user by their name. It also provides an admin link for admin users. For users who aren't logged in, it provides a link to log in or sign up.
 
-![](./images/Picture2.JPG)
+![](./Images/Picture2.JPG)
 
 **Topic Selection** : This section provides an overview of all available topics. Each topic card includes the title, description, and a link to start playing .
 
-![](./images/Picture3.JPG)
+![](./Images/Picture3.JPG)
 
 **Game** :
 
  This component prompts the user to start the game and provides information about the topic and the max time seconds. It also includes a button to start the game and a link to change the topic.
 
 
-![](./images/Picture4.JPG)
+![](./Images/Picture4.JPG)
 
 This is the main page for playing the vocabulary game. It displays the topic, provides an input box for the user to type their guess, shows the remaining time, displays a progress bar, and a button for submitting all guesses. Depending on the game phase, it can also show a game start component, a loading spinner, or a game result component.
 
-![](./images/Picture5.JPG)
+![](./Images/Picture5.JPG)
 
 **Results** :
 
 This component displays the user's score and a detailed result of each word including the user's guess and the correct answer. It also offers a button to try again or a link to change the topic.
 
-![](./images/Picture6.JPG)
+![](./Images/Picture6.JPG)
 
 **Statisctis** :
  This page displays a bar chart of word statistics.
 
-![](./images/Picture7.JPG)
+![](./Images/Picture7.JPG)
 
 **Admin Topic** : This is the administrative view for managing topics. It displays a table of topics with their respective number of words. From this view, an admin can manage each topic or add a new one.
 
