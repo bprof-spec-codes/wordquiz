@@ -16,23 +16,82 @@ User authentication and authorization using JWT tokens
 CRUD operations for words, word statistics, and topics
 Fetch random words based on player's statistics and selected topics
 
-Prerequisites
-.NET SDK 6.0 or later
-Visual Studio 2022 or Visual Studio Code with C# extension
-SQL Server or any other supported relational database
 
-Getting Started
-Clone the repository:
-bash
-Copy code
-git clone https://github.com/yourusername/WordQuizAPI.git
-Change the connection string in appsettings.json to match your database configuration.
+##Starting the Project
+
+##Backend
 
 
-The API should be up and running at https://localhost:5001. You can test the endpoints using a REST client like Postman or the built-in Swagger UI at https://localhost:5001/swagger.
+1. **Prerequisites** : Make sure that .NET 6.0 SDK is installed on your local machine as the project is targeting .NET 6.0. You can download it from the [official Microsoft website](https://dotnet.microsoft.com/download/dotnet/6.0). To confirm the .NET version, you can run **dotnet --version** command in the terminal or command prompt.
+2. **Clone the Repository** : Clone the repository from GitHub using the **git clone** command. Replace **\<repo-link\>** with your GitHub repository link:
 
-API Documentation
-API documentation is available through the Swagger UI, which can be accessed at https://localhost:5001/swagger after running the application.
+
+git clone \<repo-link\>
+
+3. **Navigate to the Project Directory** : Use the **cd** command to navigate into the directory containing the project file ( **.csproj** ). This directory contains the project files and the **Program.cs** file where the main function of the application resides.
+4. **Restore the Packages** : .NET Core uses NuGet for package management. All the dependencies of the project are mentioned in the **.csproj** file. Run the following command to download all the dependencies:
+
+
+dotnet restore
+
+5. **Update the Connection String** : The connection string for your database is specified in the **appsettings.json** file. Update the "DefaultConnection" string with your local SQL Server instance details.
+6. **Database Migration** : From your project directory, run the following commands to apply migrations and update the database:
+
+
+dotnet ef migrations add InitialCreate dotnet ef database update
+
+7. **Build the Project** : Run the following command to build the project:
+
+
+dotnet build
+
+8. **Run the Project** : Finally, run the project using the following command:
+
+
+dotnet run
+
+Your application should now be running locally. You can access it by navigating to
+
+**https://localhost:7220** or [**http://localhost:5017**](http://localhost:5017/)on your web browser.
+
+Remember to check that your firewall or any other network security settings are not blocking the application's ports (5000 for HTTP and 5001 for HTTPS by default).
+
+##Frontend:
+
+1. **Install Node.js and npm** : Before you start, make sure you have Node.js and npm installed on your computer. Angular requires Node.js version 10.9.0 or later and npm (which comes with Node.js) version 6 or later. You can download Node.js from the official [website](https://nodejs.org/). After installation, you can check the versions using the following commands:
+
+
+node -v npm -v
+
+2. **Clone the Repository** : First, you need to clone the repository from GitHub to your local machine. Open a terminal and run the following command (replace **url** with the URL of the GitHub repository):
+
+bashCopy code
+
+git clone url
+
+3. **Navigate to the Project Directory** : Change your current directory to the project's directory:
+
+
+cd word-quiz
+
+4. **Install Angular CLI** : Angular CLI is a command-line interface for Angular. You can install it globally on your machine with the following command:
+
+
+npm install -g @angular/cli@15.2.1
+
+5. **Install Dependencies** : The next step is to install all the project dependencies. You can do this by running the npm install command:
+
+
+npm install
+
+This will look at the **package.json** file in your project directory and install all the necessary dependencies listed there.
+
+6. **Start the Development Server** : Finally, you can start your local development server with the Angular CLI command mentioned in the README:
+
+
+ng serve
+
+This will start the server, and you can access your application by navigating to **http://localhost:4200/** in your browser. The application should automatically reload if you change any of the source files.
 
 Contributing
 Feel free to submit issues or pull requests for bug fixes, new features, or improvements.
@@ -40,57 +99,13 @@ Feel free to submit issues or pull requests for bug fixes, new features, or impr
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
+## Test User
 
- Game Features:
- 
-A fun and interactive word quiz game
-Test your vocabulary and language skills
-Learn new words and track your progress
-Random word generation
-Word statistics tracking
-Topic selection for personalized gameplay
+seedplayer@gmail.com <> almafa123
 
 
- Technology Stack :
- 
- Backend
-ASP.NET Core RESTful API
-Entity Framework Core for database access
-SQL Server or any other supported relational database
-JWT tokens for authentication
-
- Word Quiz API:
- 
-Backend service for the Word Quiz game
-Handles user authentication, word and topic management, and game logic
-Exposes RESTful endpoints for client applications
-
- User Authentication & Authorization :
- 
-Secure user registration and login
-Role-based access control
-JWT tokens for secure API access
-
- Word & Topic Management:
- 
-CRUD operations for words and topics
-Retrieve random words based on player's statistics and selected topics
-
-Word Statistics Tracking:
-
-Monitor player's progress and performance
-Update statistics after each game session
-Encourage improvement and learning
-
-
-Future Plans:
-
-Multiplayer mode
-Leaderboards and achievements
-Integration with other language learning tools
-Support for additional languages
-
-## API Endpoints
+## API Documentation
+API documentation is available through the Swagger UI, which can be accessed at https://localhost:7220/swagger after running the application.
 
 
 **Auth:**
@@ -224,6 +239,58 @@ Support for additional languages
 - **GET /api/WordStatistic/{idRandomWithTopic}** : Retrieves a random word statistic from a specific topic. The player, ID, and topics are specified in the query parameter, path parameter, and request body respectively.
   - Input: **{ "idRandomWithTopic": "integer($int32)", "player": "string", "topics": ["string"] }**
   - Output: **200 Success**
+
+
+
+ Game Features:
+ 
+A fun and interactive word quiz game
+Test your vocabulary and language skills
+Learn new words and track your progress
+Random word generation
+Word statistics tracking
+Topic selection for personalized gameplay
+
+
+ Technology Stack :
+ 
+ Backend
+ASP.NET Core RESTful API
+Entity Framework Core for database access
+SQL Server or any other supported relational database
+JWT tokens for authentication
+
+ Word Quiz API:
+ 
+Backend service for the Word Quiz game
+Handles user authentication, word and topic management, and game logic
+Exposes RESTful endpoints for client applications
+
+ User Authentication & Authorization :
+ 
+Secure user registration and login
+Role-based access control
+JWT tokens for secure API access
+
+ Word & Topic Management:
+ 
+CRUD operations for words and topics
+Retrieve random words based on player's statistics and selected topics
+
+Word Statistics Tracking:
+
+Monitor player's progress and performance
+Update statistics after each game session
+Encourage improvement and learning
+
+
+Future Plans:
+
+Multiplayer mode
+Leaderboards and achievements
+Integration with other language learning tools
+Support for additional languages
+
 
 ## Difficulties
 
