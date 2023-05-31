@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using WordQuiz.Models;
 
 namespace WordQuiz.Data
@@ -36,6 +37,12 @@ namespace WordQuiz.Data
             };
             seed.PasswordHash = ph.HashPassword(seed, "almafa123");
             builder.Entity<Player>().HasData(seed);
+
+            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "1",
+                UserId = seed.Id,
+            });
 
             builder.Entity<Word>().HasOne(p => p.Topic)
                 .WithMany(u => u.Words)
