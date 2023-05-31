@@ -284,6 +284,48 @@ Update statistics after each game session
 Encourage improvement and learning
 
 
+**Home Page:** This page provides an overview of the website. It includes several key sections: a header which advertises expanding vocabulary, a section showing some stats like the number of words and topics available, a showcase of popular topics, a section promoting a gaming feature for learning words, and testimonials from users.
+
+![](RackMultipart20230531-1-pq41ey_html_df6f735b728b2faa.png)
+
+**Footer:** The footer contains a logo, links to the source code and the requirements on GitHub
+
+**Navbar:** This section includes a logo and a set of links. For logged-in users, it provides links to word statistics, data import/export, and game start, and greets the user by their name. It also provides an admin link for admin users. For users who aren't logged in, it provides a link to log in or sign up.
+
+![](RackMultipart20230531-1-pq41ey_html_d61ac92c8ed303f7.png)
+
+**Topic Selection** : This section provides an overview of all available topics. Each topic card includes the title, description, and a link to start playing .
+
+![](RackMultipart20230531-1-pq41ey_html_87185051d28e4e91.png)
+**Game** :
+
+ This component prompts the user to start the game and provides information about the topic and the max time seconds. It also includes a button to start the game and a link to change the topic.
+
+
+ ![](RackMultipart20230531-1-pq41ey_html_ed9ab47e1dfd13e9.png)
+
+This is the main page for playing the vocabulary game. It displays the topic, provides an input box for the user to type their guess, shows the remaining time, displays a progress bar, and a button for submitting all guesses. Depending on the game phase, it can also show a game start component, a loading spinner, or a game result component.
+
+![](RackMultipart20230531-1-pq41ey_html_78789d91a067ae3d.png)
+
+**Results** :
+
+This component displays the user's score and a detailed result of each word including the user's guess and the correct answer. It also offers a button to try again or a link to change the topic.
+ ![](RackMultipart20230531-1-pq41ey_html_4ba41d482979fffe.png)
+
+**Statisctis** :
+ This page displays a bar chart of word statistics.
+
+ ![](RackMultipart20230531-1-pq41ey_html_1864eee481ffbdc8.png)
+
+**Admin Topic** : This is the administrative view for managing topics. It displays a table of topics with their respective number of words. From this view, an admin can manage each topic or add a new one.
+
+**Admin Topic Add** : This component is a form for creating a new topic. It asks for the title and description of the new topic.
+
+**Admin Topic Details** : This is the detailed administrative view for a specific topic. An admin can add new words to the topic (with their original form and translation) and delete the entire topic if needed.
+
+**Data Import/Export** : This section provides tools for importing and exporting data. It allows an admin to select a data type (topics, words, users, word statistics) and either import this data from a file or export it for download.
+
 Future Plans:
 
 Multiplayer mode
