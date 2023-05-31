@@ -25,13 +25,10 @@ namespace WordQuiz.Controllers
     [ApiController]
     public class DataController : ControllerBase
     {
-
         IWordRepository wordRepository;
         IWordStaticRepository wordStatRepository;
         IPlayerRepository playerRepository;
         ITopicRepository topicRepository;
-
-
 
         private readonly UserManager<Player> userManager;
 
@@ -59,18 +56,14 @@ namespace WordQuiz.Controllers
                 string jsonString = await streamReader.ReadToEndAsync();
                 var topics = JsonConvert.DeserializeObject<List<Topic>>(jsonString);
 
-                // Import the topics into the database
                 foreach (var topic in topics)
                 {
-                    // Check if the topic already exists
                     var existingTopic = topicRepository.GetTopicByName(topic.Title);
                     if (existingTopic == null)
                     {
                         topicRepository.AddTopic(topic);
                     }
                 }
-
-                // await topicRepository.sa();
                 return Ok("Topics imported successfully.");
             }
             catch (Exception ex)
@@ -102,17 +95,14 @@ namespace WordQuiz.Controllers
 
                 foreach (var word in importedWords)
                 {
-                    // Check if the word already exists in the database
                     var existingWordT = wordRepository.GetWordByTranslation(word.Translation);
                     var existingWordO = wordRepository.GetWordByOriginal(word.Original);
                     if (existingWordT == null && existingWordO == null)
                     {
-                        // If the word does not exist, add it to the database
                         wordRepository.CreateWord(word);
                     }
                     else
                     {
-                        // If the word exists, update its data
 
                     }
                 }

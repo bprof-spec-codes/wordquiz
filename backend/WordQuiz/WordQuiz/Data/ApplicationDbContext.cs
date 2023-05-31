@@ -68,7 +68,7 @@ namespace WordQuiz.Data
             builder.Entity<Topic>().HasData(family, sports, gardening, travel, clothing, food);
 
             builder.Entity<Word>().HasData(
-             /* Fam */
+              /* Fam */
               new Word() { Original = "Father", Translation = "Apa", TopicId = family.Id },
               new Word() { Original = "Mother", Translation = "Anya", TopicId = family.Id },
               new Word() { Original = "Aunt", Translation = "Nagynéni", TopicId = family.Id },
@@ -262,9 +262,9 @@ namespace WordQuiz.Data
          new Word() { Original = "Compost bin", Translation = "Komposztáló", TopicId = gardening.Id },
          new Word() { Original = "Garden bench", Translation = "Kerti pad", TopicId = gardening.Id },
          new Word() { Original = "Garden gnome", Translation = "Kerti törpe", TopicId = gardening.Id }
-        
+
          );
-         
+
             base.OnModelCreating(builder);
         }
     }

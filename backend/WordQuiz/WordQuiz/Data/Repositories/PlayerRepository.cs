@@ -49,7 +49,7 @@ namespace WordQuiz.Data.Repositories
         public void AddRange(List<Player> playeres)
         {
             _dbContext.AddRange(playeres);
-            _dbContext.SaveChanges ();
+            _dbContext.SaveChanges();
         }
     }
 

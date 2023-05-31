@@ -20,7 +20,6 @@ namespace WordQuiz.Controllers
     {
         ITopicRepository tp;
 
-
         private readonly UserManager<Player> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 

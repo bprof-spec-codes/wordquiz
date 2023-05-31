@@ -41,8 +41,6 @@ namespace WordQuiz.Controllers
             this.roleManager = roleManager;
         }
 
-
-
         // GET: api/<WordStatisticController>
         [HttpGet]
         public IEnumerable<WordStatistic> Get()
@@ -61,7 +59,7 @@ namespace WordQuiz.Controllers
         [HttpPost]
         public async void AddWordStatistic([FromBody] WordStatistic value)
         {
-             wrdst.Add(value);
+            wrdst.Add(value);
         }
 
         // PUT api/<WordStatisticController>/5
@@ -69,7 +67,7 @@ namespace WordQuiz.Controllers
         public async Task<IActionResult> EditWordStatistic(int id, [FromBody] WordStatistic value)
         {
 
-             wrdst.Update(value);
+            wrdst.Update(value);
             return Ok();
         }
 

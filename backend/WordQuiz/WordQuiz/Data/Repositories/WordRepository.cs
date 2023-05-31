@@ -14,12 +14,12 @@ namespace WordQuiz.Data.Repositories
         }
         public IEnumerable<Word> GetAllWords()
         {
-            return  _dbContext.Words.Include(w => w.Topic).ToList();
+            return _dbContext.Words.Include(w => w.Topic).ToList();
         }
 
         public Word GetWordById(string wordId)
         {
-            return  _dbContext.Words.Include(w => w.Topic).FirstOrDefault(w => w.Id == wordId);
+            return _dbContext.Words.Include(w => w.Topic).FirstOrDefault(w => w.Id == wordId);
         }
 
         public Word GetWordByOriginal(string wordOriginal)
@@ -49,26 +49,26 @@ namespace WordQuiz.Data.Repositories
             return word;
         }
 
-        public  Word UpdateWord(Word word)
+        public Word UpdateWord(Word word)
         {
             _dbContext.Entry(word).State = EntityState.Modified;
-             _dbContext.SaveChanges();
+            _dbContext.SaveChanges();
             return word;
         }
 
-        public  void DeleteWord(string wordId)
+        public void DeleteWord(string wordId)
         {
-            var word =  _dbContext.Words.Find(wordId);
+            var word = _dbContext.Words.Find(wordId);
             if (word != null)
             {
                 _dbContext.Words.Remove(word);
-                 _dbContext.SaveChanges();
+                _dbContext.SaveChanges();
             }
         }
 
-        public  IEnumerable<Word> GetWordsByTopicId(string topicId)
+        public IEnumerable<Word> GetWordsByTopicId(string topicId)
         {
-            return  _dbContext.Words.Where(w => w.Topic.Id == topicId).ToList();
+            return _dbContext.Words.Where(w => w.Topic.Id == topicId).ToList();
         }
 
         public void AddRange(List<Word> words)

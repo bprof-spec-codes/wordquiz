@@ -12,13 +12,13 @@ namespace WordQuiz.Models
         public string WordId { get; set; }
         public int Score { get; set; }
 
-        
+
         [NotMapped]
         public Player Player { get; set; }
 
         [NotMapped]
         public Word Word { get; set; }
-        
+
         public WordStatistic()
         {
             this.Id = Guid.NewGuid().ToString();

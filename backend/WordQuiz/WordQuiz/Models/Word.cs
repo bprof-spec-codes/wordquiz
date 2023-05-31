@@ -15,10 +15,6 @@ namespace WordQuiz.Models
         [Required]
         public string Translation { get; set; }
 
-        /*
-        [Required]
-        public List<string> Translation { get; set;}*/
-
         [Required]
         [ForeignKey(nameof(Topic))]
         public string TopicId { get; set; }
