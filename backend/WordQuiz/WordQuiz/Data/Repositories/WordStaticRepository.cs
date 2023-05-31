@@ -16,7 +16,6 @@ namespace WordQuiz.Data.Repositories
 
         public IEnumerable<WordStatistic> GetAll()
         {
-            // return  _context.WordStatistics.Include(ws => ws.Player).Include(ws => ws.Word).ToList();
             return _context.WordStatistics.ToList();
         }
 
@@ -61,25 +60,21 @@ namespace WordQuiz.Data.Repositories
             _context.SaveChanges();
         }
 
-
-        public  IEnumerable<WordStatistic> GetUserWordStatistics(string userId)
+        public IEnumerable<WordStatistic> GetUserWordStatistics(string userId)
         {
-
-            List<WordStatistic> wordStatistics =  _context.WordStatistics
+            List<WordStatistic> wordStatistics = _context.WordStatistics
                 .Include(ws => ws.Word)
                 .Where(ws => ws.PlayerId == userId)
                 .Select(ws => new WordStatistic
                 {
-                   Word = ws.Word,
-                   Score=  ws.Score
-                    
-                    
+                    Word = ws.Word,
+                    Score = ws.Score
+
+
                 })
                 .ToList();
 
             return wordStatistics;
         }
-
-
     }
 }

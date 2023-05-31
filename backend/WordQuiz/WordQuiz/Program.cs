@@ -45,7 +45,8 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddDefaultIdentity<Player>(options => {
+builder.Services.AddDefaultIdentity<Player>(options =>
+{
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 6;
@@ -122,7 +123,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();  
+app.MapRazorPages();
 
 
 
@@ -130,10 +131,10 @@ app.MapRazorPages();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c=>c.SwaggerEndpoint(
+    app.UseSwaggerUI(c => c.SwaggerEndpoint(
         "/swagger/v1/swagger.json",
         "v1"
-        
+
         ));
 }
 

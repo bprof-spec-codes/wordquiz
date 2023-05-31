@@ -25,13 +25,10 @@ namespace WordQuiz.Controllers
     [ApiController]
     public class DataController : ControllerBase
     {
-
         IWordRepository wordRepository;
         IWordStaticRepository wordStatRepository;
         IPlayerRepository playerRepository;
         ITopicRepository topicRepository;
-
-
 
         private readonly UserManager<Player> userManager;
 
@@ -59,18 +56,14 @@ namespace WordQuiz.Controllers
                 string jsonString = await streamReader.ReadToEndAsync();
                 var topics = JsonConvert.DeserializeObject<List<Topic>>(jsonString);
 
-                // Import the topics into the database
                 foreach (var topic in topics)
                 {
-                    // Check if the topic already exists
                     var existingTopic = topicRepository.GetTopicByName(topic.Title);
                     if (existingTopic == null)
                     {
                         topicRepository.AddTopic(topic);
                     }
                 }
-
-                // await topicRepository.sa();
                 return Ok("Topics imported successfully.");
             }
             catch (Exception ex)
@@ -102,17 +95,14 @@ namespace WordQuiz.Controllers
 
                 foreach (var word in importedWords)
                 {
-                    // Check if the word already exists in the database
                     var existingWordT = wordRepository.GetWordByTranslation(word.Translation);
                     var existingWordO = wordRepository.GetWordByOriginal(word.Original);
                     if (existingWordT == null && existingWordO == null)
                     {
-                        // If the word does not exist, add it to the database
                         wordRepository.CreateWord(word);
                     }
                     else
                     {
-                        // If the word exists, update its data
 
                     }
                 }
@@ -124,39 +114,6 @@ namespace WordQuiz.Controllers
                 return StatusCode(500, new { message = $"An error occurred: {ex.Message}" });
             }
         }
-
-
-
-
-
-
-
-        /*
-        // POST api/data/import/{dataType}
-        [HttpPost("import/{dataType}")]
-        public async Task<IActionResult> ImportData(string dataType, [FromForm] IFormFile file)
-        {
-            using var streamReader = new StreamReader(file.OpenReadStream());
-            var jsonString = await streamReader.ReadToEndAsync();
-
-            switch (dataType.ToLower())
-            {
-               
-                case "users":
-                    var users = JsonConvert.DeserializeObject<List<Player>>(jsonString);
-                    playerRepository.AddRange(users);
-                    break;
-                case "wordstatistics":
-                    var wordStatistics = JsonConvert.DeserializeObject<List<WordStatistic>>(jsonString);
-                    wordStatRepository.AddRange(wordStatistics);
-                    break;
-                default:
-                    return BadRequest("Invalid data type specified.");
-            }
-
-
-            return Ok();
-        }*/
 
         // GET api/data/export/{dataType}
         [HttpGet("export/{dataType}")]
@@ -179,22 +136,12 @@ namespace WordQuiz.Controllers
                     return BadRequest("Invalid data type specified.");
             }
 
-
-            //    var words = await wrd.GetAllWords();
-            //    var options = new JsonSerializerOptions { WriteIndented = true };
-            //    var jsonString = System.Text.Json.JsonSerializer.Serialize(words, options);
-
-            //    return Ok(jsonString);
-
             var options = new JsonSerializerOptions { WriteIndented = true };
             var jsonString = System.Text.Json.JsonSerializer.Serialize(data, options);
-            //var jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
             var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(jsonString));
 
             return File(stream, "application/octet-stream", $"{dataType}_export.json");
         }
-
-
 
         // GET api/data/user/wordstatistics
         [HttpGet("user/wordstatistics")]
@@ -207,7 +154,5 @@ namespace WordQuiz.Controllers
 
             return Ok(wordStatistics);
         }
-
-
     }
 }

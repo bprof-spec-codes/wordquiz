@@ -21,7 +21,7 @@ namespace WordQuiz.Controllers
     [ApiController]
     [Authorize]
     public class WordController : ControllerBase
-    {   
+    {
         IWordRepository wrd;
         IWordStaticRepository wrdst;
         ITopicRepository tp;
@@ -44,60 +44,18 @@ namespace WordQuiz.Controllers
 
         public RoleManager<IdentityRole> RoleManager => roleManager;
 
-        #region Probably never used endpoints
-        //// GET: api/<WordController>
-        //[HttpGet("all")]
-        //public async Task<IEnumerable<Word>> GetAllWord()
-        //{
-        //    return await wrd.GetAllWords();
-        //}
-
-        //// GET api/<WordController>/5
-        //[HttpGet("{id}")]
-        //public Word? GetWord(string id)
-        //{
-        //    return wrd.GetWordById(id).Result;
-        //}
-
-        // GET api/<WordController>/ExportWords
-        //[HttpGet("ExportWords")]
-        //public async Task<ActionResult> ExportWords()
-        //{
-        //    /*var words = await wrd.GetAllWords();
-        //    var serializedWords = JsonConvert.SerializeObject(words, Formatting.Indented);
-
-        //    */
-        //    /*
-        //    return Ok(await wrd.GetAllWords());
-
-
-        //    */
-
-        //    var words = await wrd.GetAllWords();
-        //    var options = new JsonSerializerOptions { WriteIndented = true };
-        //    var jsonString = System.Text.Json.JsonSerializer.Serialize(words, options);
-
-        //    return Ok(jsonString);
-        //}
-        #endregion
-
-
         // GET: api/<WordController>
         [HttpGet("Random/{idRandom}")]
         public async Task<IEnumerable<Word>> GetRandom(int idRandom)
         {
-            // Retrieve the authenticated user
             var user = await userManager.GetUserAsync(User);
 
-            // Retrieve all words from the database
-            var words =  wrd.GetAllWords();
-            var statistic =  wrdst.GetAll();
+            var words = wrd.GetAllWords();
+            var statistic = wrdst.GetAll();
             List<Word> result = new List<Word>();
             int i = 0;
 
             var currentPlayerWords = statistic.Where(x => x.PlayerId == user.Id);
-
-            // ...
 
             return result;
         }
@@ -105,12 +63,10 @@ namespace WordQuiz.Controllers
         [HttpGet("RandomWithTopics/{idRandomWithTopic}")]
         public async Task<IEnumerable<Word>> GetRandomWithTopics(int idRandomWithTopic, [FromQuery] List<string> mytopicstitle)
         {
-            // Retrieve the authenticated user
             var user = await userManager.GetUserAsync(User);
 
-            // Retrieve all words from the database
-            var words =  wrd.GetAllWords();
-            var statistic =  wrdst.GetAll();
+            var words = wrd.GetAllWords();
+            var statistic = wrdst.GetAll();
             List<Word> result = new List<Word>();
             int i = 0;
             var topics = tp.GetAllTopics();
@@ -118,27 +74,21 @@ namespace WordQuiz.Controllers
 
             var currentPlayerWords = statistic.Where(x => x.PlayerId == user.Id);
 
-            // ...
-
             return result;
         }
-
-
 
         // POST api/<WordController>
         [HttpPost]
         public async void AddWord([FromBody] Word value)
         {
-
-             wrd.CreateWord(value);
+            wrd.CreateWord(value);
         }
 
         // PUT api/<WordController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> EditWord(int id, [FromBody] Word value)
         {
-
-             wrd.UpdateWord(value);
+            wrd.UpdateWord(value);
             return Ok();
         }
 
@@ -146,7 +96,7 @@ namespace WordQuiz.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWord(string id)
         {
-             wrd.DeleteWord(id);
+            wrd.DeleteWord(id);
             return Ok();
 
         }
@@ -157,13 +107,10 @@ namespace WordQuiz.Controllers
         {
             foreach (var word in words)
             {
-                // Check if the topic exists
                 var existingTopic = tp.GetTopicById(word.TopicId);
 
-                // If the topic doesn't exist, create it
                 if (existingTopic == null)
                 {
-                    // If the Topic object is provided, use it to create the topic
                     if (word.Topic != null)
                     {
                         var newTopic = new Topic
@@ -172,7 +119,6 @@ namespace WordQuiz.Controllers
                             Title = word.Topic.Title,
                             Description = word.Topic.Description
                         };
-
                         tp.AddTopic(newTopic);
                         existingTopic = newTopic;
                     }
@@ -182,24 +128,16 @@ namespace WordQuiz.Controllers
                     }
                 }
 
-                // Set the Topic property of the word to the existing topic
                 word.Topic = existingTopic;
 
-                // Check if the word already exists
-                var existingWord =  wrd.GetWordById(word.Id);
+                var existingWord = wrd.GetWordById(word.Id);
 
-                // If the word doesn't exist, add it to the database
                 if (existingWord == null)
                 {
-                     wrd.CreateWord(word);
+                    wrd.CreateWord(word);
                 }
             }
-
             return Ok();
         }
-
-
-
-
     }
 }
