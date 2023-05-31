@@ -219,9 +219,9 @@ Support for additional languages
   - Input: **No parameters**
   - Output: **200 Success**
 - **GET /api/WordStatistic/{idRandom}** : Retrieves a random word statistic. The player and ID are specified in the query parameter and path parameter respectively.
-  - Input: `{ "idRandom": "integer($int32)", "player": "string"}`
+  - Input: **{ "idRandom": "integer($int32)", "player": "string"}**
   - Output: **200 Success**
-  - **GET /api/WordStatistic/{idRandomWithTopic}** : Retrieves a random word statistic from a specific topic. The player, ID, and topics are specified in the query parameter, path parameter, and request body respectively.
+- **GET /api/WordStatistic/{idRandomWithTopic}** : Retrieves a random word statistic from a specific topic. The player, ID, and topics are specified in the query parameter, path parameter, and request body respectively.
   - Input: **{ "idRandomWithTopic": "integer($int32)", "player": "string", "topics": ["string"] }**
   - Output: **200 Success**
 
