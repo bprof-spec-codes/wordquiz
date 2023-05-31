@@ -112,6 +112,32 @@ namespace WordQuiz.Data
                 new Word() { Original = "Passport", Translation = "Útlevél", TopicId = travel.Id }
             );
 
+            builder.Entity<Word>().HasData(
+                /* Clothing */
+                new Word() { Original = "Dress", Translation = "Ruha", TopicId = clothing.Id },
+                new Word() { Original = "Fashionable", Translation = "Divatos", TopicId = clothing.Id },
+                new Word() { Original = "Cap", Translation = "Sapka", TopicId = clothing.Id },
+                new Word() { Original = "Bathrobe", Translation = "Fürdőköpeny", TopicId = clothing.Id },
+                new Word() { Original = "Belt", Translation = "Öv", TopicId = clothing.Id },
+                new Word() { Original = "Jeans", Translation = "Farmer", TopicId = clothing.Id },
+                new Word() { Original = "Boots", Translation = "Csizma", TopicId = clothing.Id },
+                new Word() { Original = "Bracelet", Translation = "Karkötő", TopicId = clothing.Id },
+                new Word() { Original = "Coat", Translation = "Kabát", TopicId = clothing.Id }
+            );
+
+            builder.Entity<Word>().HasData(
+                /* Gardening */
+                new Word() { Original = "Flowerpot", Translation = "Virágcserép", TopicId = gardening.Id },
+                new Word() { Original = "Raking", Translation = "Gereblyézés", TopicId = gardening.Id },
+                new Word() { Original = "Seed", Translation = "Mag", TopicId = gardening.Id },
+                new Word() { Original = "Soil", Translation = "Termőföld", TopicId = gardening.Id },
+                new Word() { Original = "Hole", Translation = "Lyuk", TopicId = gardening.Id },
+                new Word() { Original = "Dirt", Translation = "Föld", TopicId = gardening.Id },
+                new Word() { Original = "Lawn mowing", Translation = "Fűnyírás", TopicId = gardening.Id },
+                new Word() { Original = "Spade", Translation = "Ásó", TopicId = gardening.Id },
+                new Word() { Original = "Wheelbarrow", Translation = "Talicska", TopicId = gardening.Id }
+            );
+
             base.OnModelCreating(builder);
         }
     }
