@@ -9,12 +9,55 @@
 | Budai Dávid   | Backend       |
 | Bognár Bence  | Teamleader    |
 
-## User manual
+## Summary
 
-Features
+
+
 User authentication and authorization using JWT tokens
 CRUD operations for words, word statistics, and topics
 Fetch random words based on player's statistics and selected topics
+
+
+ Game Features:
+ 
+A fun and interactive word quiz game
+Test your vocabulary and language skills
+Learn new words and track your progress
+Random word generation
+Word statistics tracking
+Topic selection for personalized gameplay
+
+
+ Technology Stack :
+ 
+ Backend
+ASP.NET Core RESTful API
+Entity Framework Core for database access
+SQL Server or any other supported relational database
+JWT tokens for authentication
+
+ Word Quiz API:
+ 
+Backend service for the Word Quiz game
+Handles user authentication, word and topic management, and game logic
+Exposes RESTful endpoints for client applications
+
+ User Authentication & Authorization :
+ 
+Secure user registration and login
+Role-based access control
+JWT tokens for secure API access
+
+ Word & Topic Management:
+ 
+CRUD operations for words and topics
+Retrieve random words based on player's statistics and selected topics
+
+Word Statistics Tracking:
+
+Monitor player's progress and performance
+Update statistics after each game session
+Encourage improvement and learning
 
 
 ##Starting the Project
@@ -242,46 +285,7 @@ API documentation is available through the Swagger UI, which can be accessed at 
 
 
 
- Game Features:
- 
-A fun and interactive word quiz game
-Test your vocabulary and language skills
-Learn new words and track your progress
-Random word generation
-Word statistics tracking
-Topic selection for personalized gameplay
-
-
- Technology Stack :
- 
- Backend
-ASP.NET Core RESTful API
-Entity Framework Core for database access
-SQL Server or any other supported relational database
-JWT tokens for authentication
-
- Word Quiz API:
- 
-Backend service for the Word Quiz game
-Handles user authentication, word and topic management, and game logic
-Exposes RESTful endpoints for client applications
-
- User Authentication & Authorization :
- 
-Secure user registration and login
-Role-based access control
-JWT tokens for secure API access
-
- Word & Topic Management:
- 
-CRUD operations for words and topics
-Retrieve random words based on player's statistics and selected topics
-
-Word Statistics Tracking:
-
-Monitor player's progress and performance
-Update statistics after each game session
-Encourage improvement and learning
+## UI
 
 
 **Home Page:** This page provides an overview of the website. It includes several key sections: a header which advertises expanding vocabulary, a section showing some stats like the number of words and topics available, a showcase of popular topics, a section promoting a gaming feature for learning words, and testimonials from users.
