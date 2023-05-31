@@ -99,6 +99,19 @@ namespace WordQuiz.Data
                 new Word() { Original = "Carrot", Translation = "Répa", TopicId = food.Id }
             );
 
+            builder.Entity<Word>().HasData(
+                /* Travel */
+                new Word() { Original = "Suitcase", Translation = "Bőrönd", TopicId = travel.Id },
+                new Word() { Original = "Ferry", Translation = "Komp", TopicId = travel.Id },
+                new Word() { Original = "Airport", Translation = "Reptér", TopicId = travel.Id },
+                new Word() { Original = "Travel agency", Translation = "Utazási iroda", TopicId = travel.Id },
+                new Word() { Original = "Service", Translation = "Szolgáltatás", TopicId = travel.Id },
+                new Word() { Original = "Reception", Translation = "Recepció", TopicId = travel.Id },
+                new Word() { Original = "Delay", Translation = "Késés", TopicId = travel.Id },
+                new Word() { Original = "Airline", Translation = "Légitársaság", TopicId = travel.Id },
+                new Word() { Original = "Passport", Translation = "Útlevél", TopicId = travel.Id }
+            );
+
             base.OnModelCreating(builder);
         }
     }
