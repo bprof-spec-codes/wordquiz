@@ -324,10 +324,12 @@ This component displays the user's score and a detailed result of each word incl
 ![](./Images/Picture7.png)
 
 **Admin Topic** : This is the administrative view for managing topics. It displays a table of topics with their respective number of words. From this view, an admin can manage each topic or add a new one.
-
-**Admin Topic Add** : This component is a form for creating a new topic. It asks for the title and description of the new topic.
+![](./Images/Picture8.png)
 
 **Admin Topic Details** : This is the detailed administrative view for a specific topic. An admin can add new words to the topic (with their original form and translation) and delete the entire topic if needed.
+
+![](./Images/Picture9.png)
+
 
 **Data Import/Export** : This section provides tools for importing and exporting data. It allows an admin to select a data type (topics, words, users, word statistics) and either import this data from a file or export it for download.
 
